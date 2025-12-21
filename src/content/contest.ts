@@ -8,9 +8,9 @@ export const contestContent = {
 
 		// Добавляем галерею и видео
 		gallery: [
-			{ src: '/images/вручение.jpg', alt: 'Қатысушылардың жұмыстары' },
+			{ src: '/images/vruchenie.jpg', alt: 'Қатысушылардың жұмыстары' },
 			{ src: '/images/эссе1.jpg', alt: 'Байқауда сөз сөйлеу' },
-			{ src: '/images/стэнд конкурс.jpg', alt: 'Сертификаттарды табыстау' },
+			{ src: '/images/stand.jpg', alt: 'Сертификаттарды табыстау' },
 			{ src: '/images/сертифика.jpeg', alt: 'Салтанатты ашылу рәсімі' },
 		],
 		video: '/images/WhatsApp Video 2025-12-15 at 8.39.07 PM.mp4', // Рекомендую переименовать файл в contest-2024.mp4
@@ -102,9 +102,9 @@ export const contestContent = {
 			'Байқаудың мақсаты — шығармашыл педагогтарды қолдау, педагогикалық идеялармен алмасу және озық тәжірибені тарату, Асқар Ислямов мұрасын сақтау.',
 
 		gallery: [
-			{ src: '/images/вручение.jpg', alt: 'Қатысушылардың жұмыстары' },
+			{ src: '/images/vruchenie.jpg', alt: 'Қатысушылардың жұмыстары' },
 			{ src: '/images/эссе1.jpg', alt: 'Байқауда сөз сөйлеу' },
-			{ src: '/images/стэнд конкурс.jpg', alt: 'Сертификаттарды табыстау' },
+			{ src: '/images/stand.jpg', alt: 'Сертификаттарды табыстау' },
 			{ src: '/images/сертифика.jpeg', alt: 'Салтанатты ашылу рәсімі' },
 		],
 		video: '/images/WhatsApp Video 2025-12-15 at 8.39.07 PM.mp4',
