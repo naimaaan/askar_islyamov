@@ -47,7 +47,7 @@ function FadeIn({
 
 // Images to cycle through for biography sections
 const sectionImages = [
-	'/images/скриншот.png', // Portrait / Early years
+	'/images/port.png', // Portrait / Early years
 	'/images/Шығыс Қазақстан мемлекеттік институтының алғашқы түлектерінің бірі Асқар Ислямов.jpeg', // Education / University
 	// Early career / Journalism
 	'/images/сабак беру.png', // Teaching / School
