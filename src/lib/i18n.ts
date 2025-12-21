@@ -1,4 +1,4 @@
-export const defaultLocale = 'ru'
+export const defaultLocale = 'kz'
 export const locales = ['ru', 'kz'] as const
 export type Locale = (typeof locales)[number]
 
@@ -13,5 +13,5 @@ export const getDictionary = async (locale: Locale) => {
 	// We'll assume the content files export an object with keys for 'ru' and 'kz'.
 	return dictionaries[locale as keyof typeof dictionaries]
 		? dictionaries[locale as keyof typeof dictionaries]()
-		: dictionaries['ru']()
+		: dictionaries['kz']()
 }

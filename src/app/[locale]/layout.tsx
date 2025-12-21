@@ -33,7 +33,11 @@ export default async function LocaleLayout({
 			<body className='font-sans bg-slate-50 text-slate-900 min-h-screen flex flex-col'>
 				<Header locale={locale as any} dict={dict.header} />
 				<main className='flex-grow'>{children}</main>
-				<Footer locale={locale as any} dict={dict.footer} />
+				<Footer
+					locale={locale as any}
+					dict={dict.footer}
+					nav={dict.header.nav}
+				/>
 			</body>
 		</html>
 	)

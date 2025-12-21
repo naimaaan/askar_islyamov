@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { FileText, Download } from 'lucide-react'
+import { FileText, Download, Play } from 'lucide-react'
 import { Locale } from '@/lib/i18n'
 
 interface Book {
@@ -18,12 +18,15 @@ interface BookCardProps {
 	dict: {
 		openPdf: string
 		download: string
+		watch: string
 	}
 }
 
 export default function BookCard({ book, locale, dict }: BookCardProps) {
+	const isFilm = book.id === 'films'
+
 	return (
-		<div className='bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow flex flex-col h-full'>
+		<div className='bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow flex flex-col h-full relative group'>
 			<div className='aspect-[3/4] bg-slate-100 relative'>
 				<Image
 					src={book.cover}
@@ -37,7 +40,7 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 				<h3 className='text-xl font-serif font-semibold text-slate-900 mb-3 line-clamp-2'>
 					<Link
 						href={`/${locale}/books/${book.id}`}
-						className='hover:underline'
+						className='hover:underline before:absolute before:inset-0'
 					>
 						{book.title}
 					</Link>
@@ -46,23 +49,34 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 					{book.description}
 				</p>
 
-				<div className='flex gap-3 mt-auto'>
+				<div className='flex gap-3 mt-auto relative z-10'>
 					<a
 						href={book.pdf}
 						target='_blank'
 						rel='noopener noreferrer'
 						className='flex-1 inline-flex justify-center items-center px-4 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50'
 					>
-						<FileText size={16} className='mr-2' />
-						{dict.openPdf}
+						{isFilm ? (
+							<>
+								<Play size={16} className='mr-2' />
+								{dict.watch}
+							</>
+						) : (
+							<>
+								<FileText size={16} className='mr-2' />
+								{dict.openPdf}
+							</>
+						)}
 					</a>
-					<a
-						href={book.pdf}
-						download
-						className='inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-slate-800 hover:bg-slate-900'
-					>
-						<Download size={16} />
-					</a>
+					{!isFilm && (
+						<a
+							href={book.pdf}
+							download
+							className='inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-slate-800 hover:bg-slate-900'
+						>
+							<Download size={16} />
+						</a>
+					)}
 				</div>
 			</div>
 		</div>

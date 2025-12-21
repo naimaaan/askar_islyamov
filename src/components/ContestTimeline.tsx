@@ -8,7 +8,7 @@ interface TimelineEvent {
 export default function ContestTimeline({
 	events,
 }: {
-	events: TimelineEvent[]
+	events: readonly TimelineEvent[]
 }) {
 	return (
 		<div className='flex items-center justify-center space-x-4 md:space-x-12 py-8'>
