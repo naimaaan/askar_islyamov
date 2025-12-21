@@ -30,7 +30,7 @@ export default async function LocaleLayout({
 
 	return (
 		<html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
-			<body className='font-sans bg-slate-50 text-slate-900 min-h-screen flex flex-col'>
+			<body className='font-sans bg-slate-50 text-slate-900 min-h-screen flex flex-col overflow-x-hidden'>
 				<Header locale={locale as any} dict={dict.header} />
 				<main className='flex-grow'>{children}</main>
 				<Footer
