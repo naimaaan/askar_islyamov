@@ -187,4 +187,99 @@ export const contestContent = {
 			note: '',
 		},
 	},
+
+	en: {
+		title:
+			'Contest "Үздік педагогикалық эссе" (Best Pedagogical Essay) named after Askar Islyamov',
+		description:
+			'II Republican contest among teachers of technical and vocational education organizations (colleges).',
+		goals:
+			'The goal of the contest is to support creative teachers, exchange ideas and disseminate advanced pedagogical experience, and preserve the legacy of Askar Islyamov.',
+
+		gallery: [
+			{ src: '/images/vruchenie.jpg', alt: "Participants' works" },
+			{ src: '/images/эссе1.jpg', alt: 'Speaking at the contest' },
+			{ src: '/images/stand.jpg', alt: 'Awarding certificates' },
+			{ src: '/images/сертифика.jpeg', alt: 'Opening ceremony' },
+		],
+		video: '/images/WhatsApp Video 2025-12-15 at 8.39.07 PM.mp4',
+
+		timeline: [
+			{
+				year: '2023',
+				status: 'Held',
+			},
+			{
+				year: '2024',
+				status: 'II Republican — results published',
+			},
+			{
+				year: '2025',
+				status: 'Held',
+			},
+		],
+
+		winners: [
+			{
+				year: '2024',
+				name: 'Аймуханбетова Гульназ Ахметовна',
+				place: 'I degree diploma',
+				work: 'Teacher of Kazakh language and literature',
+				prize: '150 000 ₸',
+				org: '"Абай атындағы Шығыс Қазақстан гуманитарлық колледжі" (Abai East Kazakhstan Humanitarian College)',
+			},
+			{
+				year: '2024',
+				name: 'Абдикаримова Айнур Опабековна',
+				place: 'II degree diploma',
+				work: 'Teacher of Kazakh language and literature',
+				prize: '100 000 ₸',
+				org: '"Педагогический колледж Астана халықаралық университеті" (Pedagogical College of Astana International University)',
+			},
+			{
+				year: '2024',
+				name: 'Жусупова Гульнур Айдаровна',
+				place: 'II degree diploma',
+				work: 'Teacher of special disciplines',
+				prize: '100 000 ₸',
+				org: '"Мәншүк Мәметова атындағы Қызылорда педагогикалық жоғары колледжі" (Manshuk Mametova Kyzylorda Higher Pedagogical College)',
+			},
+			{
+				year: '2024',
+				name: 'Майлыбаева Данагуль Нурдаулетовна',
+				place: 'III degree diploma',
+				work: 'Teacher of Kazakh language and literature',
+				prize: '50 000 ₸',
+				org: '"Ойыл кәсіптік колледжі" (Oiyl Vocational College)',
+			},
+			{
+				year: '2024',
+				name: 'Умирбаева Акжамал Нурмухановна',
+				place: 'III degree diploma',
+				work: 'Teacher of Kazakh language and literature',
+				prize: '50 000 ₸',
+				org: '"Кәсіптік оқудағы көпсалалы колледжі" (Multidisciplinary College of Vocational Training)',
+			},
+			{
+				year: '2024',
+				name: 'Шалибекова Галия Маратовна',
+				place: 'III degree diploma',
+				work: 'Teacher of Kazakh language and literature',
+				prize: '50 000 ₸',
+				org: '"Абай атындағы Жамбыл гуманитарлық жоғары колледжі" (Abai Zhambyl Higher Humanitarian College)',
+			},
+		],
+
+		resources: {
+			title: 'Resources',
+			links: [
+				{
+					label: 'Contest results: list of winners (from document)',
+					href: 'https://www.gov.kz/memleket/entities/vko-bilim/press/news/details/901981',
+					badge: 'DOC',
+				},
+			],
+			note: '',
+		},
+	},
 } as const

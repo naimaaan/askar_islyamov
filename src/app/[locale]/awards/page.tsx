@@ -7,7 +7,8 @@ export default async function AwardsPage({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = await params
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const awards = awardsContent[validLocale]
 
 	return (
@@ -115,7 +116,11 @@ export default async function AwardsPage({
 
 								<div className='shrink-0 text-center md:text-left'>
 									<div className='text-sm text-slate-500 font-medium uppercase tracking-widest mb-1'>
-										{validLocale === 'ru' ? 'Наследие' : 'Мұра'}
+										{validLocale === 'ru'
+											? 'Наследие'
+											: validLocale === 'kz'
+											? 'Мұра'
+											: 'Legacy'}
 									</div>
 									<div className='text-slate-900 font-bold font-serif text-lg'>
 										Asqar Islyamov

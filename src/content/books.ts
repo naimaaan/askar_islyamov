@@ -120,4 +120,67 @@ export const booksContent = {
 			},
 		],
 	},
+
+	en: {
+		title: 'Books and Works',
+		description:
+			'Written and scientific heritage of Askar Islyamov: memoirs, essays, research.',
+		items: [
+			{
+				id: 'otken-omir',
+				title: '«Өткен өмір естеліктері» (Memories of Past Life)',
+				year: '1998',
+				description:
+					"Autobiographical memoir book written for the 70th anniversary of the Tarbagatay district. Covers the author's life path and his pedagogical experience.",
+				cover: '/images/өткен өмір гпт2.png',
+				pdf: '/pdf/А. Ислямов  өткен өмір естеліктері.pdf',
+			},
+			{
+				id: 'east-kz-toponymy',
+				title: '«Шығыс Қазақстан топонимикасы» (Toponymy of East Kazakhstan)',
+				year: '2003 / 2022',
+				description:
+					'Scientific work on the toponymy of East Kazakhstan. Published in 2003 (Almaty, "Evero"), and also in 2022 as a monograph within the framework of "Rukhani Zhangyru" in three languages (Kazakh-Russian-English). Used as a teaching aid in universities and colleges.',
+				cover: '/images/topo.png',
+				pdf: '',
+			},
+			{
+				id: 'tarikhta-kalgan',
+				title: '«Тарихта қалған тағылым» (Lessons Remaining in History)',
+				year: '2006',
+				description:
+					"A collection consisting of articles and essays on local history, the culture of cherishing nature, the upbringing of students, and the teacher's life path.",
+				cover: '/images/Тарихта қалған тағылым гпт2.png',
+				pdf: '/pdf/Тарихта қалған тағылым 1-287 (1).pdf',
+			},
+			{
+				id: 'cultural-heritage',
+				title:
+					'«Шығыс Қазақстанның мәдени мұралары» (Cultural Heritage of East Kazakhstan)',
+				year: '2006',
+				description:
+					'Scientific and educational series published within the framework of the state program "Madeni Mura" (Cultural Heritage). The collection presents information about the life path, pedagogical activity, scientific works, and public activity of the prominent teacher, scholar-local historian, and public figure Askar Zhumagulovich Islyamov.',
+				cover: '/images/mura2.png',
+				pdf: '/pdf/Madeni_mura_2006.pdf',
+			},
+			{
+				id: 'barkytbel',
+				title: '«Барқытбелдің баурайында» (On the Slopes of Barkytbel)',
+				year: '',
+				description:
+					'A book telling about the native land, the Barkytbel region.',
+				cover: '/images/baurai2.png',
+				pdf: '',
+			},
+			{
+				id: 'films',
+				title: 'Documentary Films',
+				year: '1984 / 2002 / 2005',
+				description:
+					'Documentary films about Askar Islyamov: «Әскери-патриоттық тәрбие» (Military-Patriotic Education) (1984), «Өмір өткелдері» (Life Crossings) (2002), «Қалдырған ізің мәңгілік» (Your Trace is Eternal) (2005).',
+				cover: '/images/скриншот2.png',
+				pdf: 'https://www.youtube.com/watch?v=wIE2znixCOo',
+			},
+		],
+	},
 }

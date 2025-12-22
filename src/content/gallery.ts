@@ -899,4 +899,454 @@ export const galleryContent = {
 			},
 		],
 	},
+	en: {
+		allText: 'All',
+		title: 'Gallery',
+		description: 'Photo archive of life and activities.',
+		albums: [
+			{ id: 'teaching', title: 'Pedagogical Path' },
+			{ id: 'conferences', title: 'Public Activities' },
+			{ id: 'personal', title: 'Family and Life Path' },
+			{ id: 'documents', title: 'Documents and Publications' },
+		],
+		images: [
+			// Teaching
+			{
+				src: '/images/1967-1970 жж. Асқар Ислямов Абай орта мектебінде парбюро секретары.jpeg',
+				albumId: 'conferences',
+				alt: 'Secretary of the Party Bureau at Abai Secondary School, 1967-1970.',
+			},
+			{
+				src: '/images/1988ж. Абай орта мектебіне 60 жыл..jpeg',
+				albumId: 'teaching',
+				alt: '60th Anniversary of Abai Secondary School, 1988.',
+			},
+			{
+				src: '/images/Журналистермен кездесу сәті.jpeg',
+				albumId: 'teaching',
+				alt: 'Meeting with journalists',
+			},
+			{
+				src: '/images/вывеска.jpeg',
+				albumId: 'documents',
+				alt: 'Signboard',
+			},
+			{
+				src: '/images/кабинет.jpeg',
+				albumId: 'teaching',
+				alt: 'Office',
+			},
+			{
+				src: '/images/кабинет2.jpeg',
+				albumId: 'teaching',
+				alt: 'Work office',
+			},
+			{
+				src: '/images/Колледж.jpeg',
+				albumId: 'teaching',
+				alt: 'College',
+			},
+			{
+				src: '/images/колледж2.jpeg',
+				albumId: 'teaching',
+				alt: 'At the college',
+			},
+			{
+				src: '/images/колледж3.jpeg',
+				albumId: 'teaching',
+				alt: 'College students',
+			},
+			{
+				src: '/images/колледж4.jpeg',
+				albumId: 'teaching',
+				alt: 'Event at the college',
+			},
+			{
+				src: '/images/колледж5.jpeg',
+				albumId: 'teaching',
+				alt: 'College, educational process',
+			},
+			{
+				src: '/images/колледж6.jpeg',
+				albumId: 'teaching',
+				alt: 'College, staff',
+			},
+			{
+				src: '/images/колледж7.jpeg',
+				albumId: 'teaching',
+				alt: 'College, auditorium',
+			},
+			{
+				src: '/images/колледж8.jpeg',
+				albumId: 'teaching',
+				alt: 'College',
+			},
+			{
+				src: '/images/Мектепте.jpeg',
+				albumId: 'teaching',
+				alt: 'At school',
+			},
+			{
+				src: '/images/Стенд.jpeg',
+				albumId: 'documents',
+				alt: 'Information stand',
+			},
+
+			// Conferences
+			{
+				src: '/images/выставка.jpeg',
+				albumId: 'teaching',
+				alt: 'Exhibition',
+			},
+			{
+				src: '/images/выступление.jpeg',
+				albumId: 'teaching',
+				alt: 'Speech',
+			},
+			{
+				src: '/images/Ислямовтар династиясымен ақын Ф. Оңғарсынова, білім және ғылым министрлігі Б. Айтымова т.б..jpeg',
+				albumId: 'teaching',
+				alt: 'With Fariza Ongarsynova and Byrganym Aitimova',
+			},
+			{
+				src: '/images/Лента.jpeg',
+				albumId: 'personal',
+				alt: 'Grand opening',
+			},
+			{
+				src: '/images/мұғалімдер съезі.jpeg',
+				albumId: 'conferences',
+				alt: "Teachers' Congress",
+			},
+
+			// Personal
+			{
+				src: '/images/семья чб.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/ата апа.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/1983 ж. ҰОС құрбандарының ескерткіштеріне гүл шоқтарын қою рәсімі..jpeg',
+				albumId: 'conferences',
+				alt: 'Laying flowers at the monuments to the victims of WWII, 1983.',
+			},
+			{
+				src: '/images/адал адам.jpeg',
+				albumId: 'personal',
+				alt: 'Meeting with the Islyamov dynasty',
+			},
+			{
+				src: '/images/Апа.jpeg',
+				albumId: 'personal',
+				alt: 'Naghima Suleimenkyzy',
+			},
+			{
+				src: '/images/Апаә.jpeg',
+				albumId: 'personal',
+				alt: 'Naghima Suleimenkyzy',
+			},
+
+			{
+				src: '/images/дерево.jpeg',
+				albumId: 'personal',
+				alt: 'Pedagogical dynasty',
+			},
+
+			{
+				src: '/images/сара апа и апа2.jpeg',
+				albumId: 'personal',
+				alt: 'Sara Askarovna',
+			},
+			{
+				src: '/images/Семья фото.jpeg',
+				albumId: 'personal',
+				alt: 'Family photo',
+			},
+			{
+				src: '/images/семья2.jpeg',
+				albumId: 'personal',
+				alt: 'Family',
+			},
+			{
+				src: '/images/семья3.jpeg',
+				albumId: 'personal',
+				alt: 'Family',
+			},
+			{
+				src: '/images/Студенттік.jpeg',
+				albumId: 'personal',
+				alt: 'Student years',
+			},
+			{
+				src: '/images/Студенттік шақ2.jpeg',
+				albumId: 'personal',
+				alt: 'Student years',
+			},
+			{
+				src: '/images/Шығыс Қазақстан мемлекеттік институтының алғашқы түлектерінің бірі Асқар Ислямов.jpeg',
+				albumId: 'personal',
+				alt: 'One of the first graduates of VKGU Askar Islyamov',
+			},
+			{
+				src: '/images/Қалдырған ізің мәңгілік..jpeg',
+				albumId: 'personal',
+				alt: 'Eternal trace',
+			},
+
+			// Documents
+			{
+				src: '/images/басылым.jpeg',
+				albumId: 'documents',
+				alt: 'Publication',
+			},
+			{
+				src: '/images/Басылымдар.jpeg',
+				albumId: 'documents',
+				alt: 'Publications',
+			},
+			{
+				src: '/images/газет.jpeg',
+				albumId: 'documents',
+				alt: 'Newspaper',
+			},
+			{
+				src: '/images/испей.jpg',
+				albumId: 'documents',
+				alt: 'Article',
+			},
+			{
+				src: '/images/почетная грамота.jpg',
+				albumId: 'documents',
+				alt: 'Certificate of Honor',
+			},
+
+			{
+				src: '/images/кагаз.jpeg',
+				albumId: 'documents',
+				alt: 'Document',
+			},
+			{
+				src: '/images/Орысша.jpeg',
+				albumId: 'documents',
+				alt: 'General information',
+			},
+			{
+				src: '/images/сертифика.jpeg',
+				albumId: 'documents',
+				alt: 'Certificate',
+			},
+			{
+				src: '/images/сертификат2.jpeg',
+				albumId: 'documents',
+				alt: 'Certificate',
+			},
+
+			{
+				src: '/images/Тарихта қалған тағылым2.jpeg',
+				albumId: 'documents',
+				alt: '«Тарихта қалған тағылым» (Lessons Remaining in History)',
+			},
+			{
+				src: '/images/цитаты.jpeg',
+				albumId: 'documents',
+				alt: 'Quotes',
+			},
+			{
+				src: '/images/эссе.jpeg',
+				albumId: 'documents',
+				alt: 'Republican contest «Үздік педагогикалық эссе» (Best Pedagogical Essay) named after Askar Islyamov',
+			},
+			{
+				src: '/images/0001.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0002.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0003.jpg',
+				albumId: 'personal',
+				alt: 'Pedagogical Council Meeting',
+			},
+			{
+				src: '/images/0004.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0006.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0007.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0008.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0010.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0011.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0012.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0013.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0014.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0015.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0016.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0017.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0018.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0019.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0020.jpg',
+				albumId: 'conferences',
+				alt: '',
+			},
+			{
+				src: '/images/0021.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+
+			{
+				src: '/images/0023.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0024.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0025.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0026.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0027.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0028.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0029.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0030.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0031.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0032.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0034.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0035.jpg',
+				albumId: 'conferences',
+				alt: '',
+			},
+			{
+				src: '/images/0036.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0037.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0038.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0039.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0040.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+			{
+				src: '/images/0041.jpg',
+				albumId: 'personal',
+				alt: '',
+			},
+		],
+	},
 }

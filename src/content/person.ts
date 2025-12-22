@@ -254,4 +254,135 @@ export const personContent = {
 				'Әулетте: «Қазақ ССР еңбек сіңірген мұғалім» — 1; «ҚКСР халық ағарту ісінің үздігі» — 3; «Отан соғысы кезіндегі тылдағы үздік еңбегі үшін» медалі — 2; «Қазақстан Республикасының білім беру ісінің Құрметті қызметкері» — 4; «ҚР ІІМ Құрметті қызметкері» — 2; «Сот жүйесінің үздігі» — 1; «Ыбырай Алтынсарин атындағы белгі» иегерлері — 2; «Еңбек ардагерлері» — 7; Құрметті профессор — 1; Ғылым кандидаттары — 2; «Мінсіз қызметі үшін» медалінің иегерлері — 5. Нағима Сүлейменқызы «Қазақ КСР халық ағарту ісінің үздігі», «Еңбек ардагері», І–ІІІ дәрежелі «Ана Даңқы», «Батыр Ана» медалі, «Алтын алқа», «Университет мақтанышы» төсбелгісі және басқа да марапаттарға ие.',
 		},
 	},
+
+	en: {
+		name: 'Askar Zhumagululy Islyamov',
+		role: 'Educator, school principal, public figure',
+		intro:
+			'Askar Zhumagululy Islyamov (04.03.1928 – 30.10.2001) — an outstanding educator of East Kazakhstan, who dedicated his life to public education, local history, and the upbringing of youth. His destiny is an example of resilience, selfless labor, and service to his native land.',
+		keyFacts: [
+			{ label: 'Career path', value: '45 years in the field of education' },
+			{
+				label: 'Publications',
+				value: 'About 50 works (methodologies, articles, experience)',
+			},
+			{ label: 'Pedagogical dynasty', value: '540 years of total experience' },
+		],
+
+		biography: {
+			title: 'Biography',
+			sections: [
+				{
+					title: 'Childhood and years of trials',
+					content:
+						"Askar Islyamov was born on March 4, 1928, in Semey region, Aksuat district, in the Kyzylkesik sovkhoz, in the family of Zhumagululy Silama. During the famine and forced relocations (1932), his father moved to the Akzhar region; his mother died in the same year. In 1933–1938, Askar was raised in the boarding school of the orphanage in Akzhar. After his father's death (1940), he lived with relatives. When he was in the 6th grade, the war began, and in the difficult years of 1942, having a 7th-grade education, he was forced to leave his studies and start working in his native village from the age of 13.",
+				},
+				{
+					title: 'Education',
+					content:
+						'In 1947–1950, he graduated from a three-year teacher training college in Semey. In 1952 — Ust-Kamenogorsk Pedagogical Institute. In 1962, he completed his studies in Alma-Ata at the Kazakh Pedagogical Institute named after Abai.',
+				},
+				{
+					title: 'Beginning of pedagogical activity',
+					content:
+						'He gained his first teaching experience at the Zhangyztal seven-year school. Since 1952, he worked in Akzhar at the first secondary school of the district — the secondary school named after Abai (which at that time was called the "university of the district"): as a teacher, deputy for educational work; on a voluntary basis, he participated in the activities of the party organization and was later the secretary of the party bureau. Over 18 years of work, he became the initiator and organizer of the first multi-day local history excursions in the district (7–12 days) and participation in the first regional rally of local historians.',
+				},
+				{
+					title: 'Local history and scientific interest',
+					content:
+						'As a young geographer, with a backpack on his shoulders, he led schoolchildren through the Tarbagatai mountains, teaching them to understand, love, and respect the nature of their native land. He was fond of research work, reflected on the meaning of geographical names; was interested in archaeology, astronomy, ethnology. Continuous search became his life habit. At the age of 37, he was awarded recognition as an "Excellence in Public Education" (Отличник народного просвещения).',
+				},
+				{
+					title: 'School leadership and recognition',
+					content:
+						'From 1970 to 1995, until his retirement, he worked as the director of the secondary school named after Lenin in the Zhetiaral sovkhoz; upon retirement, he left the school by personal written application. Over 25 years of leadership, the school became one of the centers for disseminating advanced pedagogical experience: the material and technical base was strengthened, it was one of the first to switch to the cabinet system, foreign languages were taught in language laboratories; regional forums of educators were repeatedly held here. The experience of the Islyamov pedagogical dynasty became widely known.',
+				},
+				{
+					title: 'Fame and contribution to methodology',
+					content:
+						'The name of Askar Islyamov was known throughout the Soviet Union. The practice and experience of the Islyamov family were sent to Moscow and presented in the A. S. Makarenko Museum as an exhibit. During 45 years of work, he prepared and published about 50 materials (methodologies, descriptions of experience, articles), which were published in the republican, regional, and district press and served to disseminate best practices.',
+				},
+				{
+					title: 'Public activity and legacy',
+					content:
+						'For 25 years, he was a freelance lecturer of the district party committee, noted with the diploma "Үздік лектор" (Best Lecturer) of the regional party committee and was repeatedly awarded honorary certificates. For more than 20 years, he was elected a deputy of the village council, was a delegate to district and regional party conferences. Among the recognitions are also participation in the Exhibition of Achievements of the National Economy of the USSR (VDNKh) and the status of a diploma winner of the Peace Fund Board. In the last years of his life, he headed the council of elders in the village of Molodezhny (Ulan district), continuing to serve society and the cause of youth upbringing.',
+				},
+			],
+
+			timeline: [
+				{
+					year: '1928',
+					title: 'Birth',
+					description:
+						'Born on March 4, 1928, in Semey region, Aksuat district, in the Kyzylkesik sovkhoz, in the family of Zhumagululy Silama.',
+				},
+				{
+					year: '1932',
+					title: 'Family move to Akzhar',
+					description:
+						'During the famine and relocations, his father moved to the Akzhar region; his mother died in the same year.',
+				},
+				{
+					year: '1933 – 1938',
+					title: 'Orphanage boarding school',
+					description:
+						'Was raised in the boarding school of the orphanage in Akzhar.',
+				},
+				{
+					year: '1940',
+					title: "After father's death",
+					description: "After his father's death, he lived with relatives.",
+				},
+				{
+					year: '1942',
+					title: 'Early labor',
+					description:
+						'In the difficult war years, having a 7th-grade education, he left his studies and began working in his native village from the age of 13.',
+				},
+				{
+					year: '1947 – 1950',
+					title: 'Teacher training college',
+					description:
+						'Graduated from a three-year teacher training college in Semey.',
+				},
+				{
+					year: '1952',
+					title: 'Start of work at Abai School',
+					description:
+						'Worked in Akzhar at the secondary school named after Abai as a teacher and deputy for educational work; on a voluntary basis, engaged in the activities of the party organization (later — secretary of the party bureau).',
+				},
+				{
+					year: '1962',
+					title: 'Graduation from university',
+					description:
+						'Completed studies at the Kazakh Pedagogical Institute named after Abai in Alma-Ata.',
+				},
+				{
+					year: '1970 – 1995',
+					title: 'School Director',
+					description:
+						'For 25 years, he led the secondary school named after Lenin (Zhetiaral sovkhoz), turning it into one of the centers of advanced experience: cabinet system, language laboratories, strengthening of the material base, and holding regional forums.',
+				},
+				{
+					year: '2001',
+					title: 'Passing away',
+					description:
+						'Passed away on October 30, 2001, leaving a rich pedagogical and scientific legacy.',
+				},
+				{
+					year: '2021 – 2024',
+					title: 'Memory and legacy',
+					description:
+						'2021: A named cabinet of Askar Islyamov "Тәрбие жұмысының теориясы мен әдістемесі" (Theory and Methodology of Educational Work) was opened at the East Kazakhstan Humanitarian College named after Abai, and a scholarship for students was established. 2022: A geography cabinet was opened in the secondary school named after Abai in the village of Akzhar. Since 2023, the district geography olympiad named after Askar Islyamov has been held annually. In 2024, the Republican contest "Лучшее педагогическое эссе" (Best Pedagogical Essay) named after Askar Islyamov took place, following which a collection of essays was published.',
+				},
+			],
+		},
+
+		family: {
+			title: 'Family and pedagogical dynasty',
+			lead: 'His life partner is Nagima Suleimenkyzy Satybaldina, a famous educator, "Батыр Ана" (Hero Mother) and an Excellence in Education of the Republic of Kazakhstan. The family raised 10 children (4 sons and 6 daughters), 24 grandchildren, and 37 great-grandchildren. The total pedagogical experience of the dynasty is 540 years.',
+			content:
+				'In the dynasty: 1 Honored Teacher of the Kazakh SSR; 3 Excellence in Public Education of the KazSSR; 4 Honorary Workers of Education of the Republic of Kazakhstan; 2 Honorary Employees of the Ministry of Internal Affairs of the RK; 1 representative — "Excellence in the Judicial System"; 2 holders of the badge named after Ybyrai Altynsarin; 7 Veterans of Labor; 1 Honorary Professor; 2 Candidates of Sciences; 5 holders of the medal "Мінсіз қызметі үшін" (For Flawless Service). Also noted with medals "Отан соғысы кезіндегі тылдағы үздік еңбегі үшін" (For Outstanding Work in the Rear During the Patriotic War). Nagima Suleimenkyzy was awarded "Алтын алқа" (Golden Pendant), the medal "Батыр Ана" (Hero Mother), orders "Ана Даңқы" (Mother\'s Glory) I, II, III degrees, as well as the badge "Университет мақтанышы" (Pride of the University) and other awards for many years of work.',
+		},
+	},
 }

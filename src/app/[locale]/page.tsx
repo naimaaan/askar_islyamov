@@ -14,7 +14,9 @@ export default async function Home({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = await params
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	// Добавлена проверка для 'en'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const person = personContent[validLocale]
 	const books = booksContent[validLocale]
 	const gallery = galleryContent[validLocale]
@@ -100,7 +102,9 @@ export default async function Home({
 					<blockquote className='text-2xl md:text-3xl font-serif italic text-slate-800 leading-relaxed mb-8'>
 						{validLocale === 'ru'
 							? '«Школа - вершина воспитания, где труд является благородным делом»'
-							: '«Мектеп - тәрбие биігі, онда еңбек ету ұлағатты іс»'}
+							: validLocale === 'kz'
+							? '«Мектеп - тәрбие биігі, онда еңбек ету ұлағатты іс»'
+							: '“School is the pinnacle of upbringing, where labor is a noble deed”'}
 					</blockquote>
 					<cite className='text-slate-500 font-medium not-italic'>
 						— {person.name}

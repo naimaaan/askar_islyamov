@@ -137,4 +137,80 @@ export const awardsContent = {
 				'Ислямов Асқар Жұмағұлұлы Шығыс Қазақстан өңірінде ғана емес, республика көлемінде білім беру ісінің дамуына зор үлес қосты. Оның есімі өз кезеңінде бүкіл Кеңестер Одағына танымал болып, Ислямовтар әулетінің педагогикалық іс-тәжірибесі Мәскеудегі А. С. Макаренко мұражайына экспонат ретінде енгізілді.\n\n45 жылдық еңбек жолында ол елуге жуық әдістемелік және ғылыми-практикалық еңбектер жариялап, КСРО халық шаруашылығы жетістіктерінің көрмесіне қатысты, Бейбітшілік қорының дипломанты атанды. Ұстаз өмірден өткеннен кейін де оның еңбектері мен идеялары ғылыми басылымдар мен білім беру ісінде жалғасын тапты.\n\nБүгінде Асқар Ислямовтың есімімен республикалық «Үздік педагогикалық эссе» байқауы өткізіліп, оның атында кабинеттер мен олимпиадалар ашылып, педагогикалық мұрасы ұрпақтан-ұрпаққа жалғасып келеді.',
 		},
 	},
+
+	en: {
+		title: 'Awards and Recognition',
+		description:
+			'Titles, awards, and public recognition received by Askar Zhumagululy Islyamov for many years of work in education, mentorship, and contribution to the development of schools and local history.',
+		items: [
+			{
+				title:
+					'«Қазақстанның еңбегі сіңген мұғалім» (Honored Teacher of Kazakhstan)',
+				year: '',
+				description:
+					'Honorary recognition for outstanding contribution to the development of education and upbringing of the younger generation.',
+				image: '',
+			},
+			{
+				title:
+					'«КСРО Халық ағарту ісінің үздігі» (Excellence in Public Education of the USSR)',
+				year: '',
+				description:
+					'Title for merits in the field of public enlightenment and development of school education.',
+				image: '',
+			},
+			{
+				title:
+					'«Қазақ КСР халық ағарту ісінің үздігі» (Excellence in Public Education of the Kazakh SSR)',
+				year: '',
+				description:
+					'Recognition of a high level of professionalism and many years of work in the education system.',
+				image: '',
+			},
+			{
+				title:
+					'Diploma «Үздік лектор» (Best Lecturer) (regional party committee)',
+				year: '',
+				description:
+					'Awarded for educational activities and speeches as a freelance lecturer.',
+				image: '',
+			},
+			{
+				title: 'Medal «Еңбек ардагері» (Veteran of Labour)',
+				year: '',
+				description:
+					'For many years of conscientious work and contribution to the development of society.',
+				image: '',
+			},
+			{
+				title:
+					'Medal «Отан соғысы кезіндегі тылдағы үздік еңбегі үшін» (For Valiant Labour in the Great Patriotic War)',
+				year: '',
+				description:
+					'Award for work on the home front during the Great Patriotic War.',
+				image: '',
+			},
+			{
+				title:
+					'Badge «КСРО Азаматтық қорғаныс ісінің үздігі» (Excellence in Civil Defense of the USSR)',
+				year: '',
+				description:
+					'Distinction for contribution and activity in the field of civil defense.',
+				image: '',
+			},
+			{
+				title:
+					'Status: «Қазақстан Республикасына ерекше сіңірген еңбегі үшін зейнетақы иесі» (Pensioner for Special Merits to the Republic of Kazakhstan)',
+				year: '',
+				description:
+					'Recognition of special merits to the Republic of Kazakhstan.',
+				image: '',
+			},
+		],
+		influence: {
+			title: 'Influence and Significance',
+			content:
+				'Askar Zhumagululy Islyamov made a significant contribution to the development of education and pedagogical culture of East Kazakhstan and the Republic as a whole. His name was known at the level of the entire Soviet Union, and the pedagogical experience of the Islyamov family was presented in Moscow at the A. S. Makarenko Museum as an example of advanced practice.\n\nOver 45 years of work, he published about 50 methodological and scientific-practical works, participated in the VDNKh of the USSR, was a diploma winner of the Peace Fund and a delegate to republican congresses of teachers. After his passing, his ideas and works continued to live in scientific publications, films, and educational initiatives.\n\nToday, the Republican contest «Лучшее педагогическое эссе» (Best Pedagogical Essay) bears the name of Askar Islyamov, as well as classrooms, olympiads, and projects that preserve and develop his pedagogical heritage.',
+		},
+	},
 }

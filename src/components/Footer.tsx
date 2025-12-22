@@ -6,6 +6,9 @@ interface FooterProps {
 	dict: {
 		rights: string
 		developedBy: string
+		description: string
+		menuTitle: string
+		contactsTitle: string
 	}
 	nav: { label: string; href: string }[]
 }
@@ -21,16 +24,14 @@ export default function Footer({ locale, dict, nav }: FooterProps) {
 							Asqar Islyamov
 						</h3>
 						<p className='text-slate-400 leading-relaxed max-w-xs text-sm'>
-							{locale === 'ru'
-								? 'Мемориальный сайт, посвященный жизни, трудам и наследию выдающегося педагога.'
-								: 'Көрнекті педагогтың өміріне, еңбектеріне және мұрасына арналған мемориалдық сайт.'}
+							{dict.description}
 						</p>
 					</div>
 
 					{/* Column 2: Navigation */}
 					<div>
 						<h4 className='text-xs font-bold uppercase tracking-widest text-slate-500 mb-6'>
-							{locale === 'ru' ? 'Меню' : 'Мәзір'}
+							{dict.menuTitle}
 						</h4>
 						<ul className='space-y-3 text-sm'>
 							{nav.map(item => (
@@ -50,7 +51,7 @@ export default function Footer({ locale, dict, nav }: FooterProps) {
 					{/* Column 3: Contact / Info */}
 					<div>
 						<h4 className='text-xs font-bold uppercase tracking-widest text-slate-500 mb-6'>
-							{locale === 'ru' ? 'Контакты' : 'Байланыс'}
+							{dict.contactsTitle}
 						</h4>
 						<div className='space-y-4 text-sm'>
 							<p className='text-slate-400 hover:text-white transition-colors'>

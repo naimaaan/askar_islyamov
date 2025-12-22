@@ -1,10 +1,11 @@
 export const defaultLocale = 'kz'
-export const locales = ['ru', 'kz'] as const
+export const locales = ['ru', 'kz', 'en'] as const
 export type Locale = (typeof locales)[number]
 
 export const dictionaries = {
 	ru: () => import('@/content/site').then(module => module.siteContent.ru),
 	kz: () => import('@/content/site').then(module => module.siteContent.kz),
+	en: () => import('@/content/site').then(module => module.siteContent.en),
 }
 
 export const getDictionary = async (locale: Locale) => {

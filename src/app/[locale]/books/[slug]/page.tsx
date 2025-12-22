@@ -26,7 +26,8 @@ export default async function BookPage({
 	params: Promise<{ locale: string; slug: string }>
 }) {
 	const { locale, slug } = await params
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const books = booksContent[validLocale]
 	const site = siteContent[validLocale]
 	const book = books.items.find(b => b.id === slug)
@@ -92,10 +93,14 @@ export default async function BookPage({
 									{isFilm
 										? validLocale === 'ru'
 											? 'Видеоархив'
-											: 'Бейне мұрағат'
+											: validLocale === 'kz'
+											? 'Бейне мұрағат'
+											: 'Video Archive'
 										: validLocale === 'ru'
 										? 'Книга'
-										: 'Кітап'}
+										: validLocale === 'kz'
+										? 'Кітап'
+										: 'Book'}
 								</span>
 								{book.year && (
 									<span className='inline-flex items-center text-slate-600 text-sm font-medium bg-white/50 px-3 py-1 rounded-full border border-slate-200'>

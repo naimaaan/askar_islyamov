@@ -70,7 +70,8 @@ export default function BiographyPage({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = use(params)
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const { biography, family, intro, name } = personContent[validLocale]
 
 	// Lightbox state
@@ -153,7 +154,11 @@ export default function BiographyPage({
 											/>
 											<div className='absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center'>
 												<span className='opacity-0 group-hover:opacity-100 text-white bg-black/50 px-4 py-2 rounded-full text-sm transition-opacity duration-300 backdrop-blur-sm'>
-													{validLocale === 'ru' ? 'Увеличить' : 'Үлкейту'}
+													{validLocale === 'ru'
+														? 'Увеличить'
+														: validLocale === 'kz'
+														? 'Үлкейту'
+														: 'Zoom'}
 												</span>
 											</div>
 										</div>
@@ -171,7 +176,9 @@ export default function BiographyPage({
 						<p className='text-2xl md:text-3xl font-serif text-slate-800 italic leading-relaxed'>
 							{validLocale === 'ru'
 								? '«Я не жалею о том, что посвятил себя воспитанию молодого поколения, напротив — радуюсь тому, что по воле Всевышнего стал учителем…»'
-								: '«Мен өзім жас ұрпақты тәрбиелеу жұмысымен айналысқаныма өкінбеймін, қайта Құдайдың құдіретімен мұғалім болғаныма қуанамын…»'}
+								: validLocale === 'kz'
+								? '«Мен өзім жас ұрпақты тәрбиелеу жұмысымен айналысқаныма өкінбеймін, қайта Құдайдың құдіретімен мұғалім болғаныма қуанамын…»'
+								: '«I do not regret dedicating myself to educating the younger generation; on the contrary, I rejoice that by the will of the Almighty I became a teacher…»'}
 						</p>
 						<p className='mt-4 text-slate-500 font-medium'>— {name}</p>
 					</div>
@@ -231,7 +238,9 @@ export default function BiographyPage({
 								<p className='text-sm text-slate-500 mt-4 text-center italic'>
 									{validLocale === 'ru'
 										? 'Семейный архив'
-										: 'Отбасылық мұрағат'}
+										: validLocale === 'kz'
+										? 'Отбасылық мұрағат'
+										: 'Family Archive'}
 								</p>
 							</div>
 						</div>
@@ -244,7 +253,9 @@ export default function BiographyPage({
 						<h2 className='text-3xl font-serif font-semibold text-slate-900 mb-12 text-center'>
 							{validLocale === 'ru'
 								? 'Хронология жизни'
-								: 'Өмір жолының хронологиясы'}
+								: validLocale === 'kz'
+								? 'Өмір жолының хронологиясы'
+								: 'Life Timeline'}
 						</h2>
 						<Timeline items={biography.timeline} />
 					</section>

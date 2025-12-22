@@ -9,7 +9,8 @@ export default async function ContestPage({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = await params
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const contest = contestContent[validLocale]
 
 	// Group winners by year
@@ -52,7 +53,9 @@ export default async function ContestPage({
 						<span className='text-xs font-bold text-slate-200 uppercase tracking-widest'>
 							{validLocale === 'ru'
 								? 'Республиканский конкурс'
-								: 'Республикалық байқау'}
+								: validLocale === 'kz'
+								? 'Республикалық байқау'
+								: 'Republican Contest'}
 						</span>
 					</div>
 					<h1 className='text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight tracking-tight'>
@@ -71,7 +74,11 @@ export default async function ContestPage({
 						<div className='flex-1'>
 							<h3 className='text-lg font-serif font-bold text-slate-900 mb-4 flex items-center'>
 								<Quote className='w-5 h-5 text-blue-600 mr-3' />
-								{validLocale === 'ru' ? 'Миссия конкурса' : 'Байқау мақсаты'}
+								{validLocale === 'ru'
+									? 'Миссия конкурса'
+									: validLocale === 'kz'
+									? 'Байқау мақсаты'
+									: 'Contest Mission'}
 							</h3>
 							<p className='text-slate-600 italic leading-relaxed text-lg'>
 								{contest.goals}
@@ -91,7 +98,11 @@ export default async function ContestPage({
 					<div className='mb-8 flex items-center gap-4'>
 						<div className='h-px bg-slate-200 flex-1' />
 						<h2 className='text-2xl font-serif font-bold text-slate-800'>
-							{validLocale === 'ru' ? 'Галерея событий' : 'Іс-шара галереясы'}
+							{validLocale === 'ru'
+								? 'Галерея событий'
+								: validLocale === 'kz'
+								? 'Іс-шара галереясы'
+								: 'Event Gallery'}
 						</h2>
 						<div className='h-px bg-slate-200 flex-1' />
 					</div>

@@ -21,6 +21,10 @@ export const siteContent = {
 		footer: {
 			rights: 'Все права защищены.',
 			developedBy: 'Разработано в память об учителе.',
+			description:
+				'Мемориальный сайт, посвященный жизни, трудам и наследию выдающегося педагога.',
+			menuTitle: 'Меню',
+			contactsTitle: 'Контакты',
 		},
 		common: {
 			readMore: 'Читать далее',
@@ -52,6 +56,10 @@ export const siteContent = {
 		footer: {
 			rights: 'Барлық құқықтар қорғалған.',
 			developedBy: 'Ұстаз рухына арналып жасалды.',
+			description:
+				'Көрнекті педагогтың өміріне, еңбектеріне және мұрасына арналған мемориалдық сайт.',
+			menuTitle: 'Мәзір',
+			contactsTitle: 'Байланыс',
 		},
 		common: {
 			readMore: 'Толығырақ',
@@ -59,6 +67,41 @@ export const siteContent = {
 			openPdf: 'PDF ашу',
 			watch: 'Көру',
 			back: 'Артқа',
+		},
+	},
+	en: {
+		metadata: {
+			title: 'Asqar Islyamov',
+			description:
+				'Memorial website dedicated to the life and work of Asqar Islyamov.',
+		},
+		header: {
+			title: 'Asqar Islyamov',
+			nav: [
+				{ label: 'Home', href: '/' },
+				{ label: 'Biography', href: '/biography' },
+				{ label: 'Books', href: '/books' },
+				{ label: 'Gallery', href: '/gallery' },
+				{ label: 'Awards', href: '/awards' },
+				{ label: 'Contest', href: '/contest' },
+				{ label: 'Memories', href: '/memories' },
+				{ label: 'Contacts', href: '/contacts' },
+			],
+		},
+		footer: {
+			rights: 'All rights reserved.',
+			developedBy: 'Developed in memory of the teacher.',
+			description:
+				'Memorial site dedicated to the life, works, and legacy of an outstanding teacher.',
+			menuTitle: 'Menu',
+			contactsTitle: 'Contacts',
+		},
+		common: {
+			readMore: 'Read more',
+			download: 'Download',
+			openPdf: 'Open PDF',
+			watch: 'Watch',
+			back: 'Back',
 		},
 	},
 }

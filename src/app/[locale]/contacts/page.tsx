@@ -16,7 +16,8 @@ export default async function ContactsPage({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = await params
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const site = siteContent[validLocale]
 
 	const content = {
@@ -48,7 +49,7 @@ export default async function ContactsPage({
 			credits: [
 				{
 					role: 'Разработка и дизайн',
-					name: 'Внук Асқара Ислямова',
+					name: 'Асқаров Жалғас (внук)',
 					icon: Code,
 				},
 				{
@@ -87,7 +88,7 @@ export default async function ContactsPage({
 			credits: [
 				{
 					role: 'Әзірлеу және дизайн',
-					name: 'Асқар Ислямовтың немересі',
+					name: 'Асқаров Жалғас (немересі)',
 					icon: Code,
 				},
 				{
@@ -97,6 +98,44 @@ export default async function ContactsPage({
 				},
 			],
 			footer: 'Сайтты Асқар Ислямовтың отбасы қолдайды.',
+		},
+		en: {
+			subtitle: 'We welcome your letters, memories, and archival materials.',
+			emailLabel: 'Write to us',
+			helpTitle: 'How can you help the project?',
+			helpItems: [
+				{
+					icon: ImageIcon,
+					title: 'Archival Photos',
+					desc: 'If you have rare photos with Askar Islyamov, we will gratefully add them to the gallery.',
+				},
+				{
+					icon: PenTool,
+					title: 'Memories',
+					desc: 'Share a story about a meeting, a lesson, or working together. Living stories are the soul of this site.',
+				},
+				{
+					icon: FileText,
+					title: 'Corrections',
+					desc: 'If you notice an inaccuracy in the dates, please let us know so we can correct it.',
+				},
+			],
+			aboutTitle: 'About the creation of the site',
+			aboutText:
+				'This digital monument was created with love and respect for the memory of our grandfather. We tried to bring together the story of his life so that it would inspire new generations.',
+			credits: [
+				{
+					role: 'Development and Design',
+					name: 'Askarov Zhalgas (grandson)',
+					icon: Code,
+				},
+				{
+					role: 'Archival Materials',
+					name: 'Sara Askarovna (daughter)',
+					icon: BookOpen,
+				},
+			],
+			footer: 'The site is supported by the family of Askar Islyamov.',
 		},
 	}[validLocale]
 
@@ -146,7 +185,11 @@ export default async function ContactsPage({
 									className='inline-flex items-center justify-center w-full px-6 py-3 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors group'
 								>
 									<Send className='w-4 h-4 mr-2 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform text-blue-600' />
-									{validLocale === 'ru' ? 'Написать письмо' : 'Хат жазу'}
+									{validLocale === 'ru'
+										? 'Написать письмо'
+										: validLocale === 'kz'
+										? 'Хат жазу'
+										: 'Write a letter'}
 								</a>
 							</div>
 

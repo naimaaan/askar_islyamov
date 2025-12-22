@@ -7,7 +7,8 @@ export default async function MemoriesPage({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = await params
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const memories = memoriesContent[validLocale]
 
 	return (

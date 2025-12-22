@@ -9,7 +9,8 @@ export default async function BooksPage({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = await params
-	const validLocale = locale === 'ru' || locale === 'kz' ? locale : 'ru'
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const books = booksContent[validLocale]
 	const site = siteContent[validLocale]
 
@@ -50,7 +51,9 @@ export default async function BooksPage({
 						<h2 className='text-2xl md:text-3xl font-serif font-bold text-slate-900'>
 							{validLocale === 'ru'
 								? 'Книги и монографии'
-								: 'Кітаптар мен монографиялар'}
+								: validLocale === 'kz'
+								? 'Кітаптар мен монографиялар'
+								: 'Books and Monographs'}
 						</h2>
 					</div>
 
@@ -74,7 +77,11 @@ export default async function BooksPage({
 								<Film size={24} />
 							</div>
 							<h2 className='text-2xl md:text-3xl font-serif font-bold text-slate-900'>
-								{validLocale === 'ru' ? 'Видеоархив' : 'Бейне мұрағат'}
+								{validLocale === 'ru'
+									? 'Видеоархив'
+									: validLocale === 'kz'
+									? 'Бейне мұрағат'
+									: 'Video Archive'}
 							</h2>
 						</div>
 

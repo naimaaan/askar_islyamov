@@ -85,4 +85,48 @@ export const memoriesContent = {
 			button: 'Естелік қалдыру',
 		},
 	},
+
+	en: {
+		title: 'Memories',
+		description:
+			'Heartfelt memories from colleagues, students, and contemporaries.',
+		items: [
+			{
+				id: '1',
+				author: 'Staff of V. I. Lenin School',
+				role: 'Colleagues',
+				text: 'Over more than 40 years of pedagogical work, Askar Islyamov demonstrated persistence and high responsibility in educating the younger generation. His work is the path of a true teacher.',
+			},
+			{
+				id: '2',
+				author: 'Graduates of Abai Secondary School, Akzhar village',
+				role: 'Students',
+				text: 'You taught us not only knowledge but also life principles and humanity. Your wisdom and example are always with us.',
+			},
+			{
+				id: '3',
+				author: 'Argynbek Zhurtbaiuly',
+				role: 'Student',
+				text: 'Askar aga is a true teacher, possessor of a deep mind. His guidance opened the way for us not to get lost in life.',
+			},
+			{
+				id: '4',
+				author: 'Colleague',
+				role: 'Teacher',
+				text: 'Your pedagogical vision and fairness became a guideline for many young specialists. We had much to learn from you.',
+			},
+			{
+				id: '5',
+				author: 'Roza Mukanai',
+				role: 'Contemporary',
+				text: 'Your life path, full of kindness, is a beacon for future generations. Your work is in the memory of the people.',
+			},
+		],
+		cta: {
+			title: 'Leave your memory',
+			description:
+				'If you have a memory, letter, or thoughts about Askar Islyamov, we invite you to share them with us.',
+			button: 'Leave a memory',
+		},
+	},
 }
