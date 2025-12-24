@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 	return locales.flatMap(locale => {
 		return routes.map(route => ({
-			url: `${baseUrl}/${locale}${route}`,
+			url: `${baseUrl}/${locale}${route}/`,
 			lastModified: currentDate,
 			changeFrequency: 'monthly' as const,
 			priority: route === '' ? 1 : 0.8,
