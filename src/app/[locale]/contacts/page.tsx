@@ -9,6 +9,29 @@ import {
 	Code,
 	BookOpen,
 } from 'lucide-react'
+import { Metadata } from 'next'
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+	const { locale } = await params
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
+	const site = siteContent[validLocale]
+	const title =
+		site.header.nav.find(n => n.href === '/contacts')?.label || 'Contacts'
+
+	return {
+		title,
+		description: site.metadata.description,
+		openGraph: {
+			title,
+			description: site.metadata.description,
+		},
+	}
+}
 
 export default async function ContactsPage({
 	params,

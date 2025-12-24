@@ -1,9 +1,9 @@
 export const siteContent = {
 	ru: {
 		metadata: {
-			title: 'Асқар Ислямов',
+			title: 'Асқар Ислямов — биография, книги и наследие',
 			description:
-				'Мемориальный сайт, посвященный жизни и деятельности Асқара Ислямова.',
+				'Официальный мемориальный сайт, посвящённый Асқару Ислямову: биография, книги, награды, воспоминания и культурное наследие.',
 		},
 		header: {
 			title: 'Асқар Ислямов',
@@ -36,9 +36,9 @@ export const siteContent = {
 	},
 	kz: {
 		metadata: {
-			title: 'Асқар Ислямов',
+			title: 'Асқар Ислямов — өмірбаян, кітаптар және мұра',
 			description:
-				'Асқар Ислямовтың өмірі мен қызметіне арналған мемориалдық сайт.',
+				'Асқар Ислямовқа арналған ресми мемориалдық сайт: өмірбаян, кітаптар, марапаттар, естеліктер және мәдени мұра.',
 		},
 		header: {
 			title: 'Асқар Ислямов',
@@ -71,9 +71,9 @@ export const siteContent = {
 	},
 	en: {
 		metadata: {
-			title: 'Asqar Islyamov',
+			title: 'Asqar Islyamov — Biography, Books, and Legacy',
 			description:
-				'Memorial website dedicated to the life and work of Asqar Islyamov.',
+				'Official memorial website dedicated to Asqar Islyamov: biography, books, awards, memories, and cultural heritage.',
 		},
 		header: {
 			title: 'Asqar Islyamov',

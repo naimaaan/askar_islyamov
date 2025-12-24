@@ -2,6 +2,27 @@ import { booksContent } from '@/content/books'
 import { siteContent } from '@/content/site'
 import BookCard from '@/components/BookCard'
 import { BookOpen, Film, Library } from 'lucide-react'
+import { Metadata } from 'next'
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+	const { locale } = await params
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
+	const books = booksContent[validLocale]
+
+	return {
+		title: books.title,
+		description: books.description,
+		openGraph: {
+			title: books.title,
+			description: books.description,
+		},
+	}
+}
 
 export default async function BooksPage({
 	params,

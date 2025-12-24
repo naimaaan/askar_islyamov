@@ -1,5 +1,26 @@
 import { awardsContent } from '@/content/awards'
 import { Award, Star, Trophy, Medal, Quote, Sparkles } from 'lucide-react'
+import { Metadata } from 'next'
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+	const { locale } = await params
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
+	const awards = awardsContent[validLocale]
+
+	return {
+		title: awards.title,
+		description: awards.description,
+		openGraph: {
+			title: awards.title,
+			description: awards.description,
+		},
+	}
+}
 
 export default async function AwardsPage({
 	params,

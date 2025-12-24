@@ -15,6 +15,10 @@ export async function generateMetadata({
 	return {
 		title: gallery.title,
 		description: gallery.description,
+		openGraph: {
+			title: gallery.title,
+			description: gallery.description,
+		},
 	}
 }
 

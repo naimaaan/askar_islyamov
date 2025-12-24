@@ -1,5 +1,26 @@
 import { memoriesContent } from '@/content/memories'
 import { Quote, PenTool, Send, MessageCircle } from 'lucide-react'
+import { Metadata } from 'next'
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+	const { locale } = await params
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
+	const memories = memoriesContent[validLocale]
+
+	return {
+		title: memories.title,
+		description: memories.description,
+		openGraph: {
+			title: memories.title,
+			description: memories.description,
+		},
+	}
+}
 
 export default async function MemoriesPage({
 	params,

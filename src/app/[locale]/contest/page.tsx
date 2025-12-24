@@ -2,6 +2,27 @@ import { contestContent } from '@/content/contest'
 import ContestTimeline from '@/components/ContestTimeline'
 import ContestGallery from '@/components/ContestGallery' // Импортируем новый компонент
 import { FileText, Trophy, ExternalLink, Award, Quote } from 'lucide-react'
+import { Metadata } from 'next'
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+	const { locale } = await params
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
+	const contest = contestContent[validLocale]
+
+	return {
+		title: contest.title,
+		description: contest.description,
+		openGraph: {
+			title: contest.title,
+			description: contest.description,
+		},
+	}
+}
 
 export default async function ContestPage({
 	params,

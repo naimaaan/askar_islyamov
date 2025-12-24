@@ -7,6 +7,27 @@ import { siteContent } from '@/content/site'
 import { memoriesContent } from '@/content/memories'
 import BookCard from '@/components/BookCard'
 import Image from 'next/image'
+import { Metadata } from 'next'
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+	const { locale } = await params
+	const validLocale =
+		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
+	const site = siteContent[validLocale]
+
+	return {
+		title: site.metadata.title,
+		description: site.metadata.description,
+		openGraph: {
+			title: site.metadata.title,
+			description: site.metadata.description,
+		},
+	}
+}
 
 export default async function Home({
 	params,
