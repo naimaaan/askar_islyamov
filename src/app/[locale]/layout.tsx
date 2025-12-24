@@ -52,6 +52,14 @@ export async function generateMetadata({
 			type: 'website',
 			url: 'https://askarislyamov.kz',
 			siteName: dict.header.title,
+			images: [
+				{
+					url: '/opengraph.png',
+					width: 1200,
+					height: 630,
+					alt: dict.metadata.title,
+				},
+			],
 		},
 		alternates: {
 			canonical: `/${locale}${slug}`,
