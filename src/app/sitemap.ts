@@ -16,14 +16,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		'/contacts',
 	]
 
-	const urls = locales.flatMap(locale => {
+	// Use a fixed date or dynamic date.
+	// Using new Date() updates the lastModified on every request, which is fine for dynamic sites.
+	const currentDate = new Date()
+
+	return locales.flatMap(locale => {
 		return routes.map(route => ({
 			url: `${baseUrl}/${locale}${route}`,
-			lastModified: new Date(),
+			lastModified: currentDate,
 			changeFrequency: 'monthly' as const,
 			priority: route === '' ? 1 : 0.8,
 		}))
 	})
-
-	return urls
 }
