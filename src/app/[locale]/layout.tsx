@@ -4,6 +4,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { getDictionary } from '@/lib/i18n'
 import '@/app/globals.css'
+import { Metadata } from 'next'
 
 const inter = Inter({
 	subsets: ['latin', 'cyrillic'],
@@ -13,6 +14,21 @@ const playfair = Playfair_Display({
 	subsets: ['latin', 'cyrillic'],
 	variable: '--font-playfair',
 })
+
+export const metadata: Metadata = {
+	metadataBase: new URL('https://askarislyamov.kz'),
+	title: {
+		template: '%s | Asqar Islyamov',
+		default: 'Asqar Islyamov',
+	},
+	description:
+		'Memorial website dedicated to the life and work of Asqar Islyamov.',
+	openGraph: {
+		type: 'website',
+		url: 'https://askarislyamov.kz',
+		siteName: 'Asqar Islyamov Memorial',
+	},
+}
 
 export async function generateStaticParams() {
 	return locales.map(locale => ({ locale }))
