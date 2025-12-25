@@ -66,45 +66,29 @@ export async function generateMetadata({
 			languages,
 		},
 		icons: {
-			icon: '/favicon.ico',
-			shortcut: '/favicon.ico',
-			apple: '/apple-touch-icon.png',
-			other: [
+			icon: [
+				{ url: '/favicon.ico' },
+				{ url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+				{ url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
 				{
-					rel: 'icon',
-					type: 'image/png',
-					sizes: '16x16',
-					url: '/favicon-16x16.png',
-				},
-				{
-					rel: 'icon',
-					type: 'image/png',
-					sizes: '32x32',
-					url: '/favicon-32x32.png',
-				},
-				{
-					rel: 'icon',
-					type: 'image/png',
-					sizes: '192x192',
 					url: '/android-chrome-192x192.png',
+					sizes: '192x192',
+					type: 'image/png',
 				},
 				{
-					rel: 'icon',
-					type: 'image/png',
-					sizes: '512x512',
 					url: '/android-chrome-512x512.png',
+					sizes: '512x512',
+					type: 'image/png',
 				},
 			],
+			shortcut: '/favicon.ico',
+			apple: '/apple-touch-icon.png',
 		},
 		manifest: '/site.webmanifest',
 	}
 }
 
-export async function generateStaticParams() {
-	return locales.map(locale => ({ locale }))
-}
-
-export default async function LocaleLayout({
+export default async function RootLayout({
 	children,
 	params,
 }: {
