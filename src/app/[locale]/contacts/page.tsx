@@ -200,11 +200,11 @@ export default async function ContactsPage({
 									{content.emailLabel}
 								</h3>
 								<p className='text-slate-400 text-sm mb-8'>
-									contact@askar-islyamov.kz
+									contact@askarislyamov.kz
 								</p>
 
 								<a
-									href='mailto:contact@askar-islyamov.kz'
+									href='mailto:contact@askarislyamov.kz'
 									className='inline-flex items-center justify-center w-full px-6 py-3 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors group'
 								>
 									<Send className='w-4 h-4 mr-2 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform text-blue-600' />
