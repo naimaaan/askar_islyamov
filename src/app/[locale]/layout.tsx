@@ -100,6 +100,27 @@ export default async function RootLayout({
 	const pContent =
 		personContent[locale as keyof typeof personContent] || personContent.ru
 
+	// Данные, зависящие от языка (можно вынести в person.ts, если хотите)
+	const birthPlace =
+		locale === 'kz'
+			? 'Семей облысы, Ақсуат ауданы, Қызылкесік совхозы'
+			: 'Семейская область, Аксуатский район, совхоз Кызылкесик'
+
+	const spouseName = 'Нағима Сүлейменқызы Сатыбалдина'
+
+	const alumni =
+		locale === 'kz'
+			? [
+					'Семей мұғалімдер техникумы',
+					'Өскемен педагогикалық институты',
+					'Абай атындағы Қазақ педагогикалық институты',
+			  ]
+			: [
+					'Семипалатинский учительский техникум',
+					'Усть-Каменогорский педагогический институт',
+					'Казахский педагогический институт имени Абая',
+			  ]
+
 	return (
 		<html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
 			<body className='font-sans bg-slate-50 text-slate-900 min-h-screen flex flex-col overflow-x-hidden'>
@@ -108,6 +129,17 @@ export default async function RootLayout({
 					description={dict.metadata.description}
 					url={`https://askarislyamov.kz/${locale}`}
 					image='https://askarislyamov.kz/images/port.png'
+					birthDate='1928-03-04'
+					deathDate='2001-10-30'
+					jobTitle={pContent.role}
+					birthPlace={birthPlace}
+					spouse={spouseName}
+					alumniOf={alumni}
+					awards={[
+						'Заслуженный учитель Казахской ССР',
+						'Отличник народного просвещения СССР',
+						'Отличник народного просвещения Казахской ССР',
+					]}
 				/>
 				<Header locale={locale as any} dict={dict.header} />
 				<main className='flex-grow'>{children}</main>
