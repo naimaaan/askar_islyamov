@@ -111,7 +111,7 @@ export default async function MemoriesPage({
 							{memories.cta.description}
 						</p>
 						<a
-							href='mailto:contact@askar-islyamov.kz'
+							href='mailto:contact@askarislyamov.kz'
 							className='inline-flex items-center px-8 py-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200 hover:-translate-y-1 group'
 						>
 							<Send className='w-4 h-4 mr-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform' />

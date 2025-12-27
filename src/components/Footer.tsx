@@ -55,8 +55,8 @@ export default function Footer({ locale, dict, nav }: FooterProps) {
 						</h4>
 						<div className='space-y-4 text-sm'>
 							<p className='text-slate-400 hover:text-white transition-colors'>
-								<a href='mailto:contact@askar-islyamov.kz'>
-									contact@askar-islyamov.kz
+								<a href='mailto:contact@askarislyamov.kz'>
+									contact@askarislyamov.kz
 								</a>
 							</p>
 							<p className='text-slate-500 pt-4 border-t border-slate-800/50'>
