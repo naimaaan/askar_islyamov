@@ -34,6 +34,7 @@ export default function PersonJsonLd({
 	const jsonLd = {
 		'@context': 'https://schema.org',
 		'@type': 'Person',
+		'@id': `${url.replace(/\/$/, '')}#person`, // canonical ID сущности
 		name,
 		url,
 		description,
@@ -71,10 +72,13 @@ export default function PersonJsonLd({
 		},
 	}
 
+	// Убираем undefined-поля, чтобы JSON-LD был чище
+	const cleanedJsonLd = JSON.parse(JSON.stringify(jsonLd))
+
 	return (
 		<script
 			type='application/ld+json'
-			dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+			dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanedJsonLd) }}
 		/>
 	)
 }

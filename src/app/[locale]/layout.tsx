@@ -100,11 +100,10 @@ export default async function RootLayout({
 	const pContent =
 		personContent[locale as keyof typeof personContent] || personContent.ru
 
-	// Данные, зависящие от языка (можно вынести в person.ts, если хотите)
 	const birthPlace =
 		locale === 'kz'
 			? 'Семей облысы, Ақсуат ауданы, Қызылкесік совхозы'
-			: 'Семейская область, Аксуатский район, совхоз Кызылкесик'
+			: 'Семипалатинская область, Аксуатский район, совхоз Кызылкесик'
 
 	const spouseName = 'Нағима Сүлейменқызы Сатыбалдина'
 
@@ -121,14 +120,18 @@ export default async function RootLayout({
 					'Казахский педагогический институт имени Абая',
 			  ]
 
+	// 🔹 Один канонический URL сущности для всех локалей
+	const personUrl = 'https://askarislyamov.kz'
+
 	return (
 		<html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
 			<body className='font-sans bg-slate-50 text-slate-900 min-h-screen flex flex-col overflow-x-hidden'>
 				<PersonJsonLd
 					name={pContent.name}
 					description={dict.metadata.description}
-					url={`https://askarislyamov.kz/${locale}`}
-					image='https://askarislyamov.kz/images/port.png'
+					url={personUrl}
+					// 🔹 Реальная фотка
+					image='https://askarislyamov.kz/images/%D0%BF%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82.jpeg'
 					birthDate='1928-03-04'
 					deathDate='2001-10-30'
 					jobTitle={pContent.role}
@@ -139,6 +142,11 @@ export default async function RootLayout({
 						'Заслуженный учитель Казахской ССР',
 						'Отличник народного просвещения СССР',
 						'Отличник народного просвещения Казахской ССР',
+					]}
+					// 🔹 Самое важное – связка с wiki + Wikidata
+					sameAs={[
+						'https://kk.wikipedia.org/wiki/Ислямов_Асқар_Жұмағұлұлы',
+						'https://www.wikidata.org/wiki/Q137571264',
 					]}
 				/>
 				<Header locale={locale as any} dict={dict.header} />
