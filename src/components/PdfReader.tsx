@@ -19,7 +19,13 @@ import {
 } from 'lucide-react'
 
 // Configure worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+if (typeof window !== 'undefined' && !pdfjs.GlobalWorkerOptions.workerSrc) {
+	try {
+		pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+	} catch (e) {
+		console.error('Failed to configure PDF worker', e)
+	}
+}
 
 // Internal Error Boundary
 class ReaderErrorBoundary extends React.Component<
@@ -61,7 +67,9 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [numPages, setNumPages] = useState<number | null>(null)
 	const [pageNumber, setPageNumber] = useState<number>(1)
-	const [containerWidth, setContainerWidth] = useState<number>(600)
+	const [containerWidth, setContainerWidth] = useState<number>(
+		typeof window !== 'undefined' ? Math.min(window.innerWidth - 48, 600) : 600
+	)
 	const [rotation, setRotation] = useState<number>(0)
 	const [scale, setScale] = useState<number>(1.0)
 
@@ -92,7 +100,10 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 					setPageNumber(Number(data.page))
 					setPageInput(String(data.page))
 				}
-				if (data.splitMode !== undefined) setSplitMode(Boolean(data.splitMode))
+				// Only restore splitMode if screen is large enough
+				if (data.splitMode !== undefined && window.innerWidth >= 1024) {
+					setSplitMode(Boolean(data.splitMode))
+				}
 				if (data.splitSide === 'left' || data.splitSide === 'right')
 					setSplitSide(data.splitSide)
 				if (data.scale && !isNaN(Number(data.scale)))
@@ -149,6 +160,11 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 			// Ensure we don't set negative or NaN width
 			if (availableWidth > 0) {
 				setContainerWidth(availableWidth)
+			}
+
+			// Force disable split mode on small screens
+			if (width < 1024 && splitMode) {
+				setSplitMode(false)
 			}
 		}
 
@@ -433,6 +449,9 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											width={containerWidth * scale * 2} // Double width for split mode
 											rotate={rotation}
 											className='bg-white'
+											onRenderError={error =>
+												console.error('Page render error (split):', error)
+											}
 										/>
 									</div>
 								</div>
@@ -446,6 +465,9 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 									width={containerWidth * scale}
 									rotate={rotation}
 									className='bg-white'
+									onRenderError={error =>
+										console.error('Page render error:', error)
+									}
 								/>
 							</div>
 						)}
