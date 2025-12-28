@@ -65,7 +65,7 @@ export default async function Home({
 				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl' />
 
 				{/* Reduced padding from py-24 md:py-32 to py-12 md:py-20 */}
-				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12 md:py-20'>
+				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 pb-12 md:pt-12 md:pb-20'>
 					{/* Reduced gap from gap-12 md:gap-20 to gap-8 md:gap-12 */}
 					<div className='flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12'>
 						<div className='flex-1 space-y-6 text-center md:text-left'>

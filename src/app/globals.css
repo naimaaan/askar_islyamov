@@ -8,6 +8,9 @@
 }
 
 @layer base {
+	html {
+		zoom: 0.9;
+	}
 	body {
 		@apply antialiased;
 	}
