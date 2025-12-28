@@ -19,9 +19,11 @@ import {
 } from 'lucide-react'
 
 // Configure worker
-if (typeof window !== 'undefined' && !pdfjs.GlobalWorkerOptions.workerSrc) {
+if (typeof window !== 'undefined') {
 	try {
-		pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+		// Use https and ensure version is present
+		const version = pdfjs.version || '5.4.449'
+		pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`
 	} catch (e) {
 		console.error('Failed to configure PDF worker', e)
 	}
@@ -66,6 +68,10 @@ interface PdfReaderProps {
 function PdfReaderContent({ file }: PdfReaderProps) {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [numPages, setNumPages] = useState<number | null>(null)
+
+	// If no file is provided, don't attempt to render
+	if (!file) return null
+
 	const [pageNumber, setPageNumber] = useState<number>(1)
 	const [containerWidth, setContainerWidth] = useState<number>(
 		typeof window !== 'undefined' ? Math.min(window.innerWidth - 48, 600) : 600
@@ -163,7 +169,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 			}
 
 			// Force disable split mode on small screens
-			if (width < 1024 && splitMode) {
+			if (window.innerWidth < 1024 && splitMode) {
 				setSplitMode(false)
 			}
 		}
@@ -408,6 +414,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 					<Document
 						file={file}
 						onLoadSuccess={onDocumentLoadSuccess}
+						onLoadError={error => console.error('Document load error:', error)}
 						loading={
 							<div className='text-center py-10 text-gray-500'>
 								Загрузка документа...
