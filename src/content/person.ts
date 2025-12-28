@@ -23,6 +23,7 @@ export const personContent = {
 					content:
 						'В 1947–1950 годах окончил трёхгодичный учительский техникум в Семее. В 1952 году — Усть-Каменогорский педагогический институт. В 1962 году завершил обучение в Алма-Ате в Казахском педагогическом институте имени Абая.',
 				},
+
 				{
 					title: 'Начало педагогической деятельности',
 					content:
@@ -83,6 +84,12 @@ export const personContent = {
 					year: '1947 – 1950',
 					title: 'Учительский техникум',
 					description: 'Окончил трёхгодичный учительский техникум в Семее.',
+				},
+				{
+					year: '1952',
+					title: 'Окончание института',
+					description:
+						'Окончил Усть-Каменогорский педагогический институт и был одним из первых его выпускников.',
 				},
 				{
 					year: '1952',
@@ -217,6 +224,12 @@ export const personContent = {
 				},
 				{
 					year: '1952',
+					title: 'Институтты бітіруі',
+					description:
+						'Өскеменнің педагогикалық институтын бітірді және осы педагогикалық институттың алғашқы түлектерінің бірі.',
+				},
+				{
+					year: '1952',
 					title: 'Абай мектебіндегі қызметі',
 					description:
 						'Өскеменнің педагогикалық институтын бітіріп, Ақжардағы Абай атындағы тұңғыш орта мектепте мұғалім, оқу-тәрбие ісінің меңгерушісі болып қызмет атқарған; қоғамдық негізде партия ұйымы жұмысына қатысып, кейін партбюро хатшысы болған.',
@@ -344,6 +357,12 @@ export const personContent = {
 					title: 'Teacher training college',
 					description:
 						'Graduated from a three-year teacher training college in Semey.',
+				},
+				{
+					year: '1952',
+					title: 'Graduation from institute',
+					description:
+						'Graduated from Ust-Kamenogorsk Pedagogical Institute. He was one of its first graduates.',
 				},
 				{
 					year: '1952',
