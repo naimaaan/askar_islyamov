@@ -17,19 +17,19 @@ export default function Header({ locale, dict }: HeaderProps) {
 			{/* Soulful accent line representing the timeline/lifeline */}
 			<div className='h-1 bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200' />
 
-			<header className='border-b border-slate-200/60 bg-white/90 backdrop-blur-xl sticky top-0 z-50 transition-all duration-300 supports-[backdrop-filter]:bg-white/80'>
-				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between'>
+			<header className='border-b border-slate-200/60 bg-white/90 backdrop-blur-xl sticky top-0 z-50 transition-all duration-300 supports-[backdrop-filter]:bg-white/80 w-full left-0'>
+				<div className='max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between'>
 					{/* Logo / Title */}
 					<div className='flex-shrink-0'>
 						<Link href={`/${locale}`} className='group flex flex-col'>
-							<span className='text-2xl font-serif font-bold text-slate-900 tracking-tight group-hover:text-slate-700 transition-colors'>
+							<span className='text-lg sm:text-2xl font-serif font-bold text-slate-900 tracking-tight group-hover:text-slate-700 transition-colors'>
 								{dict.title}
 							</span>
 						</Link>
 					</div>
 
 					{/* Desktop Navigation */}
-					<nav className='hidden md:flex items-center space-x-8'>
+					<nav className='hidden lg:flex items-center space-x-8'>
 						{dict.nav.map(item => (
 							<Link
 								key={item.href}
@@ -43,7 +43,7 @@ export default function Header({ locale, dict }: HeaderProps) {
 					</nav>
 
 					{/* Actions */}
-					<div className='flex items-center space-x-6'>
+					<div className='flex items-center space-x-2 sm:space-x-6'>
 						<div className='hidden sm:block w-px h-6 bg-slate-200' />
 						<LanguageSwitcher currentLocale={locale} />
 						<MobileMenu nav={dict.nav} locale={locale} />

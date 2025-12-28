@@ -97,10 +97,11 @@ export default function MobileMenu({ nav, locale }: MobileMenuProps) {
 	}, [isOpen])
 
 	return (
-		<div className='md:hidden'>
+		/* Было md:hidden, меняем на lg:hidden */
+		<div className='lg:hidden'>
 			<button
 				onClick={toggleMenu}
-				className='p-2 -mr-2 text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500 rounded-full transition-colors'
+				className='p-2 -mr-2 text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500 rounded-full transition-colors'
 				aria-label='Toggle menu'
 				aria-expanded={isOpen}
 			>
@@ -163,7 +164,7 @@ export default function MobileMenu({ nav, locale }: MobileMenuProps) {
 							{/* Footer decoration */}
 							<div className='p-6 border-t border-slate-100/50 bg-slate-50/50'>
 								<div className='text-xs text-slate-400 text-center font-medium tracking-wider uppercase'>
-									&copy; {new Date().getFullYear()} Askar
+									&copy; {new Date().getFullYear()} Askar Islyamov
 								</div>
 							</div>
 						</div>
