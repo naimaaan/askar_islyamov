@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 import {
 	ChevronLeft,
@@ -17,6 +17,21 @@ import {
 	Moon,
 	Sun,
 } from 'lucide-react'
+
+// Polyfill for Promise.withResolvers (Required for pdfjs-dist v4+ on Safari < 17.4)
+if (typeof Promise.withResolvers === 'undefined') {
+	if (typeof window !== 'undefined') {
+		// @ts-expect-error This is a polyfill
+		Promise.withResolvers = function () {
+			let resolve, reject
+			const promise = new Promise((res, rej) => {
+				resolve = res
+				reject = rej
+			})
+			return { promise, resolve, reject }
+		}
+	}
+}
 
 // Configure worker
 if (typeof window !== 'undefined') {
@@ -394,6 +409,16 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 		pageNumber >= numPages &&
 		(!splitMode || splitSide === 'right')
 
+	// Memoize options to prevent unnecessary re-renders
+	const options = useMemo(
+		() => ({
+			cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
+			cMapPacked: true,
+			standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts/`,
+		}),
+		[]
+	)
+
 	return (
 		<div
 			ref={containerRef}
@@ -415,6 +440,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 						file={file}
 						onLoadSuccess={onDocumentLoadSuccess}
 						onLoadError={error => console.error('Document load error:', error)}
+						options={options}
 						loading={
 							<div className='text-center py-10 text-gray-500'>
 								Загрузка документа...
