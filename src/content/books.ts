@@ -29,7 +29,7 @@ export const booksContent = {
 				description:
 					'Сборник, состоящий из статей и очерков о краеведении, культуре бережного отношения к природе, воспитании учеников и жизненном пути учителя.',
 				cover: '/images/Тарихта қалған тағылым гпт2.png',
-				pdf: '/pdf/Тарихта қалған тағылым 1-287 (1).pdf',
+				pdf: '/pdf/Тарихта қалған тағылым 1-287.pdf',
 			},
 			{
 				id: 'cultural-heritage',
@@ -90,7 +90,7 @@ export const booksContent = {
 				description:
 					'Өлкетану, табиғатты аялау мәдениеті, шәкірт тәрбиесі және ұстаздың өмір жолы туралы мақалалар мен очерктерден құралған жинақ.',
 				cover: '/images/Тарихта қалған тағылым гпт2.png',
-				pdf: '/pdf/Тарихта қалған тағылым 1-287 (1).pdf',
+				pdf: '/pdf/Тарихта қалған тағылым 1-287.pdf',
 			},
 			{
 				id: 'cultural-heritage',
@@ -151,7 +151,7 @@ export const booksContent = {
 				description:
 					"A collection consisting of articles and essays on local history, the culture of cherishing nature, the upbringing of students, and the teacher's life path.",
 				cover: '/images/Тарихта қалған тағылым гпт2.png',
-				pdf: '/pdf/Тарихта қалған тағылым 1-287 (1).pdf',
+				pdf: '/pdf/Тарихта қалған тағылым 1-287.pdf',
 			},
 			{
 				id: 'cultural-heritage',

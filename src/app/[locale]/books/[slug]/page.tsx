@@ -12,6 +12,9 @@ import {
 	BookOpen,
 	Calendar,
 } from 'lucide-react'
+import BookPdfReaderSection from '@/components/BookPdfReaderSection'
+import { BookReaderProvider } from '@/components/BookReaderContext'
+import ReadOnlineButton from '@/components/ReadOnlineButton'
 
 export async function generateStaticParams({
 	params: { locale },
@@ -43,8 +46,8 @@ export default async function BookPage({
 	return (
 		<div className='min-h-screen bg-slate-50'>
 			{/* Navigation Bar */}
-			<div className='bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50'>
-				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between'>
+			<div className='bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-16 z-40 transition-all duration-300'>
+				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between'>
 					<Link
 						href={`/${locale}/books`}
 						className='inline-flex items-center text-slate-500 hover:text-slate-900 transition-colors text-sm font-medium group'
@@ -59,101 +62,128 @@ export default async function BookPage({
 			</div>
 
 			{/* Hero Section */}
-			<div className='relative overflow-hidden bg-slate-900'>
-				{/* Ambient Background */}
-				<div className='absolute inset-0 overflow-hidden'>
-					<Image
-						src={book.cover}
-						alt=''
-						fill
-						className='object-cover opacity-30 blur-3xl scale-110 mix-blend-overlay'
-					/>
-					<div className='absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/95 to-slate-900/50' />
-				</div>
+			<BookReaderProvider>
+				<div className='relative overflow-hidden bg-slate-900'>
+					{/* Ambient Background */}
+					<div className='absolute inset-0 overflow-hidden'>
+						<Image
+							src={book.cover}
+							alt=''
+							fill
+							className='object-cover opacity-30 blur-3xl scale-110 mix-blend-overlay'
+						/>
+						<div className='absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/95 to-slate-900/50' />
+					</div>
 
-				<div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24'>
-					<div className='flex flex-col md:flex-row gap-12 lg:gap-20 items-start'>
-						{/* Book Cover */}
-						<div className='w-full md:w-1/3 lg:w-[320px] flex-shrink-0 relative z-10 mx-auto md:mx-0 max-w-sm'>
-							<div className='transform transition-transform hover:scale-[1.02] duration-500'>
-								<Image
-									src={book.cover}
-									alt={book.title}
-									width={600}
-									height={900}
-									className='w-full h-auto drop-shadow-2xl'
-									priority
-								/>
+					<div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24'>
+						<div className='flex flex-col md:flex-row gap-12 lg:gap-20 items-start'>
+							{/* Book Cover */}
+							<div className='w-full md:w-1/3 lg:w-[320px] flex-shrink-0 relative z-10 mx-auto md:mx-0 max-w-sm'>
+								<div className='transform transition-transform hover:scale-[1.02] duration-500'>
+									<Image
+										src={book.cover}
+										alt={book.title}
+										width={600}
+										height={900}
+										className='w-full h-auto drop-shadow-2xl'
+										priority
+									/>
+								</div>
 							</div>
-						</div>
 
-						{/* Content */}
-						<div className='flex-1 pt-2 md:pt-4 text-center md:text-left'>
-							<div className='flex flex-wrap items-center justify-center md:justify-start gap-3 mb-6'>
-								<span className='inline-flex items-center px-3 py-1 rounded-full bg-blue-600/10 text-blue-700 text-xs font-bold uppercase tracking-wider border border-blue-600/20'>
-									{isFilm
-										? validLocale === 'ru'
-											? 'Видеоархив'
+							{/* Content */}
+							<div className='flex-1 pt-2 md:pt-4 text-center md:text-left'>
+								<div className='flex flex-wrap items-center justify-center md:justify-start gap-3 mb-6'>
+									<span className='inline-flex items-center px-3 py-1 rounded-full bg-blue-600/10 text-blue-700 text-xs font-bold uppercase tracking-wider border border-blue-600/20'>
+										{isFilm
+											? validLocale === 'ru'
+												? 'Видеоархив'
+												: validLocale === 'kz'
+												? 'Бейне мұрағат'
+												: 'Video Archive'
+											: validLocale === 'ru'
+											? 'Книга'
 											: validLocale === 'kz'
-											? 'Бейне мұрағат'
-											: 'Video Archive'
-										: validLocale === 'ru'
-										? 'Книга'
-										: validLocale === 'kz'
-										? 'Кітап'
-										: 'Book'}
-								</span>
-								{book.year && (
-									<span className='inline-flex items-center text-slate-600 text-sm font-medium bg-white/50 px-3 py-1 rounded-full border border-slate-200'>
-										<Calendar className='w-3.5 h-3.5 mr-1.5 text-slate-400' />
-										{book.year}
+											? 'Кітап'
+											: 'Book'}
 									</span>
-								)}
-							</div>
-
-							<h1 className='text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight tracking-tight'>
-								{book.title}
-							</h1>
-
-							<div className='prose prose-lg text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0'>
-								{book.description}
-							</div>
-
-							<div className='flex flex-col sm:flex-row gap-4 justify-center md:justify-start'>
-								<a
-									href={book.pdf}
-									target='_blank'
-									rel='noopener noreferrer'
-									className='inline-flex items-center justify-center px-8 py-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group'
-								>
-									{isFilm ? (
-										<>
-											<Play className='mr-3 h-5 w-5 fill-current group-hover:scale-110 transition-transform' />
-											{site.common.watch}
-										</>
-									) : (
-										<>
-											<BookOpen className='mr-3 h-5 w-5 group-hover:scale-110 transition-transform' />
-											{site.common.openPdf}
-										</>
+									{book.year && (
+										<span className='inline-flex items-center text-slate-600 text-sm font-medium bg-white/50 px-3 py-1 rounded-full border border-slate-200'>
+											<Calendar className='w-3.5 h-3.5 mr-1.5 text-slate-400' />
+											{book.year}
+										</span>
 									)}
-								</a>
+								</div>
 
-								{!isFilm && (
+								<h1 className='text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight tracking-tight'>
+									{book.title}
+								</h1>
+
+								<div className='prose prose-lg text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0'>
+									{book.description}
+								</div>
+
+								<div className='flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap'>
+									{!isFilm && (
+										<ReadOnlineButton
+											label={
+												validLocale === 'kz'
+													? 'Онлайн оқу'
+													: validLocale === 'en'
+													? 'Read Online'
+													: 'Читать онлайн'
+											}
+											activeLabel={
+												validLocale === 'kz'
+													? 'Жабу'
+													: validLocale === 'en'
+													? 'Close'
+													: 'Закрыть'
+											}
+										/>
+									)}
+
 									<a
 										href={book.pdf}
-										download
+										target='_blank'
+										rel='noopener noreferrer'
 										className='inline-flex items-center justify-center px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-lg font-medium hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md group'
 									>
-										<Download className='mr-3 h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors' />
-										{site.common.download}
+										{isFilm ? (
+											<>
+												<Play className='mr-3 h-5 w-5 fill-current group-hover:scale-110 transition-transform' />
+												{site.common.watch}
+											</>
+										) : (
+											<>
+												<BookOpen className='mr-3 h-5 w-5 group-hover:scale-110 transition-transform' />
+												{site.common.openPdf}
+											</>
+										)}
 									</a>
-								)}
+
+									{!isFilm && (
+										<a
+											href={book.pdf}
+											download
+											className='inline-flex items-center justify-center px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-lg font-medium hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md group'
+										>
+											<Download className='mr-3 h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors' />
+											{site.common.download}
+										</a>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+
+				{!isFilm && (
+					<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:pt-4 md:pb-16'>
+						<BookPdfReaderSection pdf={book.pdf} />
+					</div>
+				)}
+			</BookReaderProvider>
 
 			{/* Related Books Section */}
 			{otherBooks.length > 0 && (
