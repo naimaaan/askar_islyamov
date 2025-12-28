@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 import {
 	ChevronLeft,
@@ -21,11 +21,43 @@ import {
 // Configure worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
+// Internal Error Boundary
+class ReaderErrorBoundary extends React.Component<
+	{ children: React.ReactNode },
+	{ hasError: boolean }
+> {
+	constructor(props: { children: React.ReactNode }) {
+		super(props)
+		this.state = { hasError: false }
+	}
+
+	static getDerivedStateFromError(error: unknown) {
+		return { hasError: true }
+	}
+
+	componentDidCatch(error: unknown, info: unknown) {
+		console.error('PdfReader error:', error, info)
+	}
+
+	render() {
+		if (this.state.hasError) {
+			return (
+				<div className='mt-4 text-sm text-red-400 text-center p-4 border border-red-200 rounded bg-red-50 dark:bg-red-900/20 dark:border-red-800'>
+					Произошла ошибка при загрузке ридера.
+					<br />
+					Попробуйте обновить страницу или использовать кнопку "Читать PDF".
+				</div>
+			)
+		}
+		return this.props.children
+	}
+}
+
 interface PdfReaderProps {
 	file: string
 }
 
-export default function PdfReader({ file }: PdfReaderProps) {
+function PdfReaderContent({ file }: PdfReaderProps) {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [numPages, setNumPages] = useState<number | null>(null)
 	const [pageNumber, setPageNumber] = useState<number>(1)
@@ -46,20 +78,29 @@ export default function PdfReader({ file }: PdfReaderProps) {
 		if (typeof window === 'undefined') return
 
 		const storageKey = `pdfReader:${file}`
-		const saved = localStorage.getItem(storageKey)
+		let saved: string | null = null
+		try {
+			saved = localStorage.getItem(storageKey)
+		} catch (e) {
+			// ignore
+		}
 
 		if (saved) {
 			try {
 				const data = JSON.parse(saved)
-				if (data.page) {
-					setPageNumber(data.page)
+				if (data.page && !isNaN(Number(data.page))) {
+					setPageNumber(Number(data.page))
 					setPageInput(String(data.page))
 				}
-				if (data.splitMode !== undefined) setSplitMode(data.splitMode)
-				if (data.splitSide) setSplitSide(data.splitSide)
-				if (data.scale) setScale(data.scale)
-				if (data.isNightMode !== undefined) setIsNightMode(data.isNightMode)
-				if (data.rotation !== undefined) setRotation(data.rotation)
+				if (data.splitMode !== undefined) setSplitMode(Boolean(data.splitMode))
+				if (data.splitSide === 'left' || data.splitSide === 'right')
+					setSplitSide(data.splitSide)
+				if (data.scale && !isNaN(Number(data.scale)))
+					setScale(Number(data.scale))
+				if (data.isNightMode !== undefined)
+					setIsNightMode(Boolean(data.isNightMode))
+				if (data.rotation !== undefined && !isNaN(Number(data.rotation)))
+					setRotation(Number(data.rotation))
 			} catch (e) {
 				console.error('Failed to restore PDF state', e)
 			}
@@ -83,22 +124,32 @@ export default function PdfReader({ file }: PdfReaderProps) {
 			isNightMode,
 			rotation,
 		}
-		localStorage.setItem(storageKey, JSON.stringify(stateToSave))
+		try {
+			localStorage.setItem(storageKey, JSON.stringify(stateToSave))
+		} catch (e) {
+			// ignore
+		}
 	}, [pageNumber, splitMode, splitSide, scale, isNightMode, rotation, file])
 
 	// Handle window resize to make PDF responsive
 	useEffect(() => {
+		if (typeof window === 'undefined') return
+
 		function updateWidth() {
 			if (!containerRef.current) return
 			const width = containerRef.current.clientWidth
 			// On desktop (lg), we have a sidebar of approx 320px (w-72 + gap-8)
 			// Max container width is 1200px unless fullscreen
-			const isDesktop = window.innerWidth >= 1024
+			const isDesktop =
+				typeof window !== 'undefined' && window.innerWidth >= 1024
 			const sidebarWidth = isDesktop ? 320 : 0
 			const padding = 48 // px-6 * 2
 
 			const availableWidth = width - sidebarWidth - padding
-			setContainerWidth(availableWidth)
+			// Ensure we don't set negative or NaN width
+			if (availableWidth > 0) {
+				setContainerWidth(availableWidth)
+			}
 		}
 
 		// Initial set
@@ -116,16 +167,25 @@ export default function PdfReader({ file }: PdfReaderProps) {
 
 	// Fullscreen toggle
 	function toggleFullscreen() {
+		if (typeof document === 'undefined') return
+		if (!containerRef.current) return
+
 		if (!document.fullscreenElement) {
-			containerRef.current?.requestFullscreen().catch(err => {
+			containerRef.current.requestFullscreen().catch(err => {
 				console.error(`Error attempting to enable fullscreen: ${err.message}`)
 			})
 		} else {
-			document.exitFullscreen()
+			if (document.exitFullscreen) {
+				document.exitFullscreen().catch(err => {
+					console.error(`Error attempting to exit fullscreen: ${err.message}`)
+				})
+			}
 		}
 	}
 
 	useEffect(() => {
+		if (typeof document === 'undefined') return
+
 		function onFullscreenChange() {
 			setIsFullscreen(Boolean(document.fullscreenElement))
 		}
@@ -136,6 +196,8 @@ export default function PdfReader({ file }: PdfReaderProps) {
 
 	// Keyboard navigation
 	useEffect(() => {
+		if (typeof window === 'undefined') return
+
 		const handleKeyDown = (e: KeyboardEvent) => {
 			// If focus is in input, ignore
 			if (document.activeElement instanceof HTMLInputElement) return
@@ -279,11 +341,14 @@ export default function PdfReader({ file }: PdfReaderProps) {
 
 	// Swipe handlers
 	function onTouchStart(e: React.TouchEvent) {
-		setTouchStartX(e.touches[0].clientX)
+		if (e.touches && e.touches.length > 0) {
+			setTouchStartX(e.touches[0].clientX)
+		}
 	}
 
 	function onTouchEnd(e: React.TouchEvent) {
 		if (touchStartX === null) return
+		if (!e.changedTouches || e.changedTouches.length === 0) return
 
 		const touchEndX = e.changedTouches[0].clientX
 		const diff = touchStartX - touchEndX
@@ -624,5 +689,13 @@ export default function PdfReader({ file }: PdfReaderProps) {
 				)}
 			</div>
 		</div>
+	)
+}
+
+export default function PdfReader(props: PdfReaderProps) {
+	return (
+		<ReaderErrorBoundary>
+			<PdfReaderContent {...props} />
+		</ReaderErrorBoundary>
 	)
 }
