@@ -508,7 +508,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 				</div>
 
 				{numPages && (
-					<div className='flex flex-col gap-6 mt-8 lg:mt-0 w-full max-w-3xl lg:w-72 lg:shrink-0 lg:sticky lg:top-24'>
+					<div className='flex flex-col gap-6 mt-8 lg:mt-0 w-full max-w-3xl lg:w-72 lg:shrink-0 lg:sticky lg:top-32'>
 						{/* Row 1: Page Navigation */}
 						<div
 							className={`flex items-center justify-center gap-4 md:gap-8 lg:flex-col lg:gap-4 lg:p-4 lg:rounded-xl lg:border ${
