@@ -20,7 +20,7 @@ export const booksContent = {
 				description:
 					'Научный труд по топонимике Восточного Казахстана. Издан в 2003 году (Алматы, «Эверо»), а также в 2022 году как монография в рамках «Рухани Жаңғыру» на трёх языках (қазақ-орыс-ағылшын). Используется как учебно-методическое пособие в вузах и колледжах.',
 				cover: '/images/topo.png',
-				pdf: '',
+				pdf: '/pdf/А. Ислямов Шығыс Қазақстан топонимикасы.pdf',
 			},
 			{
 				id: 'tarikhta-kalgan',
@@ -142,7 +142,7 @@ export const booksContent = {
 				description:
 					'Scientific work on the toponymy of East Kazakhstan. Published in 2003 (Almaty, "Evero"), and also in 2022 as a monograph within the framework of "Rukhani Zhangyru" in three languages (Kazakh-Russian-English). Used as a teaching aid in universities and colleges.',
 				cover: '/images/topo.png',
-				pdf: '',
+				pdf: '/pdf/А. Ислямов Шығыс Қазақстан топонимикасы.pdf',
 			},
 			{
 				id: 'tarikhta-kalgan',
