@@ -4,6 +4,12 @@ export const personContent = {
 		role: 'Выдающийся педагог, директор школы, основатель педагогической династии',
 		intro:
 			'Асқар Жұмағұлұлы Ислямов (04.03.1928 – 30.10.2001) — выдающийся педагог Восточного Казахстана, посвятивший жизнь народному образованию, краеведению и воспитанию молодёжи. Его судьба — пример стойкости, самоотверженного труда и служения родной земле.',
+		awards: [
+			'Заслуженный учитель Казахстана',
+			'Отличник народного просвещения СССР',
+			'Отличник народного просвещения Казахской ССР',
+			'Обладатель пенсии за особые заслуги перед Республикой Казахстан',
+		],
 		keyFacts: [
 			{ label: 'Трудовой путь', value: '45 лет в сфере образования' },
 			{ label: 'Публикации', value: 'Около 50 работ (методики, статьи, опыт)' },
@@ -137,6 +143,12 @@ export const personContent = {
 		role: 'Ұлағатты ұстаз, мектеп директоры, ұстаздар әулетінің негізін қалаушы',
 		intro:
 			'Ислямов Асқар Жұмағұлұлы (04.03.1928 – 30.10.2001) — Шығыс Қазақстандағы халық ағарту ісіне ғұмырын арнаған көрнекті педагог, өлкетанушы, жас ұрпақ тәрбиесіне зор үлес қосқан тұлға. Оның өмір жолы — табандылық пен адал еңбектің, туған жерге қызмет етудің өнегесі.',
+		awards: [
+			'Қазақстанның еңбек сіңірген мұғалімі',
+			'КСРО Халық ағарту ісінің үздігі',
+			'Қазақ КСР халық ағарту ісінің үздігі',
+			'Қазақстан Республикасына ерекше сіңірген еңбегі үшін зейнетақы иесі',
+		],
 		keyFacts: [
 			{ label: 'Еңбек жолы', value: 'Халық ағарту саласында 45 жыл' },
 			{
@@ -273,6 +285,12 @@ export const personContent = {
 		role: 'Respected educator, school director, founder of a pedagogical dynasty',
 		intro:
 			'Askar Zhumagululy Islyamov (04.03.1928 – 30.10.2001) — an outstanding educator of East Kazakhstan, who dedicated his life to public education, local history, and the upbringing of youth. His destiny is an example of resilience, selfless labor, and service to his native land.',
+		awards: [
+			'Honored Teacher of Kazakhstan',
+			'Excellence in Public Education of the USSR',
+			'Excellence in Public Education of the Kazakh SSR',
+			'Holder of pension for special merits to the Republic of Kazakhstan',
+		],
 		keyFacts: [
 			{ label: 'Career path', value: '45 years in the field of education' },
 			{

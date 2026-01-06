@@ -69,13 +69,16 @@ export default async function Home({
 					{/* Reduced gap from gap-12 md:gap-20 to gap-8 md:gap-12 */}
 					<div className='flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12'>
 						<div className='flex-1 space-y-6 text-center md:text-left'>
-							<div className='inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm font-medium text-slate-300 mb-2'>
-								1928 — 2001
+							{/* Desktop Date & Name */}
+							<div className='hidden md:block'>
+								<div className='inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm font-medium text-slate-300 mb-2'>
+									1928 — 2001
+								</div>
+								{/* Reduced text size from 5xl/7xl to 4xl/6xl */}
+								<h1 className='text-4xl md:text-6xl font-serif font-bold leading-tight tracking-tight'>
+									{person.name}
+								</h1>
 							</div>
-							{/* Reduced text size from 5xl/7xl to 4xl/6xl */}
-							<h1 className='text-4xl md:text-6xl font-serif font-bold leading-tight tracking-tight'>
-								{person.name}
-							</h1>
 							{/* Reduced text size from xl/2xl to lg/xl */}
 							<p className='text-lg md:text-xl text-slate-300 font-light tracking-wide'>
 								{person.role}
@@ -101,21 +104,49 @@ export default async function Home({
 							</div>
 						</div>
 
-						{/* Enhanced Image Container - Reduced Size */}
-						<div className='relative group'>
-							<div className='absolute inset-0 bg-gradient-to-tr from-amber-200/20 to-blue-200/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700' />
-							{/* Reduced size from w-72/28rem to w-64/24rem */}
-							<div className='w-64 h-64 md:w-[24rem] md:h-[24rem] rounded-full border-8 border-slate-800/50 shadow-2xl overflow-hidden relative z-10 ring-1 ring-white/10'>
-								<Image
-									src='/images/image2.png'
-									alt={person.name}
-									fill
-									className='object-cover transition-transform duration-700 group-hover:scale-105'
-									style={{
-										objectPosition: '50% 10%',
-									}}
-									priority
-								/>
+						{/* Enhanced Image Container with Awards */}
+						<div className='flex flex-col items-center gap-8 relative z-10'>
+							<div className='relative group'>
+								<div className='absolute inset-0 bg-gradient-to-tr from-amber-200/20 to-blue-200/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700' />
+								{/* Profile Image - Optimized Size */}
+								<div className='w-48 h-48 md:w-72 md:h-72 rounded-full border-8 border-slate-800/50 shadow-2xl overflow-hidden relative z-10 ring-1 ring-white/10'>
+									<Image
+										src='/images/image2.png'
+										alt={person.name}
+										fill
+										className='object-cover transition-transform duration-700 group-hover:scale-105'
+										style={{
+											objectPosition: '50% 10%',
+										}}
+										priority
+									/>
+								</div>
+							</div>
+
+							{/* Mobile Date & Name */}
+							<div className='block md:hidden text-center space-y-4 -mt-2'>
+								<div className='inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm font-medium text-slate-300'>
+									1928 — 2001
+								</div>
+								<h1 className='text-3xl font-serif font-bold leading-tight tracking-tight px-2'>
+									{person.name}
+								</h1>
+							</div>
+
+							{/* Awards List - Professional & Visual Appeal */}
+							<div className='w-full max-w-md space-y-3 text-center animate-fade-in-up'>
+								{person.awards.map((award: string, index: number) => (
+									<div
+										key={index}
+										className='flex items-center justify-center gap-3 group'
+									>
+										<div className='h-px w-0 group-hover:w-8 bg-gradient-to-r from-transparent to-amber-500/50 transition-all duration-500' />
+										<span className='text-sm md:text-base font-serif text-slate-200/90 tracking-wide leading-relaxed drop-shadow-sm group-hover:text-amber-100 transition-colors duration-300'>
+											{award}
+										</span>
+										<div className='h-px w-0 group-hover:w-8 bg-gradient-to-l from-transparent to-amber-500/50 transition-all duration-500' />
+									</div>
+								))}
 							</div>
 						</div>
 					</div>
