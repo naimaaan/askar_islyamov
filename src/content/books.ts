@@ -11,7 +11,7 @@ export const booksContent = {
 				description:
 					'Автобиографическая книга-воспоминание, написанная к 70-летию Тарбагатайского района. Охватывает жизненный путь автора и его педагогический опыт.',
 				cover: '/images/өткен өмір гпт2.png',
-				pdf: '/pdf/А. Ислямов  өткен өмір естеліктері.pdf',
+				pdf: '',
 			},
 			{
 				id: 'east-kz-toponymy',
@@ -38,7 +38,7 @@ export const booksContent = {
 				description:
 					'Научно-познавательная серия, изданная в рамках государственной программы «Мәдени мұра». В сборнике представлены сведения о жизненном пути, педагогической деятельности, научных трудах и общественной деятельности видного педагога, ученого-краеведа, общественного деятеля Асқара Жумагуловича Ислямова.',
 				cover: '/images/mura2.png',
-				pdf: '/pdf/Madeni_mura_2006.pdf',
+				pdf: '',
 			},
 			{
 				id: 'barkytbel',
@@ -72,7 +72,7 @@ export const booksContent = {
 				description:
 					'Тарбағатай ауданының 70 жылдығына арнап жазылған ғұмырнама-естелік кітап. Автордың өмір жолы мен ұстаздық тәжірибесін қамтиды.',
 				cover: '/images/өткен өмір гпт2.png',
-				pdf: '/pdf/А. Ислямов  өткен өмір естеліктері.pdf',
+				pdf: '',
 			},
 			{
 				id: 'east-kz-toponymy',
@@ -99,7 +99,7 @@ export const booksContent = {
 				description:
 					'«Мәдени мұра» мемлекеттік бағдарламасы аясында жарық көрген ғылыми-танымдық серия. Жинақта көрнекті ұстаз, ғалым-өлкетанушы, қоғам қайраткері Асқар Жұмағұлұлы Ислямовтың өмір жолы, педагогикалық қызметі, ғылыми еңбектері мен қоғамдық қызметі туралы деректер берілген.',
 				cover: '/images/mura2.png',
-				pdf: '/pdf/Madeni_mura_2006.pdf',
+				pdf: '',
 			},
 			{
 				id: 'barkytbel',
@@ -133,7 +133,7 @@ export const booksContent = {
 				description:
 					"Autobiographical memoir book written for the 70th anniversary of the Tarbagatay district. Covers the author's life path and his pedagogical experience.",
 				cover: '/images/өткен өмір гпт2.png',
-				pdf: '/pdf/А. Ислямов  өткен өмір естеліктері.pdf',
+				pdf: '',
 			},
 			{
 				id: 'east-kz-toponymy',
@@ -161,7 +161,7 @@ export const booksContent = {
 				description:
 					'Scientific and educational series published within the framework of the state program "Madeni Mura" (Cultural Heritage). The collection presents information about the life path, pedagogical activity, scientific works, and public activity of the prominent teacher, scholar-local historian, and public figure Askar Zhumagulovich Islyamov.',
 				cover: '/images/mura2.png',
-				pdf: '/pdf/Madeni_mura_2006.pdf',
+				pdf: '',
 			},
 			{
 				id: 'barkytbel',

@@ -1,7 +1,7 @@
 export const personContent = {
 	ru: {
 		name: 'Асқар Жұмағұлұлы Ислямов',
-		role: 'Выдающийся педагог, директор школы, лидер педагогической династии',
+		role: 'Выдающийся педагог, директор школы, основатель педагогической династии',
 		intro:
 			'Асқар Жұмағұлұлы Ислямов (04.03.1928 – 30.10.2001) — выдающийся педагог Восточного Казахстана, посвятивший жизнь народному образованию, краеведению и воспитанию молодёжи. Его судьба — пример стойкости, самоотверженного труда и служения родной земле.',
 		keyFacts: [
@@ -134,7 +134,7 @@ export const personContent = {
 
 	kz: {
 		name: 'Ислямов Асқар Жұмағұлұлы',
-		role: 'Ұлағатты ұстаз, мектеп директоры, ұстаздар әулетінің көшбасшысы',
+		role: 'Ұлағатты ұстаз, мектеп директоры, ұстаздар әулетінің негізін қалаушы',
 		intro:
 			'Ислямов Асқар Жұмағұлұлы (04.03.1928 – 30.10.2001) — Шығыс Қазақстандағы халық ағарту ісіне ғұмырын арнаған көрнекті педагог, өлкетанушы, жас ұрпақ тәрбиесіне зор үлес қосқан тұлға. Оның өмір жолы — табандылық пен адал еңбектің, туған жерге қызмет етудің өнегесі.',
 		keyFacts: [
@@ -270,7 +270,7 @@ export const personContent = {
 
 	en: {
 		name: 'Askar Zhumagululy Islyamov',
-		role: 'Respected educator, school director, head of a pedagogical dynasty',
+		role: 'Respected educator, school director, founder of a pedagogical dynasty',
 		intro:
 			'Askar Zhumagululy Islyamov (04.03.1928 – 30.10.2001) — an outstanding educator of East Kazakhstan, who dedicated his life to public education, local history, and the upbringing of youth. His destiny is an example of resilience, selfless labor, and service to his native land.',
 		keyFacts: [
