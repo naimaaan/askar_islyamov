@@ -11,7 +11,7 @@ export const booksContent = {
 				description:
 					'Автобиографическая книга-воспоминание, написанная к 70-летию Тарбагатайского района. Охватывает жизненный путь автора и его педагогический опыт.',
 				cover: '/images/өткен өмір гпт2.png',
-				pdf: '',
+				pdf: '/pdf/А. Ислямов  өткен өмір естеліктері.pdf',
 			},
 			{
 				id: 'east-kz-toponymy',
@@ -72,7 +72,7 @@ export const booksContent = {
 				description:
 					'Тарбағатай ауданының 70 жылдығына арнап жазылған ғұмырнама-естелік кітап. Автордың өмір жолы мен ұстаздық тәжірибесін қамтиды.',
 				cover: '/images/өткен өмір гпт2.png',
-				pdf: '',
+				pdf: '/pdf/А. Ислямов  өткен өмір естеліктері.pdf',
 			},
 			{
 				id: 'east-kz-toponymy',
@@ -133,7 +133,7 @@ export const booksContent = {
 				description:
 					"Autobiographical memoir book written for the 70th anniversary of the Tarbagatay district. Covers the author's life path and his pedagogical experience.",
 				cover: '/images/өткен өмір гпт2.png',
-				pdf: '',
+				pdf: '/pdf/А. Ислямов  өткен өмір естеліктері.pdf',
 			},
 			{
 				id: 'east-kz-toponymy',
