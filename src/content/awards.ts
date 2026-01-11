@@ -74,7 +74,7 @@ export const awardsContent = {
 			'Асқар Жұмағұлұлы Ислямовтың білім беру ісіне сіңірген еңбегі, ұстаздық-тәлімгерлік қызметі және қоғамдық белсенділігі үшін алған атақтары мен марапаттары.',
 		items: [
 			{
-				title: '«Қазақстанның еңбегі сіңген мұғалім»',
+				title: '«Қазақстанның еңбек сіңірген мұғалімі»',
 				year: '',
 				description:
 					'Білім беру ісін дамытуға қосқан айрықша үлесі үшін берілген құрметті атақ.',
@@ -145,7 +145,7 @@ export const awardsContent = {
 		items: [
 			{
 				title:
-					'«Қазақстанның еңбегі сіңген мұғалім» (Honored Teacher of Kazakhstan)',
+					'«Қазақстанның еңбек сіңірген мұғалімі» (Honored Teacher of Kazakhstan)',
 				year: '',
 				description:
 					'Honorary recognition for outstanding contribution to the development of education and upbringing of the younger generation.',
