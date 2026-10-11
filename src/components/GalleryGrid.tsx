@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import { Expand } from 'lucide-react'
 import Lightbox from './Lightbox'
+import { clsx } from 'clsx'
 import { uiText } from '@/lib/ui-text'
 import type { Locale } from '@/lib/i18n'
 
@@ -48,11 +48,16 @@ export default function GalleryGrid({
 	return (
 		<div>
 			{/* Filter Buttons */}
-			<div className='mb-8 flex flex-wrap gap-2'>
+			<div className='flex flex-wrap gap-3 mb-12 justify-center'>
 				<button
 					onClick={() => { setLightboxIndex(null); setSelectedAlbum('all') }}
 					aria-pressed={selectedAlbum === 'all'}
-					className='filter-chip'
+					className={clsx(
+						'px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border',
+						selectedAlbum === 'all'
+							? 'bg-slate-900 text-white border-slate-900 shadow-lg scale-105'
+							: 'bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:bg-slate-50'
+					)}
 				>
 					{allLabel}
 				</button>
@@ -61,7 +66,12 @@ export default function GalleryGrid({
 						key={album.id}
 						aria-pressed={selectedAlbum === album.id}
 						onClick={() => { setLightboxIndex(null); setSelectedAlbum(album.id) }}
-						className='filter-chip'
+						className={clsx(
+							'px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border',
+							selectedAlbum === album.id
+								? 'bg-slate-900 text-white border-slate-900 shadow-lg scale-105'
+								: 'bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:bg-slate-50'
+						)}
 					>
 						{album.title}
 					</button>
@@ -70,7 +80,9 @@ export default function GalleryGrid({
 
 			{/* Masonry Grid */}
 			<div
-				className='columns-1 gap-6 space-y-8 sm:columns-2 lg:columns-3'
+				className={clsx(
+					'columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 transition-opacity duration-300 ease-in-out'
+				)}
 			>
 				{filteredImages.map((image, index) => (
 					<button
@@ -78,20 +90,25 @@ export default function GalleryGrid({
 						aria-label={image.alt || `${labels.photo} ${index + 1}`}
 						key={`${image.src}-${index}`}
 						onClick={() => openLightbox(index)}
-						className='group block w-full break-inside-avoid cursor-zoom-in text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
+						className='block w-full text-left break-inside-avoid group relative cursor-zoom-in rounded-xl overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1'
 					>
-						<div className='media-frame w-full'>
+						<div className='relative w-full'>
 							<Image
 								src={image.src}
 								alt={image.alt}
 								width={800}
 								height={600}
-								className='h-auto w-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.025]'
+								className='w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105'
 								sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
 							/>
-							<span className='image-zoom-control'><Expand size={16} aria-hidden='true' /></span>
 						</div>
-						{image.alt && <p className='text-caption mt-3 transition-colors group-hover:text-blue-700'>{image.alt}</p>}
+
+						{/* Overlay */}
+						<div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6'>
+							<p className='text-white text-sm font-medium leading-snug transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300'>
+								{image.alt}
+							</p>
+						</div>
 					</button>
 				))}
 			</div>
