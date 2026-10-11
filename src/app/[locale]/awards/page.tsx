@@ -32,13 +32,12 @@ export default async function AwardsPage({ params }: { params: Promise<{ locale:
 			<section aria-labelledby='honorary-titles' className='grid gap-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12 lg:gap-20'>
 				<figure className='max-w-md'>
 					<AwardPhoto src='/images/портрет.jpeg' caption={awards.portraitCaption} locale={validLocale} portrait />
-					<figcaption className='mt-3 text-sm leading-relaxed text-slate-500'>{awards.portraitCaption}</figcaption>
 				</figure>
 				<div className='self-center'>
 					<h2 id='honorary-titles' className='mb-5 text-sm font-medium uppercase tracking-wide text-slate-500'>{awards.titlesHeading}</h2>
 					<ul className='divide-y divide-slate-200 border-y border-slate-200'>
 						{awards.titles.map(item => <li key={item.title} className='py-6 sm:py-7'>
-							<h3 className='max-w-xl text-2xl font-serif font-semibold leading-snug text-slate-900 sm:text-3xl'>{item.title}</h3>
+							<h3 className='max-w-xl text-xl font-medium leading-snug text-slate-900 sm:text-2xl'>{item.title}</h3>
 							{item.date && <time dateTime={item.date} className='mt-3 block text-sm text-slate-500'>{item.dateLabel}</time>}
 						</li>)}
 					</ul>
@@ -49,19 +48,23 @@ export default async function AwardsPage({ params }: { params: Promise<{ locale:
 				<h2 id='award-documents' className='mb-8 border-b border-slate-200 pb-5 text-3xl font-serif font-bold text-slate-900'>{awards.documentsHeading}</h2>
 				{honorCertificate && <figure className='mb-12 grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12 lg:gap-20'>
 					<div className='max-w-sm'>
-						<AwardPhoto src={honorCertificate.src} caption={honorCertificate.title} locale={validLocale} portrait />
+						<AwardPhoto src={honorCertificate.src} caption={honorCertificate.year ? `${honorCertificate.title}, ${honorCertificate.year}` : honorCertificate.title} locale={validLocale} portrait />
 					</div>
 					<figcaption className='self-center'>
-						<h3 className='text-2xl font-serif font-semibold leading-snug text-slate-900'>{honorCertificate.title}</h3>
-						<p className='mt-3 max-w-xl text-base leading-relaxed text-slate-600'>{honorCertificate.caption}</p>
+						<div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
+							<h3 className='text-xl font-medium leading-snug text-slate-900'>{honorCertificate.title}</h3>
+							{honorCertificate.year && <time dateTime={String(honorCertificate.year)} className='text-sm font-medium tabular-nums text-slate-500'>{honorCertificate.year}</time>}
+						</div>
 					</figcaption>
 				</figure>}
 				<div className='grid gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-x-10'>
 					{certificates.map(document => <figure key={document.src} className='min-w-0'>
-						<AwardPhoto src={document.src} caption={document.title} locale={validLocale} wide={document.wide} documentImage />
+						<AwardPhoto src={document.src} caption={document.year ? `${document.title}, ${document.year}` : document.title} locale={validLocale} wide={document.wide} documentImage />
 						<figcaption className='pt-4'>
-							<h3 className='text-xl font-serif font-semibold leading-snug text-slate-900'>{document.title}</h3>
-							<p className='mt-2 text-sm leading-relaxed text-slate-600'>{document.caption}</p>
+							<div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
+								<h3 className='text-lg font-medium leading-snug text-slate-900'>{document.title}</h3>
+								{document.year && <time dateTime={String(document.year)} className='text-sm font-medium tabular-nums text-slate-500'>{document.year}</time>}
+							</div>
 						</figcaption>
 					</figure>)}
 				</div>

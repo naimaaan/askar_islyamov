@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { personContent } from '@/content/person'
 import Timeline from '@/components/Timeline'
-import PageHeader from '@/components/PageHeader'
 import Image from 'next/image'
 import Lightbox from '@/components/Lightbox'
 import { Quote } from 'lucide-react'
@@ -85,9 +84,32 @@ export default function BiographyClient({ locale }: { locale: string }) {
 	}
 
 	return (
-		<div className='site-page'>
-			<div className='site-container'>
-				<PageHeader title={biography.title} description={intro} />
+		<div className='min-h-screen bg-white'>
+			{/* Hero Section */}
+			<div className='relative bg-slate-900 text-white py-24 overflow-hidden'>
+				<div className='absolute inset-0 opacity-20'>
+					<Image
+						src='/images/image2.png'
+						alt='Background'
+						fill
+						className='object-cover blur-sm'
+					/>
+				</div>
+				<div className='relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
+					<FadeIn>
+						<h1 className='text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight'>
+							{biography.title}
+						</h1>
+					</FadeIn>
+					<FadeIn delay={200}>
+						<p className='text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light italic'>
+							&ldquo;{intro}&rdquo;
+						</p>
+					</FadeIn>
+				</div>
+			</div>
+
+			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
 				{/* Biography Sections */}
 				<div className='space-y-14 sm:space-y-16'>
 					{biography.sections.map((section, index) => {

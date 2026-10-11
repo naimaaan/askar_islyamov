@@ -1,4 +1,5 @@
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { locales, isLocale, languageTags } from '@/lib/i18n'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -10,12 +11,17 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 const inter = Inter({
-	subsets: ['latin', 'cyrillic'],
+	subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
 	variable: '--font-inter',
 })
-const playfair = Playfair_Display({
-	subsets: ['latin', 'cyrillic'],
+// Full font files include Kazakh glyphs omitted by the Google Fonts web subsets.
+const playfair = localFont({
+	src: [
+		{ path: '../fonts/playfair-display.ttf', weight: '400 900', style: 'normal' },
+		{ path: '../fonts/playfair-display-italic.ttf', weight: '400 900', style: 'italic' },
+	],
 	variable: '--font-playfair',
+	adjustFontFallback: 'Times New Roman',
 })
 
 export function generateStaticParams() {

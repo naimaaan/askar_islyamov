@@ -1,6 +1,7 @@
 import { pageMetadata } from '@/lib/metadata'
 import { siteContent } from '@/content/site'
 import {
+	Mail,
 	Image as ImageIcon,
 	PenTool,
 	FileText,
@@ -10,7 +11,6 @@ import {
 	BookOpen,
 } from 'lucide-react'
 import { Metadata } from 'next'
-import PageHeader from '@/components/PageHeader'
 
 export async function generateMetadata({
 	params,
@@ -160,9 +160,29 @@ export default async function ContactsPage({
 	}[validLocale]
 
 	return (
-		<div className='site-page'>
-			<div className='site-container'>
-				<PageHeader title={site.footer.contactsTitle} description={content.subtitle} />
+		<div className='min-h-screen bg-slate-50'>
+			{/* Hero Section */}
+			<div className='relative bg-slate-900 pt-24 pb-48 overflow-hidden'>
+				{/* Background Effects */}
+				<div className='absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900' />
+				<div className='absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl' />
+				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl' />
+
+				<div className='relative max-w-4xl mx-auto px-4 text-center z-10'>
+					<div className='inline-flex items-center justify-center p-3 bg-white/5 rounded-full mb-8 backdrop-blur-sm border border-white/10 shadow-2xl'>
+						<Mail className='w-6 h-6 text-blue-200' />
+					</div>
+					<h1 className='text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 tracking-tight leading-tight'>
+						{site.footer.contactsTitle}
+					</h1>
+					<p className='text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed'>
+						{content.subtitle}
+					</p>
+				</div>
+			</div>
+
+			{/* Main Content Card */}
+			<div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-20 pb-16'>
 				<div className='overflow-hidden rounded-lg border border-slate-200 bg-white'>
 					<div className='grid md:grid-cols-5'>
 						{/* Left Side: Contact Info (Dark) */}
@@ -225,8 +245,8 @@ export default async function ContactsPage({
 			</div>
 
 			{/* About / Credits Section */}
-			<div className='mt-14 border-t border-slate-200 sm:mt-16'>
-				<div className='site-container pt-14 sm:pt-16'>
+			<div className='border-t border-slate-200 bg-white'>
+				<div className='site-container py-14 sm:py-16'>
 					<h2 className='section-title mb-5'>
 						{content.aboutTitle}
 					</h2>
