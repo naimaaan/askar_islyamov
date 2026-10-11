@@ -15,6 +15,8 @@ export default async function AwardsPage({ params }: { params: Promise<{ locale:
 	const validLocale = locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const awards = awardsContent[validLocale]
 
+	const [honorCertificate, ...certificates] = awards.documents
+
 	return <div className='bg-white py-12 sm:py-16'>
 		<div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
 			<header className='mb-10 border-b border-slate-200 pb-8 sm:mb-12'>
@@ -40,9 +42,18 @@ export default async function AwardsPage({ params }: { params: Promise<{ locale:
 
 			<section aria-labelledby='award-documents' className='mt-14 sm:mt-16'>
 				<h2 id='award-documents' className='mb-8 border-b border-slate-200 pb-5 font-serif text-3xl font-bold leading-tight text-slate-900'>{awards.documentsHeading}</h2>
-				<div className='grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8'>
-					{awards.documents.map(document => <figure key={document.src} className='min-w-0'>
-						<AwardPhoto src={document.src} caption={document.title} locale={validLocale} />
+				{honorCertificate && <figure className='mb-12 grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12 lg:gap-20'>
+					<div className='max-w-sm'>
+						<AwardPhoto src={honorCertificate.src} caption={honorCertificate.title} locale={validLocale} portrait />
+					</div>
+					<figcaption className='self-center'>
+						<h3 className='font-serif text-2xl font-bold leading-snug text-slate-900'>{honorCertificate.title}</h3>
+						<p className='mt-3 max-w-xl text-base leading-relaxed text-slate-600'>{honorCertificate.caption}</p>
+					</figcaption>
+				</figure>}
+				<div className='grid gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-x-10'>
+					{certificates.map(document => <figure key={document.src} className='min-w-0'>
+						<AwardPhoto src={document.src} caption={document.title} locale={validLocale} wide={document.wide} documentImage />
 						<figcaption className='pt-4'>
 							<h3 className='font-serif text-xl font-bold leading-snug text-slate-900'>{document.title}</h3>
 							<p className='mt-2 text-sm leading-relaxed text-slate-600'>{document.caption}</p>

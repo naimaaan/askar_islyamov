@@ -17,6 +17,7 @@ interface LightboxProps {
 	imageSrc: string
 	imageAlt: string
 	showCaption?: boolean
+	documentImage?: boolean
 	imageFrame?: PhotoFrame
 	onNext?: () => void
 	onPrev?: () => void
@@ -31,6 +32,7 @@ export default function Lightbox({
 	imageSrc,
 	imageAlt,
 	showCaption = true,
+	documentImage = false,
 	imageFrame,
 	onNext,
 	onPrev,
@@ -80,7 +82,7 @@ export default function Lightbox({
 			)}
 
 			{/* Image Container */}
-			<div className='relative flex h-[calc(100dvh-112px)] w-full max-w-7xl flex-col items-center gap-3 px-12 sm:px-20 md:px-24 z-10 pointer-events-none'>
+			<div className={clsx('relative flex h-[calc(100dvh-112px)] w-full max-w-7xl flex-col items-center gap-3 z-10 pointer-events-none', documentImage ? 'px-3 sm:px-6' : 'px-12 sm:px-20 md:px-24')}>
 				<div
 					className={clsx(
 						'relative min-h-0 w-full flex-1 transition-opacity duration-500 ease-out pointer-events-auto',
@@ -90,6 +92,7 @@ export default function Lightbox({
 					{imageFrame ? <FramedPhoto key={imageSrc} src={imageSrc} alt={imageAlt} frame={imageFrame} sizes='100vw' preload onLoad={() => setLoadedSrc(imageSrc)} /> : <Image
 						key={imageSrc}
 						src={imageSrc}
+						unoptimized={documentImage}
 						alt={imageAlt}
 						fill
 						className='object-contain drop-shadow-2xl'
