@@ -53,7 +53,7 @@ export default async function Home({
 
 				{/* Decorative elements */}
 				<div className='absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl' />
-				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl' />
+				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl' />
 
 				{/* Reduced padding from py-24 md:py-32 to py-12 md:py-20 */}
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 pb-12 md:pt-12 md:pb-20'>
@@ -98,7 +98,7 @@ export default async function Home({
 						{/* Enhanced Image Container with Awards */}
 						<div className='flex flex-col items-center gap-8 relative z-10'>
 							<div className='relative group'>
-								<div className='absolute inset-0 bg-gradient-to-tr from-amber-200/20 to-blue-200/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700' />
+								<div className='absolute inset-0 bg-gradient-to-tr from-slate-200/20 to-blue-200/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700' />
 								{/* Profile Image - Optimized Size */}
 								<div className='w-48 h-48 md:w-72 md:h-72 rounded-full border-8 border-slate-800/50 shadow-2xl overflow-hidden relative z-10 ring-1 ring-white/10'>
 									<Image
@@ -131,11 +131,11 @@ export default async function Home({
 										key={index}
 										className='flex items-center justify-center gap-3 group'
 									>
-										<div className='h-px w-0 group-hover:w-8 bg-gradient-to-r from-transparent to-amber-500/50 transition-all duration-500' />
-										<span className='text-sm md:text-base font-serif text-slate-200/90 tracking-wide leading-relaxed drop-shadow-sm group-hover:text-amber-100 transition-colors duration-300'>
+										<div className='h-px w-0 group-hover:w-8 bg-gradient-to-r from-transparent to-slate-500/50 transition-all duration-500' />
+										<span className='text-sm md:text-base font-serif text-slate-200/90 tracking-wide leading-relaxed drop-shadow-sm group-hover:text-white transition-colors duration-300'>
 											{award}
 										</span>
-										<div className='h-px w-0 group-hover:w-8 bg-gradient-to-l from-transparent to-amber-500/50 transition-all duration-500' />
+										<div className='h-px w-0 group-hover:w-8 bg-gradient-to-l from-transparent to-slate-500/50 transition-all duration-500' />
 									</div>
 								))}
 							</div>
@@ -145,10 +145,10 @@ export default async function Home({
 			</section>
 
 			{/* Quote and key facts share one compact editorial section. */}
-			<section className='border-b border-slate-200 bg-[#f8f6f1]'>
+			<section className='border-b border-slate-200 bg-white'>
 				<div className='mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8'>
 					<div className='mx-auto max-w-3xl text-center'>
-						<Quote className='mx-auto mb-4 size-7 text-amber-700/50' aria-hidden='true' />
+						<Quote className='mx-auto mb-4 size-7 text-slate-400' aria-hidden='true' />
 						<blockquote className='mb-4 font-serif text-2xl italic leading-relaxed text-slate-800 sm:text-3xl'>
 							{validLocale === 'ru'
 								? '«Школа - вершина воспитания, где труд является благородным делом»'
@@ -223,7 +223,7 @@ export default async function Home({
 						</div>
 						<Link
 							href={`/${validLocale}/gallery/`}
-							className='inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-amber-800'
+							className='inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-blue-700'
 						>
 							{uiText[validLocale].viewAll}<ArrowRight size={16} aria-hidden='true' />
 						</Link>

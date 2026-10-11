@@ -36,7 +36,7 @@ export default async function MemoriesPage({
 				{/* Background Effects */}
 				<div className='absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900' />
 				<div className='absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl' />
-				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl' />
+				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl' />
 
 				<div className='relative max-w-4xl mx-auto px-4 text-center z-10'>
 					<div className='inline-flex items-center justify-center p-3 bg-white/5 rounded-full mb-8 backdrop-blur-sm border border-white/10 shadow-2xl'>

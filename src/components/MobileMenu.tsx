@@ -35,7 +35,7 @@ export default function MobileMenu({ nav, locale }: MobileMenuProps) {
                 const href = '/' + locale + (item.href === '/' ? '' : item.href)
                 const target = href.replace(/\/$/, '')
                 const active = pathname === target || (item.href !== '/' && pathname.startsWith(`${target}/`))
-                return <Link key={item.href} href={href} aria-current={active ? 'page' : undefined} className={`group flex items-center justify-between px-4 py-3.5 text-lg font-medium hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200 ${active ? 'bg-amber-50 text-amber-900' : 'text-slate-600'}`} onClick={closeMenu}>
+                return <Link key={item.href} href={href} aria-current={active ? 'page' : undefined} className={`group flex items-center justify-between px-4 py-3.5 text-lg font-medium hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200 ${active ? 'bg-slate-100 text-slate-900' : 'text-slate-600'}`} onClick={closeMenu}>
                 <span>{item.label}</span><ChevronRight size={18} className='text-slate-300 group-hover:text-slate-900' />
               </Link>})}
             </nav>

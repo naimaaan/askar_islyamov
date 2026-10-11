@@ -11,7 +11,7 @@ import Lightbox from './Lightbox'
 export default function NewsPhotoView({ photo, locale, showCaption = true, preload = false }: { photo: NewsPhoto; locale: Locale; showCaption?: boolean; preload?: boolean }) {
   const [open, setOpen] = useState(false)
   return <figure>
-    <button type='button' aria-label={photo.caption[locale]} onClick={() => setOpen(true)} style={{ aspectRatio: photo.aspectRatio || 16 / 9 }} className='group relative block w-full overflow-hidden rounded-lg bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700'>
+    <button type='button' aria-label={photo.caption[locale]} onClick={() => setOpen(true)} style={{ aspectRatio: photo.aspectRatio || 16 / 9 }} className='group relative block w-full overflow-hidden rounded-lg bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'>
       <Image src={photo.src} alt={photo.caption[locale]} fill preload={preload} sizes='(max-width: 1024px) 100vw, 960px' className={photo.document ? 'object-contain' : 'object-cover'} style={{ objectPosition: photo.position || 'center' }} />
       <span className='absolute bottom-3 right-3 rounded-full bg-slate-950/70 p-2 text-white'><Maximize2 size={16} aria-hidden='true' /></span>
     </button>

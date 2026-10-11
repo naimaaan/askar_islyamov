@@ -47,7 +47,7 @@ export default async function NewsArticlePage({ params }: Props) {
       <NewsBackLink locale={locale} />
       <header className='max-w-4xl'>
         <div className='flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-medium'>
-          <Link href={`/${locale}/news/?category=${article.category}`} className='text-amber-800 hover:underline underline-offset-4'>{labels.categories[article.category]}</Link><span className='text-slate-300' aria-hidden='true'>/</span>
+          <Link href={`/${locale}/news/?category=${article.category}`} className='text-slate-600 hover:underline underline-offset-4'>{labels.categories[article.category]}</Link><span className='text-slate-300' aria-hidden='true'>/</span>
           <span className='text-slate-500'>{article.date ? <time dateTime={article.date}>{newsDate(article, locale)}</time> : labels.archive}</span>
         </div>
         <h1 className='mt-5 text-3xl font-serif font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl'>{article.title[locale]}</h1>

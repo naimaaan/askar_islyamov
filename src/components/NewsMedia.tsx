@@ -28,7 +28,7 @@ export default function NewsMedia({ locale, photos, video, showPhotoCaptions = t
       <h2 id='news-photos-title' className='mb-5 text-2xl font-serif font-bold'>{labels.photos}</h2>
       <div className={`gap-6 ${photos.length > 1 ? 'columns-1 sm:columns-2' : ''}`}>
         {photos.map((photo, photoIndex) => <figure key={photo.src} className='mb-6 break-inside-avoid'>
-          <button type='button' onClick={() => setIndex(photoIndex)} aria-label={photo.caption[locale]} style={{ aspectRatio: photo.aspectRatio || (photo.document ? 4 / 3 : 16 / 9) }} className='group relative block w-full overflow-hidden rounded-lg bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700'>
+          <button type='button' onClick={() => setIndex(photoIndex)} aria-label={photo.caption[locale]} style={{ aspectRatio: photo.aspectRatio || (photo.document ? 4 / 3 : 16 / 9) }} className='group relative block w-full overflow-hidden rounded-lg bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700'>
             <Image src={photo.src} alt={photo.caption[locale]} fill sizes='(max-width: 640px) 100vw, 50vw' className={photo.document ? 'object-contain p-3' : 'object-contain'} />
             <span className='absolute bottom-3 right-3 rounded-full bg-slate-950/70 p-2 text-white'><Maximize2 size={16} aria-hidden='true' /></span>
           </button>

@@ -12,7 +12,7 @@ export const personContent = {
 		],
 		keyFacts: [
 			{ value: '45', label: 'Лет в образовании', description: 'Учитель и директор школы' },
-			{ value: '≈50', label: 'Публикаций', description: 'Методики, статьи и педагогический опыт' },
+			{ value: '50', label: 'Публикаций', description: 'Около пятидесяти работ: методики, статьи, опыт' },
 			{ value: '540', label: 'Лет общего стажа', description: 'Педагогическая династия Ислямовых' },
 		],
 
@@ -151,7 +151,7 @@ export const personContent = {
 		],
 		keyFacts: [
 			{ value: '45', label: 'Жыл халық ағарту ісінде', description: 'Ұстаз және мектеп директоры' },
-			{ value: '≈50', label: 'Жарияланған еңбек', description: 'Әдістеме, мақала және ұстаздық тәжірибе' },
+			{ value: '50', label: 'Жарияланған еңбек', description: 'Елуге жуық әдістемелік еңбек, мақала, тәжірибе' },
 			{ value: '540', label: 'Жылдық жалпы еңбек өтілі', description: 'Ислямовтар ұстаздар әулеті' },
 		],
 
@@ -290,7 +290,7 @@ export const personContent = {
 		],
 		keyFacts: [
 			{ value: '45', label: 'Years in education', description: 'Teacher and school principal' },
-			{ value: '≈50', label: 'Publications', description: 'Teaching methods, articles and experience' },
+			{ value: '50', label: 'Publications', description: 'Around fifty works: teaching methods, articles, experience' },
 			{ value: '540', label: 'Years of combined service', description: 'The Islyamov teaching dynasty' },
 		],
 

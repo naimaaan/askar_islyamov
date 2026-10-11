@@ -63,7 +63,7 @@ export default function NewsCarousel({ photos, locale }: { photos: NewsPhoto[]; 
     <h2 id='news-carousel-title' className='text-2xl font-serif font-bold text-slate-900'>{labels.carouselTitle}</h2>
     <p className='mb-7 mt-3 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base'>{labels.carouselDescription}</p>
     <div className='relative'>
-      <ul ref={trackRef} tabIndex={0} aria-label={labels.carouselTitle} className='flex cursor-grab gap-6 overflow-x-auto overscroll-x-contain pb-5 pt-2 select-none outline-offset-4 [scrollbar-width:none] active:cursor-grabbing focus-visible:outline-2 focus-visible:outline-amber-700 [&::-webkit-scrollbar]:hidden'
+      <ul ref={trackRef} tabIndex={0} aria-label={labels.carouselTitle} className='flex cursor-grab gap-6 overflow-x-auto overscroll-x-contain pb-5 pt-2 select-none outline-offset-4 [scrollbar-width:none] active:cursor-grabbing focus-visible:outline-2 focus-visible:outline-blue-700 [&::-webkit-scrollbar]:hidden'
         onMouseEnter={() => { interaction.current.hovered = true }}
         onMouseLeave={() => {
           interaction.current.hovered = false
@@ -104,12 +104,12 @@ export default function NewsCarousel({ photos, locale }: { photos: NewsPhoto[]; 
           if (drag.current?.moved) { event.preventDefault(); event.stopPropagation(); drag.current = null }
         }}>
         {photos.map((photo, photoIndex) => <li key={photo.src} style={{ '--photo-ratio': photo.frame?.aspectRatio || 1.25 } as CSSProperties} className='w-[calc(var(--photo-ratio)*280px)] max-w-[82vw] shrink-0 sm:w-[calc(var(--photo-ratio)*320px)]'>
-          <button type='button' onClick={() => setExpanded(photoIndex)} aria-label={`${labels.original}: ${photo.caption[locale]}`} className='group block w-full cursor-inherit text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700'>
+          <button type='button' onClick={() => setExpanded(photoIndex)} aria-label={`${labels.original}: ${photo.caption[locale]}`} className='group block w-full cursor-inherit text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'>
             <span style={{ aspectRatio: photo.frame?.aspectRatio || 1.25 }} className='relative block overflow-hidden bg-stone-100 transition-transform duration-500 group-hover:-translate-y-1 motion-reduce:transform-none'>
               {photo.frame ? <FramedPhoto src={photo.src} alt={photo.caption[locale]} frame={photo.frame} sizes='(max-width: 640px) 82vw, 460px' /> : <Image src={photo.src} alt={photo.caption[locale]} fill sizes='(max-width: 640px) 82vw, 460px' draggable={false} className='object-cover' />}
-              <span className='absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-800 shadow-sm transition-colors group-hover:bg-amber-800 group-hover:text-white'><ArrowUpRight size={17} aria-hidden='true' /></span>
+              <span className='absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-800 shadow-sm transition-colors group-hover:bg-slate-900 group-hover:text-white'><ArrowUpRight size={17} aria-hidden='true' /></span>
             </span>
-            <span className='mt-4 block border-t border-slate-200 pt-3 font-serif text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-amber-800'>{photo.caption[locale]}</span>
+            <span className='mt-4 block border-t border-slate-200 pt-3 font-serif text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-700'>{photo.caption[locale]}</span>
           </button>
         </li>)}
       </ul>

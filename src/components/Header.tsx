@@ -43,10 +43,10 @@ export default function Header({ locale, dict }: HeaderProps) {
 								key={item.href}
 								href={href}
 								aria-current={active ? 'page' : undefined}
-								className={`relative text-sm font-medium hover:text-slate-900 transition-colors py-2 group ${active ? 'text-amber-800' : 'text-slate-600'}`}
+								className={`relative text-sm font-medium hover:text-slate-900 transition-colors py-2 group ${active ? 'text-slate-900' : 'text-slate-600'}`}
 							>
 								{item.label}
-								<span className={`absolute inset-x-0 bottom-0 h-0.5 transform group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out ${active ? 'bg-amber-800 scale-x-100' : 'bg-slate-900 scale-x-0'}`} />
+								<span className={`absolute inset-x-0 bottom-0 h-0.5 transform group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out ${active ? 'bg-slate-900 scale-x-100' : 'bg-slate-900 scale-x-0'}`} />
 							</Link>
 						)})}
 					</nav>

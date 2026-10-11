@@ -43,7 +43,7 @@ export default async function BooksPage({
 				{/* Background Effects */}
 				<div className='absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900' />
 				<div className='absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl' />
-				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl' />
+				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl' />
 
 				{/* Hero Content */}
 				<div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
@@ -91,7 +91,7 @@ export default async function BooksPage({
 				{filmItems.length > 0 && (
 					<div>
 						<div className='flex items-center gap-4 mb-10 border-b border-slate-200 pb-4'>
-							<div className='p-2.5 bg-amber-50 rounded-xl text-amber-700'>
+							<div className='p-2.5 bg-slate-100 rounded-xl text-slate-600'>
 								<Film size={24} />
 							</div>
 							<h2 className='text-2xl md:text-3xl font-serif font-bold text-slate-900'>

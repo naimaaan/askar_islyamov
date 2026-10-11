@@ -56,7 +56,7 @@ export default function ContestGallery({
 						aria-label={img.alt}
 						onClick={() => openLightbox(idx)}
 						style={{ aspectRatio: img.aspectRatio || 16 / 9 }}
-						className='group relative block w-full overflow-hidden rounded-lg bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700'
+						className='group relative block w-full overflow-hidden rounded-lg bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
 					>
 						<Image
 							src={img.src}
