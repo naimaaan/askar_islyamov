@@ -6,7 +6,7 @@ import NewsCard from './NewsCard'
 
 export default function LatestNews({ locale }: { locale: Locale }) {
   const labels = newsLabels[locale]
-  return <section className='mt-16 border-y border-slate-200 bg-white py-14 sm:py-16'>
+  return <section className='border-b border-slate-200 bg-white py-14 sm:py-16'>
     <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
       <div className='mb-8 flex flex-wrap items-end justify-between gap-5'>
         <div><p className='mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-amber-800'>{labels.eyebrow}</p><h2 className='text-3xl font-serif font-bold text-slate-900'>{labels.title}</h2></div>

@@ -1,15 +1,16 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Quote, ChevronRight } from 'lucide-react'
 import { personContent } from '@/content/person'
-import { booksContent } from '@/content/books'
 import { galleryContent } from '@/content/gallery'
 import { siteContent } from '@/content/site'
 import { memoriesContent } from '@/content/memories'
-import BookCard from '@/components/BookCard'
+import FeaturedBooks from '@/components/FeaturedBooks'
+import HomeGalleryPreview from '@/components/HomeGalleryPreview'
 import LatestNews from '@/components/LatestNews'
 import Image from 'next/image'
 import { Metadata } from 'next'
 import { pageMetadata } from '@/lib/metadata'
+import { uiText } from '@/lib/ui-text'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -27,13 +28,21 @@ export default async function Home({
 	const validLocale =
 		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const person = personContent[validLocale]
-	const books = booksContent[validLocale]
 	const gallery = galleryContent[validLocale]
 	const site = siteContent[validLocale]
 	const memories = memoriesContent[validLocale]
 
 	// Select a featured memory (e.g., the first one)
 	const featuredMemory = memories.items[0]
+	const previewSources = [
+		'/images/archive-originals/geography-lesson.jpg',
+		'/images/archive-originals/family-ensemble.jpg',
+		'/images/archive-originals/teaching-dynasty-meeting.jpg',
+	]
+	const previewPhotos = previewSources.flatMap(src => {
+		const photo = gallery.images.find(image => image.src === src)
+		return photo ? [{ ...photo, category: gallery.albums.find(album => album.id === photo.albumId)?.title ?? '' }] : []
+	})
 
 	return (
 		<div className='flex flex-col min-h-screen'>
@@ -135,75 +144,37 @@ export default async function Home({
 				</div>
 			</section>
 
-			{/* Quote Section - Adds "Soul" */}
-			<section className='bg-slate-50 py-20 border-b border-slate-200'>
-				<div className='max-w-4xl mx-auto px-4 text-center'>
-					<Quote className='w-12 h-12 text-slate-300 mx-auto mb-8' />
-					<blockquote className='text-2xl md:text-3xl font-serif italic text-slate-800 leading-relaxed mb-8'>
-						{validLocale === 'ru'
-							? '«Школа - вершина воспитания, где труд является благородным делом»'
-							: validLocale === 'kz'
-							? '«Мектеп - тәрбие биігі, онда еңбек ету ұлағатты іс»'
-							: '“School is the pinnacle of upbringing, where labor is a noble deed”'}
-					</blockquote>
-					<cite className='text-slate-500 font-medium not-italic'>
-						— {person.name}
-					</cite>
-				</div>
-			</section>
-
-			{/* Key Facts - More Professional Look */}
-			<section className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20'>
-				<div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-					{person.keyFacts.map((fact, index) => (
-						<div
-							key={index}
-							className='bg-white p-8 rounded-xl shadow-lg border border-slate-100 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center group'
-						>
-							<div className='text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-3 group-hover:text-blue-900 transition-colors'>
-								{fact.value}
+			{/* Quote and key facts share one compact editorial section. */}
+			<section className='border-b border-slate-200 bg-[#f8f6f1]'>
+				<div className='mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8'>
+					<div className='mx-auto max-w-3xl text-center'>
+						<Quote className='mx-auto mb-4 size-7 text-amber-700/50' aria-hidden='true' />
+						<blockquote className='mb-4 font-serif text-2xl italic leading-relaxed text-slate-800 sm:text-3xl'>
+							{validLocale === 'ru'
+								? '«Школа - вершина воспитания, где труд является благородным делом»'
+								: validLocale === 'kz'
+								? '«Мектеп - тәрбие биігі, онда еңбек ету ұлағатты іс»'
+								: '“School is the pinnacle of upbringing, where labor is a noble deed”'}
+						</blockquote>
+						<cite className='text-slate-500 font-medium not-italic'>
+							— {person.name}
+						</cite>
+					</div>
+					<dl className='mt-9 grid divide-y divide-slate-200 border-t border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:pt-8'>
+						{person.keyFacts.map(fact => (
+							<div key={fact.label} className='grid grid-cols-[5.5rem_1fr] items-center gap-x-5 gap-y-1 py-5 sm:flex sm:flex-col sm:gap-0 sm:px-5 sm:py-0 sm:text-center'>
+								<dt className='order-2 text-sm font-semibold text-slate-800 sm:mt-3'>{fact.label}</dt>
+								<dd className='order-1 row-span-2 font-serif text-5xl font-medium tabular-nums tracking-tight text-slate-900'>{fact.value}</dd>
+								<dd className='order-3 col-start-2 text-sm leading-relaxed text-slate-500 sm:mt-1'>{fact.description}</dd>
 							</div>
-							<div className='h-1 w-12 bg-slate-200 my-4 rounded-full group-hover:bg-blue-200 transition-colors' />
-							<div className='text-slate-600 font-medium uppercase tracking-wider text-sm'>
-								{fact.label}
-							</div>
-						</div>
-					))}
+						))}
+					</dl>
 				</div>
 			</section>
 
 			<LatestNews locale={validLocale} />
 
-			{/* Featured Books */}
-			<section className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24'>
-				<div className='flex flex-col md:flex-row justify-between items-end mb-12 gap-4'>
-					<div>
-						<h2 className='text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4'>
-							{books.title}
-						</h2>
-						<p className='text-slate-600 max-w-xl text-lg'>
-							{books.description}
-						</p>
-					</div>
-					<Link
-						href={`/${validLocale}/books`}
-						className='text-slate-900 hover:text-blue-700 font-medium flex items-center group transition-colors'
-					>
-						{site.common.readMore}{' '}
-						<ArrowRight className='ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform' />
-					</Link>
-				</div>
-				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
-					{books.items.slice(0, 3).map(book => (
-						<BookCard
-							key={book.id}
-							book={book}
-							locale={validLocale}
-							dict={site.common}
-						/>
-					))}
-				</div>
-			</section>
+			<FeaturedBooks locale={validLocale} />
 
 			{/* Memories Teaser - Emotional Connection */}
 			<section className='bg-slate-900 text-white py-24 relative overflow-hidden'>
@@ -238,65 +209,26 @@ export default async function Home({
 				</div>
 			</section>
 
-			{/* Gallery Preview - Masonry Style */}
-			<section className='py-24 bg-slate-50'>
+			{/* Curated photographs from the teaching, family and public archives. */}
+			<section className='bg-slate-50 py-14 sm:py-16'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-					<div className='text-center mb-16'>
-						<h2 className='text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4'>
-							{gallery.title}
-						</h2>
-						<p className='text-slate-600 max-w-2xl mx-auto text-lg'>
-							{gallery.description}
-						</p>
-					</div>
-
-					<div className='grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px]'>
-						{/* Large Main Image */}
-						<div className='md:col-span-2 md:row-span-2 relative rounded-xl overflow-hidden group shadow-md'>
-							<Image
-								src={gallery.images[0].src}
-								alt={gallery.images[0].alt}
-								fill
-								className='object-cover transition-transform duration-700 group-hover:scale-105'
-							/>
-							<div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6'>
-								<span className='text-white font-medium'>
-									{gallery.images[0].alt}
-								</span>
-							</div>
+					<div className='mb-8 flex flex-wrap items-end justify-between gap-5'>
+						<div>
+							<h2 className='text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4'>
+								{gallery.title}
+							</h2>
+							<p className='text-slate-600 leading-relaxed'>
+								{gallery.description}
+							</p>
 						</div>
-
-						{/* Secondary Images */}
-						{gallery.images.slice(1, 4).map((image, index) => (
-							<div
-								key={index}
-								className='relative rounded-xl overflow-hidden group shadow-md'
-							>
-								<Image
-									src={image.src}
-									alt={image.alt}
-									fill
-									className='object-cover transition-transform duration-700 group-hover:scale-105'
-								/>
-								<div className='absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300' />
-							</div>
-						))}
-
-						{/* View All Link Block */}
 						<Link
-							href={`/${validLocale}/gallery`}
-							className='relative rounded-xl overflow-hidden bg-slate-900 flex items-center justify-center group shadow-md cursor-pointer'
+							href={`/${validLocale}/gallery/`}
+							className='inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-amber-800'
 						>
-							<div className='text-center'>
-								<span className='block text-white font-serif text-xl mb-2'>
-									{site.common.readMore}
-								</span>
-								<div className='w-8 h-8 rounded-full border border-white/30 flex items-center justify-center mx-auto group-hover:bg-white group-hover:text-slate-900 transition-all'>
-									<ArrowRight className='w-4 h-4' />
-								</div>
-							</div>
+							{uiText[validLocale].viewAll}<ArrowRight size={16} aria-hidden='true' />
 						</Link>
 					</div>
+					<HomeGalleryPreview locale={validLocale} photos={previewPhotos} />
 				</div>
 			</section>
 		</div>

@@ -11,9 +11,9 @@ export const personContent = {
 			'Обладатель пенсии за особые заслуги перед Республикой Казахстан',
 		],
 		keyFacts: [
-			{ label: 'Трудовой путь', value: '45 лет в сфере образования' },
-			{ label: 'Публикации', value: 'Около 50 работ (методики, статьи, опыт)' },
-			{ label: 'Педагогическая династия', value: '540 лет общего стажа' },
+			{ value: '45', label: 'Лет в образовании', description: 'Учитель и директор школы' },
+			{ value: '≈50', label: 'Публикаций', description: 'Методики, статьи и педагогический опыт' },
+			{ value: '540', label: 'Лет общего стажа', description: 'Педагогическая династия Ислямовых' },
 		],
 
 		biography: {
@@ -150,12 +150,9 @@ export const personContent = {
 			'Қазақстан Республикасына ерекше сіңірген еңбегі үшін зейнетақы иесі',
 		],
 		keyFacts: [
-			{ label: 'Еңбек жолы', value: 'Халық ағарту саласында 45 жыл' },
-			{
-				label: 'Жарияланымдар',
-				value: 'Елуге жуық еңбек (әдістеме, мақала, тәжірибе)',
-			},
-			{ label: 'Педагогикалық әулет', value: 'Жалпы өтілі — 540 жыл' },
+			{ value: '45', label: 'Жыл халық ағарту ісінде', description: 'Ұстаз және мектеп директоры' },
+			{ value: '≈50', label: 'Жарияланған еңбек', description: 'Әдістеме, мақала және ұстаздық тәжірибе' },
+			{ value: '540', label: 'Жылдық жалпы еңбек өтілі', description: 'Ислямовтар ұстаздар әулеті' },
 		],
 
 		biography: {
@@ -292,12 +289,9 @@ export const personContent = {
 			'Holder of pension for special merits to the Republic of Kazakhstan',
 		],
 		keyFacts: [
-			{ label: 'Career path', value: '45 years in the field of education' },
-			{
-				label: 'Publications',
-				value: 'About 50 works (methodologies, articles, experience)',
-			},
-			{ label: 'Pedagogical dynasty', value: '540 years of total experience' },
+			{ value: '45', label: 'Years in education', description: 'Teacher and school principal' },
+			{ value: '≈50', label: 'Publications', description: 'Teaching methods, articles and experience' },
+			{ value: '540', label: 'Years of combined service', description: 'The Islyamov teaching dynasty' },
 		],
 
 		biography: {
