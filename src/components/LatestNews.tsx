@@ -1,18 +1,22 @@
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { getNewsArticles, newsLabels } from '@/content/news'
 import NewsCard from './NewsCard'
+import HomeSectionHeading from './HomeSectionHeading'
 
 export default function LatestNews({ locale }: { locale: Locale }) {
   const labels = newsLabels[locale]
-  return <section className='border-b border-slate-200 bg-white py-14 sm:py-16'>
+  const [lead, ...otherArticles] = getNewsArticles().slice(0, 4)
+  if (!lead) return null
+
+  return <section aria-labelledby='home-news-title' className='border-b border-slate-200 bg-white py-14 sm:py-16'>
     <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-      <div className='mb-8 flex flex-wrap items-end justify-between gap-5'>
-        <div><p className='mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-slate-600'>{labels.eyebrow}</p><h2 className='text-3xl font-serif font-bold text-slate-900'>{labels.title}</h2></div>
-        <Link href={`/${locale}/news/`} className='inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-blue-700'>{labels.back}<ArrowRight size={16} aria-hidden='true' /></Link>
+      <HomeSectionHeading id='home-news-title' title={labels.title} eyebrow={labels.eyebrow} href={`/${locale}/news/`} linkLabel={labels.back} />
+      <div className='grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-10'>
+        <NewsCard article={lead} locale={locale} headingLevel='h3' />
+        <div className='grid content-start gap-6 border-t border-slate-200 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0'>
+          {otherArticles.map(article => <NewsCard key={article.slug} article={article} locale={locale} compact headingLevel='h3' />)}
+        </div>
       </div>
-      <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>{getNewsArticles().filter(article => article.category === 'school' || article.category === 'college').slice(0, 3).map(article => <NewsCard key={article.slug} article={article} locale={locale} />)}</div>
     </div>
   </section>
 }

@@ -1,12 +1,14 @@
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Quote, ChevronRight } from 'lucide-react'
+import { ArrowRight, BookOpen, Quote } from 'lucide-react'
 import { personContent } from '@/content/person'
 import { galleryContent } from '@/content/gallery'
 import { siteContent } from '@/content/site'
 import { memoriesContent } from '@/content/memories'
+import { homeContent } from '@/content/home'
 import FeaturedBooks from '@/components/FeaturedBooks'
 import HomeGalleryPreview from '@/components/HomeGalleryPreview'
 import LatestNews from '@/components/LatestNews'
+import HomeSectionHeading from '@/components/HomeSectionHeading'
 import Image from 'next/image'
 import { Metadata } from 'next'
 import { pageMetadata } from '@/lib/metadata'
@@ -31,6 +33,7 @@ export default async function Home({
 	const gallery = galleryContent[validLocale]
 	const site = siteContent[validLocale]
 	const memories = memoriesContent[validLocale]
+	const home = homeContent[validLocale]
 
 	// Select a featured memory (e.g., the first one)
 	const featuredMemory = memories.items[0]
@@ -41,7 +44,7 @@ export default async function Home({
 	]
 	const previewPhotos = previewSources.flatMap(src => {
 		const photo = gallery.images.find(image => image.src === src)
-		return photo ? [{ ...photo, category: gallery.albums.find(album => album.id === photo.albumId)?.title ?? '' }] : []
+		return photo ? [{ ...photo, caption: home.galleryCaptions[src] ?? photo.alt, category: gallery.albums.find(album => album.id === photo.albumId)?.title ?? '' }] : []
 	})
 
 	return (
@@ -82,7 +85,7 @@ export default async function Home({
 									href={`/${validLocale}/biography`}
 									className='inline-flex items-center justify-center px-6 py-3 bg-white text-slate-900 text-base font-medium rounded-sm hover:bg-slate-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]'
 								>
-									{site.common.readMore}
+									{home.biographyLink}
 									<ArrowRight className='ml-2 h-5 w-5' />
 								</Link>
 								<Link
@@ -177,13 +180,11 @@ export default async function Home({
 			<FeaturedBooks locale={validLocale} />
 
 			{/* Memories Teaser - Emotional Connection */}
-			<section className='bg-slate-900 text-white py-24 relative overflow-hidden'>
+			<section aria-labelledby='home-memories-title' className='bg-slate-900 text-white py-14 sm:py-16 relative overflow-hidden'>
 				<div className='absolute inset-0 bg-slate-800/50 mix-blend-overlay' />
-				<div className='max-w-4xl mx-auto px-4 relative z-10 text-center'>
-					<h2 className='text-3xl font-serif font-bold mb-12'>
-						{memories.title}
-					</h2>
-					<div className='bg-white/5 backdrop-blur-sm p-8 md:p-12 rounded-2xl border border-white/10'>
+				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
+					<HomeSectionHeading id='home-memories-title' title={memories.title} href={`/${validLocale}/memories/`} linkLabel={home.memoriesLink} dark />
+					<div className='mx-auto max-w-4xl bg-white/5 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-xl border border-white/10 text-center'>
 						<p className='text-xl md:text-2xl font-serif italic leading-relaxed mb-8 text-slate-200'>
 							&ldquo;{featuredMemory.text}&rdquo;
 						</p>
@@ -198,36 +199,13 @@ export default async function Home({
 							</div>
 						</div>
 					</div>
-					<div className='mt-10'>
-						<Link
-							href={`/${validLocale}/memories`}
-							className='inline-flex items-center text-slate-300 hover:text-white transition-colors border-b border-slate-700 hover:border-white pb-1'
-						>
-							{site.common.readMore} <ChevronRight className='ml-1 w-4 h-4' />
-						</Link>
-					</div>
 				</div>
 			</section>
 
 			{/* Curated photographs from the teaching, family and public archives. */}
-			<section className='bg-slate-50 py-14 sm:py-16'>
+			<section aria-labelledby='home-gallery-title' className='bg-slate-50 py-14 sm:py-16'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-					<div className='mb-8 flex flex-wrap items-end justify-between gap-5'>
-						<div>
-							<h2 className='text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4'>
-								{gallery.title}
-							</h2>
-							<p className='text-slate-600 leading-relaxed'>
-								{gallery.description}
-							</p>
-						</div>
-						<Link
-							href={`/${validLocale}/gallery/`}
-							className='inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-blue-700'
-						>
-							{uiText[validLocale].viewAll}<ArrowRight size={16} aria-hidden='true' />
-						</Link>
-					</div>
+					<HomeSectionHeading id='home-gallery-title' title={gallery.title} description={home.galleryDescription} href={`/${validLocale}/gallery/`} linkLabel={uiText[validLocale].viewAll} />
 					<HomeGalleryPreview locale={validLocale} photos={previewPhotos} />
 				</div>
 			</section>
