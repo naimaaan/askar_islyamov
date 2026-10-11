@@ -15,8 +15,6 @@ export default async function AwardsPage({ params }: { params: Promise<{ locale:
 	const validLocale = locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const awards = awardsContent[validLocale]
 
-	const [honorCertificate, ...certificates] = awards.documents
-
 	return <div className='min-h-screen bg-slate-50'>
 		<div className='absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-slate-200/50 to-transparent -z-10' />
 		<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20'>
@@ -46,20 +44,9 @@ export default async function AwardsPage({ params }: { params: Promise<{ locale:
 
 			<section aria-labelledby='award-documents' className='mt-14 sm:mt-16'>
 				<h2 id='award-documents' className='mb-8 border-b border-slate-200 pb-5 text-3xl font-serif font-bold text-slate-900'>{awards.documentsHeading}</h2>
-				{honorCertificate && <figure className='mb-12 grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12 lg:gap-20'>
-					<div className='max-w-sm'>
-						<AwardPhoto src={honorCertificate.src} caption={honorCertificate.year ? `${honorCertificate.title}, ${honorCertificate.year}` : honorCertificate.title} locale={validLocale} portrait />
-					</div>
-					<figcaption className='self-center'>
-						<div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
-							<h3 className='text-xl font-medium leading-snug text-slate-900'>{honorCertificate.title}</h3>
-							{honorCertificate.year && <time dateTime={String(honorCertificate.year)} className='text-sm font-medium tabular-nums text-slate-500'>{honorCertificate.year}</time>}
-						</div>
-					</figcaption>
-				</figure>}
-				<div className='grid gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-x-10'>
-					{certificates.map(document => <figure key={document.src} className='min-w-0'>
-						<AwardPhoto src={document.src} caption={document.year ? `${document.title}, ${document.year}` : document.title} locale={validLocale} wide={document.wide} documentImage />
+				<div className='grid items-start gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-x-10'>
+					{awards.documents.map((document, index) => <figure key={document.src} className={`min-w-0 ${index === 0 ? 'md:row-span-2' : ''}`}>
+						<AwardPhoto src={document.src} caption={document.year ? `${document.title}, ${document.year}` : document.title} locale={validLocale} portrait={index === 0} wide={document.wide} documentImage />
 						<figcaption className='pt-4'>
 							<div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
 								<h3 className='text-lg font-medium leading-snug text-slate-900'>{document.title}</h3>

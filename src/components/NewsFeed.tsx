@@ -24,12 +24,12 @@ function FeedContent({ articles, documents, locale, category, onCategory }: Prop
     <div className='mb-7 flex flex-wrap gap-2 border-b border-slate-200 pb-4' role='group' aria-label={labels.feed}>
       {(['all', ...Object.keys(labels.categories)] as Category[]).map(value => <button key={value} type='button' aria-pressed={category === value} onClick={() => onCategory?.(value)} className='filter-chip'>{value === 'all' ? labels.all : labels.categories[value]}</button>)}
     </div>
-    <div className={`grid gap-x-12 ${category === 'all' ? 'lg:grid-cols-[minmax(0,2.2fr)_minmax(260px,1fr)]' : ''}`}>
-      <div className={category === 'all' ? 'lg:col-start-1' : 'max-w-4xl'}>
+    <div className={`grid grid-cols-1 gap-x-12 ${category === 'all' ? 'lg:grid-cols-[minmax(0,2.2fr)_minmax(260px,1fr)]' : 'max-w-4xl'}`}>
+      <div className={category === 'all' ? 'lg:col-start-1' : undefined}>
         <p className='eyebrow mb-4 flex items-center gap-2'><span className='h-1.5 w-1.5 rounded-full bg-slate-500' aria-hidden='true' />{category === 'all' ? labels.featured : labels.categories[category]}</p>
         {featured && <NewsCard article={featured} locale={locale} featured fromCategory={fromCategory} />}
       </div>
-      {remaining.length > 0 && <section className='mt-10 border-t border-slate-200 pt-5 lg:col-span-2' aria-labelledby='news-feed-title'>
+      {remaining.length > 0 && <section className={`mt-10 border-t border-slate-200 pt-5 ${category === 'all' ? 'lg:col-span-2' : ''}`} aria-labelledby='news-feed-title'>
         <h2 id='news-feed-title' className='section-title mb-6'>{labels.feed}</h2>
         <div className='grid grid-cols-1 gap-x-8 gap-y-9 sm:grid-cols-2'>{remaining.map(article => <NewsCard key={article.slug} article={article} locale={locale} fromCategory={fromCategory} />)}</div>
       </section>}

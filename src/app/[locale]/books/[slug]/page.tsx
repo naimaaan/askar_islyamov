@@ -52,9 +52,9 @@ export default async function BookPage({
 	const otherBooks = books.items.filter(b => b.id !== slug).slice(0, 3)
 
 	return (
-		<div className='min-h-screen bg-white'>
+		<div className='min-h-screen bg-slate-50'>
 			{/* Navigation Bar */}
-			<div className='bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-16 z-40 transition-all duration-300'>
+			<div className='bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-16 sm:top-20 z-40 transition-all duration-300'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between'>
 					<Link
 						href={`/${locale}/books`}
@@ -71,8 +71,18 @@ export default async function BookPage({
 
 			{/* Hero Section */}
 			<BookReaderProvider>
-				<div>
-					<div className='site-container py-12 sm:py-16'>
+				<div className='relative overflow-hidden bg-slate-900'>
+					<div className='absolute inset-0 overflow-hidden' aria-hidden='true'>
+						<Image
+							src={book.cover}
+							alt=''
+							fill
+							sizes='100vw'
+							className='object-cover opacity-30 blur-3xl scale-110 mix-blend-overlay'
+						/>
+						<div className='absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/95 to-slate-900/50' />
+					</div>
+					<div className='site-container relative py-12 md:py-24'>
 						<div className='flex flex-col md:flex-row gap-12 lg:gap-20 items-start'>
 							{/* Book Cover */}
 							<div className='w-full md:w-1/3 lg:w-[320px] flex-shrink-0 relative z-10 mx-auto md:mx-0 max-w-sm'>
@@ -112,7 +122,7 @@ export default async function BookPage({
 									)}
 								</div>
 
-								<h1 className='page-title mb-5'>
+								<h1 className='text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight tracking-tight'>
 									{book.title}
 								</h1>
 

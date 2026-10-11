@@ -137,8 +137,9 @@ export default function BiographyClient({ locale }: { locale: string }) {
 										</p>
 									</div>
 									<div className='flex-1 w-full'>
-										<div
-											className='media-frame aspect-[4/3] w-full cursor-zoom-in group'
+										<button
+											type='button'
+											className='media-frame aspect-[4/3] w-full cursor-zoom-in group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
 											onClick={() => openLightbox(imageSrc)}
 										>
 											<Image
@@ -147,7 +148,7 @@ export default function BiographyClient({ locale }: { locale: string }) {
 												fill
 												className='object-cover group-hover:scale-105 transition-transform duration-700'
 											/>
-											<div className='absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center'>
+											<span className='absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center'>
 												<span className='opacity-0 group-hover:opacity-100 text-white bg-black/50 px-4 py-2 rounded-full text-sm transition-opacity duration-300 backdrop-blur-sm'>
 													{validLocale === 'ru'
 														? 'Увеличить'
@@ -155,8 +156,8 @@ export default function BiographyClient({ locale }: { locale: string }) {
 														? 'Үлкейту'
 														: 'Zoom'}
 												</span>
-											</div>
-										</div>
+											</span>
+										</button>
 									</div>
 								</section>
 							</FadeIn>
@@ -196,8 +197,9 @@ export default function BiographyClient({ locale }: { locale: string }) {
 							</div>
 							<div className='w-full xl:w-1/2 flex-shrink-0'>
 								<div className='grid grid-cols-2 gap-4'>
-									<div
-										className='relative aspect-[4/3] rounded-lg overflow-hidden transition-colors duration-300 col-span-2 cursor-zoom-in group'
+									<button
+										type='button'
+										className='relative aspect-[4/3] rounded-lg overflow-hidden transition-colors duration-300 col-span-2 cursor-zoom-in group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
 										onClick={() => openLightbox(familyImages[0])}
 									>
 										<Image
@@ -206,9 +208,10 @@ export default function BiographyClient({ locale }: { locale: string }) {
 											fill
 											className='object-cover group-hover:scale-105 transition-transform duration-500'
 										/>
-									</div>
-									<div
-										className='relative aspect-square rounded-lg overflow-hidden transition-colors duration-300 cursor-zoom-in group'
+									</button>
+									<button
+										type='button'
+										className='relative aspect-square rounded-lg overflow-hidden transition-colors duration-300 cursor-zoom-in group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
 										onClick={() => openLightbox(familyImages[1])}
 									>
 										<Image
@@ -217,9 +220,10 @@ export default function BiographyClient({ locale }: { locale: string }) {
 											fill
 											className='object-cover group-hover:scale-105 transition-transform duration-500'
 										/>
-									</div>
-									<div
-										className='relative aspect-square rounded-lg overflow-hidden transition-colors duration-300 cursor-zoom-in group'
+									</button>
+									<button
+										type='button'
+										className='relative aspect-square rounded-lg overflow-hidden transition-colors duration-300 cursor-zoom-in group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
 										onClick={() => openLightbox(familyImages[2])}
 									>
 										<Image
@@ -228,7 +232,7 @@ export default function BiographyClient({ locale }: { locale: string }) {
 											fill
 											className='object-cover group-hover:scale-105 transition-transform duration-500'
 										/>
-									</div>
+									</button>
 								</div>
 								<p className='text-sm text-slate-500 mt-4 text-center italic'>
 									{validLocale === 'ru'
