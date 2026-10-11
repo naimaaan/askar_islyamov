@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { FileText, Download, Play } from 'lucide-react'
 import { Locale } from '@/lib/i18n'
+import { uiText } from '@/lib/ui-text'
 
 interface Book {
 	id: string
@@ -24,6 +25,7 @@ interface BookCardProps {
 
 export default function BookCard({ book, locale, dict }: BookCardProps) {
 	const isFilm = book.id === 'films'
+	const hasFile = Boolean(book.pdf)
 
 	return (
 		<div className='bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow flex flex-col h-full relative group'>
@@ -32,7 +34,8 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 					src={book.cover}
 					alt={book.title}
 					fill
-					className='object-cover'
+					sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+					className={book.id === 'otken-omir' ? 'object-contain' : 'object-cover'}
 				/>
 			</div>
 			<div className='p-6 flex flex-col flex-grow'>
@@ -49,7 +52,8 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 					{book.description}
 				</p>
 
-				<div className='flex gap-3 mt-auto relative z-10'>
+				{!hasFile && <p className='text-sm text-slate-500 mt-auto'>{uiText[locale].unavailable}</p>}
+				{hasFile && <div className='flex gap-3 mt-auto relative z-10'>
 					<a
 						href={book.pdf}
 						target='_blank'
@@ -72,12 +76,13 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 						<a
 							href={book.pdf}
 							download
+							aria-label={`${dict.download}: ${book.title}`}
 							className='inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-slate-800 hover:bg-slate-900'
 						>
 							<Download size={16} />
 						</a>
 					)}
-				</div>
+				</div>}
 			</div>
 		</div>
 	)

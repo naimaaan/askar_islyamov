@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { useBookReader } from './BookReaderContext'
+import type { Locale } from '@/lib/i18n'
 
 const PdfReader = dynamic(() => import('./PdfReader'), {
 	ssr: false,
@@ -14,14 +15,16 @@ const PdfReader = dynamic(() => import('./PdfReader'), {
 
 interface BookPdfReaderSectionProps {
 	pdf: string
+	locale: Locale
 }
 
 export default function BookPdfReaderSection({
 	pdf,
+	locale,
 }: BookPdfReaderSectionProps) {
 	const { isReaderOpen } = useBookReader()
 
-	if (!isReaderOpen) return null
+	if (!isReaderOpen || !pdf) return null
 
 	return (
 		<div className='w-full bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm animate-fade-in-up'>
@@ -42,7 +45,7 @@ export default function BookPdfReaderSection({
 			`}</style>
 
 			<div className='mt-0'>
-				<PdfReader file={pdf} />
+				<PdfReader key={pdf} file={pdf} locale={locale} />
 			</div>
 		</div>
 	)

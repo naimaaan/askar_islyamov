@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata'
 import { awardsContent } from '@/content/awards'
 import { Award, Star, Trophy, Medal, Quote, Sparkles } from 'lucide-react'
 import { Metadata } from 'next'
@@ -12,14 +13,10 @@ export async function generateMetadata({
 		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const awards = awardsContent[validLocale]
 
-	return {
+	return pageMetadata(validLocale, '/awards', {
 		title: awards.title,
 		description: awards.description,
-		openGraph: {
-			title: awards.title,
-			description: awards.description,
-		},
-	}
+	})
 }
 
 export default async function AwardsPage({

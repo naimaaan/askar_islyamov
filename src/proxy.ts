@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { locales, defaultLocale } from '@/lib/i18n'
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
 	const pathname = request.nextUrl.pathname
 
 	// ✅ исключаем служебные и SEO-файлы от i18n редиректа
@@ -29,13 +29,12 @@ export function middleware(request: NextRequest) {
 
 	// Redirect if there is no locale
 	if (pathnameIsMissingLocale) {
-		const locale = defaultLocale
-		return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
+		const url = request.nextUrl.clone()
+		url.pathname = `/${defaultLocale}${pathname}`
+		return NextResponse.redirect(url)
 	}
 
-	const response = NextResponse.next()
-	response.headers.set('x-pathname', pathname)
-	return response
+	return NextResponse.next()
 }
 
 export const config = {

@@ -1,11 +1,12 @@
+import { pageMetadata } from '@/lib/metadata'
+import { isLocale } from '@/lib/i18n'
+import { uiText } from '@/lib/ui-text'
 import { notFound } from 'next/navigation'
-export const dynamic = 'force-dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { booksContent } from '@/content/books'
 import { siteContent } from '@/content/site'
 import {
-	FileText,
 	Download,
 	ArrowLeft,
 	Play,
@@ -16,12 +17,17 @@ import BookPdfReaderSection from '@/components/BookPdfReaderSection'
 import { BookReaderProvider } from '@/components/BookReaderContext'
 import ReadOnlineButton from '@/components/ReadOnlineButton'
 
-export async function generateStaticParams({
-	params: { locale },
-}: {
-	params: { locale: string }
-}) {
-	return []
+export function generateStaticParams({ params: { locale } }: { params: { locale: string } }) {
+  if (!isLocale(locale)) return []
+  return booksContent[locale].items.map(book => ({ slug: book.id }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params
+  if (!isLocale(locale)) notFound()
+  const book = booksContent[locale].items.find(book => book.id === slug)
+  if (!book) notFound()
+  return pageMetadata(locale, '/books/' + book.id, { title: book.title, description: book.description })
 }
 
 export default async function BookPage({
@@ -41,6 +47,8 @@ export default async function BookPage({
 	}
 
 	const isFilm = book.id === 'films'
+	const hasFile = Boolean(book.pdf)
+	const labels = uiText[validLocale]
 	const otherBooks = books.items.filter(b => b.id !== slug).slice(0, 3)
 
 	return (
@@ -124,7 +132,8 @@ export default async function BookPage({
 								</div>
 
 								<div className='flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap'>
-									{!isFilm && (
+									{!hasFile && <p className='text-sm text-slate-500'>{labels.unavailable}</p>}
+									{hasFile && !isFilm && (
 										<ReadOnlineButton
 											label={
 												validLocale === 'kz'
@@ -143,6 +152,7 @@ export default async function BookPage({
 										/>
 									)}
 
+									{hasFile && (
 									<a
 										href={book.pdf}
 										target='_blank'
@@ -161,8 +171,9 @@ export default async function BookPage({
 											</>
 										)}
 									</a>
+									)}
 
-									{!isFilm && (
+									{hasFile && !isFilm && (
 										<a
 											href={book.pdf}
 											download
@@ -178,9 +189,9 @@ export default async function BookPage({
 					</div>
 				</div>
 
-				{!isFilm && (
+				{hasFile && !isFilm && (
 					<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:pt-4 md:pb-16'>
-						<BookPdfReaderSection pdf={book.pdf} />
+						<BookPdfReaderSection pdf={book.pdf} locale={validLocale} />
 					</div>
 				)}
 			</BookReaderProvider>
@@ -190,13 +201,13 @@ export default async function BookPage({
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 border-t border-slate-200'>
 					<div className='flex items-center justify-between mb-12'>
 						<h2 className='text-2xl md:text-3xl font-serif font-bold text-slate-900'>
-							{validLocale === 'ru' ? 'Другие материалы' : 'Басқа материалдар'}
+							{labels.otherMaterials}
 						</h2>
 						<Link
 							href={`/${locale}/books`}
 							className='hidden sm:flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors'
 						>
-							{validLocale === 'ru' ? 'Все книги' : 'Барлық кітаптар'}
+							{labels.allBooks}
 							<ArrowLeft className='ml-2 h-4 w-4 rotate-180' />
 						</Link>
 					</div>
@@ -213,7 +224,8 @@ export default async function BookPage({
 										src={otherBook.cover}
 										alt={otherBook.title}
 										fill
-										className='object-cover group-hover:scale-105 transition-transform duration-700'
+											sizes='(max-width: 640px) 100vw, 33vw'
+										className={`${otherBook.id === 'otken-omir' ? 'object-contain' : 'object-cover'} group-hover:scale-105 transition-transform duration-700`}
 									/>
 									<div className='absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300' />
 								</div>
@@ -237,7 +249,7 @@ export default async function BookPage({
 							href={`/${locale}/books`}
 							className='inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors'
 						>
-							{validLocale === 'ru' ? 'Смотреть все' : 'Барлығын көру'}
+							{labels.viewAll}
 							<ArrowLeft className='ml-2 h-4 w-4 rotate-180' />
 						</Link>
 					</div>

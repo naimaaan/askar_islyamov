@@ -2,426 +2,146 @@
 
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
-import {
-	ChevronLeft,
-	ChevronRight,
-	RotateCw,
-	RotateCcw,
-	ZoomIn,
-	ZoomOut,
-	Maximize,
-	Minimize,
-	ArrowLeftRight,
-	RefreshCw,
-	Columns,
-	Moon,
-	Sun,
-} from 'lucide-react'
+import { ChevronLeft, ChevronRight, RotateCw, RotateCcw, ZoomIn, ZoomOut, Maximize, Minimize, ArrowLeftRight, RefreshCw, Columns, Moon, Sun } from 'lucide-react'
+import type { Locale } from '@/lib/i18n'
+import { uiText } from '@/lib/ui-text'
 
-// Polyfill for Promise.withResolvers (Required for pdfjs-dist v4+ on Safari < 17.4)
-if (typeof Promise.withResolvers === 'undefined') {
-	if (typeof window !== 'undefined') {
-		// @ts-expect-error This is a polyfill
-		Promise.withResolvers = function () {
-			let resolve, reject
-			const promise = new Promise((res, rej) => {
-				resolve = res
-				reject = rej
-			})
-			return { promise, resolve, reject }
-		}
-	}
+// Bundle a worker with exactly the same PDF.js version as React-PDF.
+pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString()
+
+interface PdfReaderProps { file: string; locale: Locale }
+
+class ReaderErrorBoundary extends React.Component<{ children: React.ReactNode; message: string }, { hasError: boolean }> {
+  state = { hasError: false }
+  static getDerivedStateFromError() { return { hasError: true } }
+  componentDidCatch(error: unknown) { console.error('PDF reader error:', error) }
+  render() {
+    return this.state.hasError ? <div role='alert' className='mt-4 text-sm text-red-600 text-center p-4 border border-red-200 rounded bg-red-50'>{this.props.message}</div> : this.props.children
+  }
 }
 
-// Configure worker
-if (typeof window !== 'undefined') {
-	try {
-		// Use https and ensure version is present
-		const version = pdfjs.version || '5.4.449'
-		pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`
-	} catch (e) {
-		console.error('Failed to configure PDF worker', e)
-	}
+function readSavedState(file: string) {
+  const defaults = { page: 1, scale: 1, rotation: 0, splitMode: false, splitSide: 'left' as 'left' | 'right', isNightMode: false }
+  try {
+    const saved = JSON.parse(localStorage.getItem('pdfReader:' + file) || 'null')
+    if (!saved || typeof saved !== 'object') return defaults
+    const number = (value: unknown, fallback: number) => typeof value === 'number' && Number.isFinite(value) ? value : fallback
+    return {
+      page: Math.max(1, Math.floor(number(saved.page, 1))),
+      scale: Math.min(2.5, Math.max(0.7, number(saved.scale, 1))),
+      rotation: ((Math.round(number(saved.rotation, 0) / 90) * 90) % 360 + 360) % 360,
+      splitMode: saved.splitMode === true && window.innerWidth >= 1024,
+      splitSide: saved.splitSide === 'right' ? 'right' as const : 'left' as const,
+      isNightMode: saved.isNightMode === true,
+    }
+  } catch { return defaults }
 }
 
-// Internal Error Boundary
-class ReaderErrorBoundary extends React.Component<
-	{ children: React.ReactNode },
-	{ hasError: boolean }
-> {
-	constructor(props: { children: React.ReactNode }) {
-		super(props)
-		this.state = { hasError: false }
-	}
+function PdfReaderContent({ file, locale }: PdfReaderProps) {
+  const labels = uiText[locale]
+  const containerRef = useRef<HTMLDivElement>(null)
+  const pageAreaRef = useRef<HTMLDivElement>(null)
+  const touchStartX = useRef<number | null>(null)
+  const [saved] = useState(() => readSavedState(file))
+  const [numPages, setNumPages] = useState<number | null>(null)
+  const [pageNumber, setPageNumber] = useState(saved.page)
+  const [containerWidth, setContainerWidth] = useState(600)
+  const [rotation, setRotation] = useState(saved.rotation)
+  const [scale, setScale] = useState(saved.scale)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [splitMode, setSplitMode] = useState(saved.splitMode)
+  const [splitSide, setSplitSide] = useState<'left' | 'right'>(saved.splitSide)
+  const [isNightMode, setIsNightMode] = useState(saved.isNightMode)
+  const [pageDraft, setPageDraft] = useState<string | null>(null)
+  const pageInput = pageDraft ?? String(pageNumber)
 
-	static getDerivedStateFromError(error: unknown) {
-		return { hasError: true }
-	}
+  useEffect(() => {
+    // Validate the restored page before overwriting storage.
+    if (!numPages) return
+    try { localStorage.setItem('pdfReader:' + file, JSON.stringify({ page: pageNumber, splitMode, splitSide, scale, isNightMode, rotation })) } catch { /* Storage may be unavailable. */ }
+  }, [numPages, pageNumber, splitMode, splitSide, scale, isNightMode, rotation, file])
 
-	componentDidCatch(error: unknown, info: unknown) {
-		console.error('PdfReader error:', error, info)
-	}
+  useEffect(() => {
+    const area = pageAreaRef.current
+    if (!area) return
+    function updateWidth() {
+      if (area) setContainerWidth(Math.max(160, area.clientWidth - 2))
+      if (window.innerWidth < 1024) setSplitMode(false)
+    }
+    const observer = new ResizeObserver(updateWidth)
+    observer.observe(area)
+    window.addEventListener('resize', updateWidth)
+    return () => { observer.disconnect(); window.removeEventListener('resize', updateWidth) }
+  }, [])
 
-	render() {
-		if (this.state.hasError) {
-			return (
-				<div className='mt-4 text-sm text-red-400 text-center p-4 border border-red-200 rounded bg-red-50 dark:bg-red-900/20 dark:border-red-800'>
-					Произошла ошибка при загрузке ридера.
-					<br />
-					Попробуйте обновить страницу или использовать кнопку "Читать PDF".
-				</div>
-			)
-		}
-		return this.props.children
-	}
-}
+  useEffect(() => {
+    const onFullscreenChange = () => setIsFullscreen(document.fullscreenElement === containerRef.current)
+    document.addEventListener('fullscreenchange', onFullscreenChange)
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange)
+  }, [])
 
-interface PdfReaderProps {
-	file: string
-}
-
-function PdfReaderContent({ file }: PdfReaderProps) {
-	const containerRef = useRef<HTMLDivElement>(null)
-	const [numPages, setNumPages] = useState<number | null>(null)
-
-	// If no file is provided, don't attempt to render
-	if (!file) return null
-
-	const [pageNumber, setPageNumber] = useState<number>(1)
-	const [containerWidth, setContainerWidth] = useState<number>(
-		typeof window !== 'undefined' ? Math.min(window.innerWidth - 48, 600) : 600
-	)
-	const [rotation, setRotation] = useState<number>(0)
-	const [scale, setScale] = useState<number>(1.0)
-
-	// New features state
-	const [isFullscreen, setIsFullscreen] = useState(false)
-	const [splitMode, setSplitMode] = useState(false)
-	const [splitSide, setSplitSide] = useState<'left' | 'right'>('left')
-	const [touchStartX, setTouchStartX] = useState<number | null>(null)
-	const [isNightMode, setIsNightMode] = useState(false)
-	const [pageInput, setPageInput] = useState<string>('1')
-
-	// Autosave & Restore
-	useEffect(() => {
-		if (typeof window === 'undefined') return
-
-		const storageKey = `pdfReader:${file}`
-		let saved: string | null = null
-		try {
-			saved = localStorage.getItem(storageKey)
-		} catch (e) {
-			// ignore
-		}
-
-		if (saved) {
-			try {
-				const data = JSON.parse(saved)
-				if (data.page && !isNaN(Number(data.page))) {
-					setPageNumber(Number(data.page))
-					setPageInput(String(data.page))
-				}
-				// Only restore splitMode if screen is large enough
-				if (data.splitMode !== undefined && window.innerWidth >= 1024) {
-					setSplitMode(Boolean(data.splitMode))
-				}
-				if (data.splitSide === 'left' || data.splitSide === 'right')
-					setSplitSide(data.splitSide)
-				if (data.scale && !isNaN(Number(data.scale)))
-					setScale(Number(data.scale))
-				if (data.isNightMode !== undefined)
-					setIsNightMode(Boolean(data.isNightMode))
-				if (data.rotation !== undefined && !isNaN(Number(data.rotation)))
-					setRotation(Number(data.rotation))
-			} catch (e) {
-				console.error('Failed to restore PDF state', e)
-			}
-		}
-	}, [file])
-
-	// Sync pageInput when pageNumber changes
-	useEffect(() => {
-		setPageInput(String(pageNumber))
-	}, [pageNumber])
-
-	useEffect(() => {
-		if (typeof window === 'undefined') return
-
-		const storageKey = `pdfReader:${file}`
-		const stateToSave = {
-			page: pageNumber,
-			splitMode,
-			splitSide,
-			scale,
-			isNightMode,
-			rotation,
-		}
-		try {
-			localStorage.setItem(storageKey, JSON.stringify(stateToSave))
-		} catch (e) {
-			// ignore
-		}
-	}, [pageNumber, splitMode, splitSide, scale, isNightMode, rotation, file])
-
-	// Handle window resize to make PDF responsive
-	useEffect(() => {
-		if (typeof window === 'undefined') return
-
-		function updateWidth() {
-			if (!containerRef.current) return
-			const width = containerRef.current.clientWidth
-			// On desktop (lg), we have a sidebar of approx 320px (w-72 + gap-8)
-			// Max container width is 1200px unless fullscreen
-			const isDesktop =
-				typeof window !== 'undefined' && window.innerWidth >= 1024
-			const sidebarWidth = isDesktop ? 320 : 0
-			const padding = 48 // px-6 * 2
-
-			const availableWidth = width - sidebarWidth - padding
-			// Ensure we don't set negative or NaN width
-			if (availableWidth > 0) {
-				setContainerWidth(availableWidth)
-			}
-
-			// Force disable split mode on small screens
-			if (window.innerWidth < 1024 && splitMode) {
-				setSplitMode(false)
-			}
-		}
-
-		// Initial set
-		updateWidth()
-
-		window.addEventListener('resize', updateWidth)
-		// Also update when fullscreen changes
-		window.addEventListener('fullscreenchange', updateWidth)
-
-		return () => {
-			window.removeEventListener('resize', updateWidth)
-			window.removeEventListener('fullscreenchange', updateWidth)
-		}
-	}, [])
-
-	// Fullscreen toggle
-	function toggleFullscreen() {
-		if (typeof document === 'undefined') return
-		if (!containerRef.current) return
-
-		if (!document.fullscreenElement) {
-			containerRef.current.requestFullscreen().catch(err => {
-				console.error(`Error attempting to enable fullscreen: ${err.message}`)
-			})
-		} else {
-			if (document.exitFullscreen) {
-				document.exitFullscreen().catch(err => {
-					console.error(`Error attempting to exit fullscreen: ${err.message}`)
-				})
-			}
-		}
-	}
-
-	useEffect(() => {
-		if (typeof document === 'undefined') return
-
-		function onFullscreenChange() {
-			setIsFullscreen(Boolean(document.fullscreenElement))
-		}
-		document.addEventListener('fullscreenchange', onFullscreenChange)
-		return () =>
-			document.removeEventListener('fullscreenchange', onFullscreenChange)
-	}, [])
-
-	// Keyboard navigation
-	useEffect(() => {
-		if (typeof window === 'undefined') return
-
-		const handleKeyDown = (e: KeyboardEvent) => {
-			// If focus is in input, ignore
-			if (document.activeElement instanceof HTMLInputElement) return
-
-			switch (e.key) {
-				case 'ArrowRight':
-				case 'ArrowDown':
-				case ' ':
-					e.preventDefault()
-					goToNextStep()
-					break
-				case 'ArrowLeft':
-				case 'ArrowUp':
-					e.preventDefault()
-					goToPrevStep()
-					break
-				case '+':
-				case '=':
-					e.preventDefault()
-					zoomIn()
-					break
-				case '-':
-					e.preventDefault()
-					zoomOut()
-					break
-				case '0':
-					e.preventDefault()
-					fitWidth()
-					break
-				case 'f':
-				case 'F':
-					e.preventDefault()
-					toggleFullscreen()
-					break
-			}
-		}
-
-		window.addEventListener('keydown', handleKeyDown)
-		return () => window.removeEventListener('keydown', handleKeyDown)
-	}, [pageNumber, splitMode, splitSide, numPages]) // Add dependencies for closure capture
-
-	function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-		setNumPages(numPages)
-		// Do NOT reset pageNumber here to allow restore from localStorage
-	}
-
-	function goToPrevStep() {
-		if (splitMode) {
-			if (splitSide === 'right') {
-				setSplitSide('left')
-			} else {
-				// Currently on left side, go to previous page's right side
-				if (pageNumber > 1) {
-					setPageNumber(prev => prev - 1)
-					setSplitSide('right')
-				}
-			}
-		} else {
-			if (pageNumber > 1) {
-				setPageNumber(prev => prev - 1)
-			}
-		}
-	}
-
-	function goToNextStep() {
-		if (splitMode) {
-			if (splitSide === 'left') {
-				setSplitSide('right')
-			} else {
-				// Currently on right side, go to next page's left side
-				if (numPages && pageNumber < numPages) {
-					setPageNumber(prev => prev + 1)
-					setSplitSide('left')
-				}
-			}
-		} else {
-			if (numPages && pageNumber < numPages) {
-				setPageNumber(prev => prev + 1)
-			}
-		}
-	}
-
-	// Rotation controls
-	function rotateLeft() {
-		setRotation(prev => (prev - 90) % 360)
-	}
-
-	function rotateRight() {
-		setRotation(prev => (prev + 90) % 360)
-	}
-
-	function resetRotation() {
-		setRotation(0)
-	}
-
-	// Zoom controls
-	function zoomOut() {
-		setScale(prev => Math.max(0.7, prev - 0.1))
-	}
-
-	function zoomIn() {
-		setScale(prev => Math.min(2.5, prev + 0.1))
-	}
-
-	function fitWidth() {
-		setScale(1.0)
-	}
-
-	function handlePageInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setPageInput(e.target.value)
-	}
-
-	function handlePageInputCommit() {
-		if (!numPages) return
-
-		let newPage = parseInt(pageInput, 10)
-		if (isNaN(newPage)) {
-			setPageInput(String(pageNumber))
-			return
-		}
-
-		// Clamp value
-		if (newPage < 1) newPage = 1
-		if (newPage > numPages) newPage = numPages
-
-		setPageNumber(newPage)
-		setPageInput(String(newPage))
-
-		// Reset split side if in split mode
-		if (splitMode) {
-			setSplitSide('left')
-		}
-	}
-
-	function handlePageInputKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-		if (e.key === 'Enter') {
-			handlePageInputCommit()
-			;(e.target as HTMLInputElement).blur()
-		}
-	}
-
-	// Swipe handlers
-	function onTouchStart(e: React.TouchEvent) {
-		if (e.touches && e.touches.length > 0) {
-			setTouchStartX(e.touches[0].clientX)
-		}
-	}
-
-	function onTouchEnd(e: React.TouchEvent) {
-		if (touchStartX === null) return
-		if (!e.changedTouches || e.changedTouches.length === 0) return
-
-		const touchEndX = e.changedTouches[0].clientX
-		const diff = touchStartX - touchEndX
-
-		// Threshold for swipe
-		if (Math.abs(diff) > 50) {
-			if (diff > 0) {
-				// Swipe Left -> Next
-				goToNextStep()
-			} else {
-				// Swipe Right -> Prev
-				goToPrevStep()
-			}
-		}
-		setTouchStartX(null)
-	}
-
-	const isFirstPage = pageNumber <= 1 && (!splitMode || splitSide === 'left')
-	const isLastPage =
-		numPages !== null &&
-		pageNumber >= numPages &&
-		(!splitMode || splitSide === 'right')
-
-	// Memoize options to prevent unnecessary re-renders
-	const options = useMemo(
-		() => ({
-			cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
-			cMapPacked: true,
-			standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts/`,
-		}),
-		[]
-	)
+  function toggleFullscreen() {
+    const action = document.fullscreenElement ? document.exitFullscreen() : containerRef.current?.requestFullscreen()
+    action?.catch(error => console.error('Fullscreen unavailable:', error))
+  }
+  function onDocumentLoadSuccess({ numPages: total }: { numPages: number }) {
+    setPageNumber(page => Math.min(total, Math.max(1, page)))
+    setNumPages(total)
+  }
+  function goToPrevStep() {
+    setPageDraft(null)
+    if (splitMode && splitSide === 'right') setSplitSide('left')
+    else if (pageNumber > 1) { setPageNumber(page => page - 1); if (splitMode) setSplitSide('right') }
+  }
+  function goToNextStep() {
+    setPageDraft(null)
+    if (splitMode && splitSide === 'left') setSplitSide('right')
+    else if (numPages && pageNumber < numPages) { setPageNumber(page => page + 1); if (splitMode) setSplitSide('left') }
+  }
+  function rotateLeft() { setRotation(value => (value + 270) % 360) }
+  function rotateRight() { setRotation(value => (value + 90) % 360) }
+  function resetRotation() { setRotation(0) }
+  function zoomOut() { setScale(value => Math.max(0.7, value - 0.1)) }
+  function zoomIn() { setScale(value => Math.min(2.5, value + 0.1)) }
+  function fitWidth() { setScale(1) }
+  function handlePageInputChange(event: React.ChangeEvent<HTMLInputElement>) { setPageDraft(event.target.value) }
+  function handlePageInputCommit() {
+    if (!numPages || pageDraft === null) return
+    const requested = parseInt(pageDraft, 10)
+    if (Number.isFinite(requested)) setPageNumber(Math.min(numPages, Math.max(1, requested)))
+    setPageDraft(null)
+    setSplitSide('left')
+  }
+  function handlePageInputKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === 'Enter') { event.preventDefault(); event.currentTarget.blur() }
+  }
+  function handleReaderKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+    // Shortcuts apply only inside the reader and never steal button or input keys.
+    if ((event.target as HTMLElement).closest('input, textarea, select, button, a, [contenteditable="true"]')) return
+    const actions: Record<string, () => void> = { ArrowRight: goToNextStep, ArrowDown: goToNextStep, ' ': goToNextStep, ArrowLeft: goToPrevStep, ArrowUp: goToPrevStep, '+': zoomIn, '=': zoomIn, '-': zoomOut, '0': fitWidth, f: toggleFullscreen, F: toggleFullscreen }
+    if (actions[event.key]) { event.preventDefault(); actions[event.key]() }
+  }
+  function onTouchStart(event: React.TouchEvent) { touchStartX.current = event.touches.length === 1 ? event.touches[0].clientX : null }
+  function onTouchEnd(event: React.TouchEvent) {
+    if (touchStartX.current === null || !event.changedTouches.length) return
+    const distance = touchStartX.current - event.changedTouches[0].clientX
+    if (Math.abs(distance) > 50) { if (distance > 0) goToNextStep(); else goToPrevStep() }
+    touchStartX.current = null
+  }
+  const isFirstPage = pageNumber <= 1 && (!splitMode || splitSide === 'left')
+  const isLastPage = numPages !== null && pageNumber >= numPages && (!splitMode || splitSide === 'right')
+  const options = useMemo(() => ({
+    cMapUrl: 'https://unpkg.com/pdfjs-dist@' + pdfjs.version + '/cmaps/', cMapPacked: true,
+    standardFontDataUrl: 'https://unpkg.com/pdfjs-dist@' + pdfjs.version + '/standard_fonts/',
+  }), [])
 
 	return (
 		<div
 			ref={containerRef}
+			tabIndex={0}
+			role='region'
+			aria-label={labels.reader}
+			onKeyDown={handleReaderKeyDown}
 			className={`w-full flex justify-center ${
 				isFullscreen ? 'bg-white dark:bg-slate-900 overflow-y-auto' : ''
 			}`}
@@ -432,7 +152,9 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 				} ${isNightMode ? 'bg-slate-900 text-slate-100' : ''}`}
 			>
 				<div
-					className='w-full lg:flex-1 flex justify-center overflow-hidden touch-pan-y'
+					ref={pageAreaRef}
+					className='w-full min-w-0 lg:flex-1 flex overflow-x-auto touch-pan-y'
+					onMouseDown={() => containerRef.current?.focus({ preventScroll: true })}
 					onTouchStart={onTouchStart}
 					onTouchEnd={onTouchEnd}
 				>
@@ -443,15 +165,15 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 						options={options}
 						loading={
 							<div className='text-center py-10 text-gray-500'>
-								Загрузка документа...
+								{labels.loading}
 							</div>
 						}
 						error={
 							<div className='text-center py-10 text-red-500'>
-								Не удалось загрузить документ.
+								{labels.loadError}
 							</div>
 						}
-						className={`shadow-lg border transition-colors duration-300 ${
+						className={`mx-auto shrink-0 shadow-lg border transition-colors duration-300 ${
 							isNightMode ? 'border-slate-700 bg-slate-800' : 'border-gray-200'
 						}`}
 					>
@@ -476,6 +198,8 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 								>
 									<div className={isNightMode ? 'invert brightness-90' : ''}>
 										<Page
+											loading={<p className='p-4 text-sm text-slate-500'>{labels.loading}</p>}
+											error={<p role='alert' className='p-4 text-sm text-red-600'>{labels.loadError}</p>}
 											pageNumber={pageNumber}
 											renderTextLayer={false}
 											renderAnnotationLayer={false}
@@ -492,6 +216,8 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 						) : (
 							<div className={isNightMode ? 'invert brightness-90' : ''}>
 								<Page
+									loading={<p className='p-4 text-sm text-slate-500'>{labels.loading}</p>}
+									error={<p role='alert' className='p-4 text-sm text-red-600'>{labels.loadError}</p>}
 									pageNumber={pageNumber}
 									renderTextLayer={false}
 									renderAnnotationLayer={false}
@@ -527,7 +253,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'bg-slate-700 text-white hover:bg-slate-600'
 											: 'bg-gray-900 text-white hover:bg-gray-800'
 									}`}
-									aria-label='Previous page'
+									aria-label={labels.previousPage}
 								>
 									<ChevronLeft className='w-5 h-5' />
 								</button>
@@ -547,7 +273,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 													? 'bg-slate-800 border-slate-600 text-slate-200'
 													: 'bg-white border-gray-300 text-gray-900'
 											}`}
-											aria-label='Go to page'
+											aria-label={labels.goToPage}
 										/>
 										<span
 											className={`font-medium text-sm ${
@@ -559,7 +285,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 									</div>
 									{splitMode && (
 										<span className='text-xs text-blue-500 font-medium mt-1'>
-											{splitSide === 'left' ? 'Левая' : 'Правая'}
+											{splitSide === 'left' ? labels.left : labels.right}
 										</span>
 									)}
 								</div>
@@ -573,7 +299,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'bg-slate-700 text-white hover:bg-slate-600'
 											: 'bg-gray-900 text-white hover:bg-gray-800'
 									}`}
-									aria-label='Next page'
+									aria-label={labels.nextPage}
 								>
 									<ChevronRight className='w-5 h-5' />
 								</button>
@@ -597,7 +323,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title='Rotate Left'
+									title={labels.rotateLeft} aria-label={labels.rotateLeft}
 								>
 									<RotateCcw className='w-5 h-5' />
 								</button>
@@ -608,7 +334,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title='Reset Rotation'
+									title={labels.resetRotation} aria-label={labels.resetRotation}
 								>
 									<RefreshCw className='w-5 h-5' />
 								</button>
@@ -619,7 +345,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title='Rotate Right'
+									title={labels.rotateRight} aria-label={labels.rotateRight}
 								>
 									<RotateCw className='w-5 h-5' />
 								</button>
@@ -645,7 +371,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title='Zoom Out'
+									title={labels.zoomOut} aria-label={labels.zoomOut}
 								>
 									<ZoomOut className='w-5 h-5' />
 								</button>
@@ -663,7 +389,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title='Zoom In'
+									title={labels.zoomIn} aria-label={labels.zoomIn}
 								>
 									<ZoomIn className='w-5 h-5' />
 								</button>
@@ -674,7 +400,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title='Fit Width'
+									title={labels.fitWidth} aria-label={labels.fitWidth}
 								>
 									<ArrowLeftRight className='w-5 h-5' />
 								</button>
@@ -700,7 +426,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+									title={isFullscreen ? labels.exitFullscreen : labels.fullscreen} aria-label={isFullscreen ? labels.exitFullscreen : labels.fullscreen}
 								>
 									{isFullscreen ? (
 										<Minimize className='w-5 h-5' />
@@ -710,15 +436,16 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 								</button>
 
 								<button
-									onClick={() => setSplitMode(!splitMode)}
-									className={`p-2 rounded-lg transition-colors ${
+									onClick={() => { setSplitMode(value => !value); setSplitSide('left') }}
+									aria-pressed={splitMode}
+									className={`hidden lg:inline-flex p-2 rounded-lg transition-colors ${
 										splitMode
 											? 'bg-blue-100 text-blue-600'
 											: isNightMode
 											? 'text-slate-300 hover:bg-slate-700 hover:text-blue-400'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title='Режим разворота'
+									title={labels.split} aria-label={labels.split}
 								>
 									<Columns className='w-5 h-5' />
 								</button>
@@ -730,7 +457,7 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 											? 'text-yellow-400 hover:bg-slate-700'
 											: 'text-gray-700 hover:bg-white hover:text-blue-600'
 									}`}
-									title={isNightMode ? 'Дневной режим' : 'Ночной режим'}
+									title={isNightMode ? labels.day : labels.night} aria-label={isNightMode ? labels.day : labels.night} aria-pressed={isNightMode}
 								>
 									{isNightMode ? (
 										<Sun className='w-5 h-5' />
@@ -748,9 +475,6 @@ function PdfReaderContent({ file }: PdfReaderProps) {
 }
 
 export default function PdfReader(props: PdfReaderProps) {
-	return (
-		<ReaderErrorBoundary>
-			<PdfReaderContent {...props} />
-		</ReaderErrorBoundary>
-	)
+  if (!props.file) return null
+  return <ReaderErrorBoundary key={props.file} message={uiText[props.locale].loadError}><PdfReaderContent key={props.file} {...props} /></ReaderErrorBoundary>
 }

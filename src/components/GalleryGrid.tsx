@@ -1,46 +1,36 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import Lightbox from './Lightbox'
 import { clsx } from 'clsx'
+import { uiText } from '@/lib/ui-text'
+import type { Locale } from '@/lib/i18n'
 
 interface GalleryImage {
 	src: string
 	albumId: string
 	alt: string
+	sourcePage?: number
 }
 
 interface GalleryGridProps {
+	locale: Locale
 	images: GalleryImage[]
 	albums: { id: string; title: string }[]
 	allLabel: string
 }
 
 export default function GalleryGrid({
+	locale,
 	images,
 	albums,
 	allLabel,
 }: GalleryGridProps) {
 	const [selectedAlbum, setSelectedAlbum] = useState<string>('all')
 	const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-	const [isAnimating, setIsAnimating] = useState(false)
-	const [filteredImages, setFilteredImages] = useState(images)
-
-	// Handle filtering with animation
-	useEffect(() => {
-		setIsAnimating(true)
-		const timeout = setTimeout(() => {
-			const newImages =
-				selectedAlbum === 'all'
-					? images
-					: images.filter(img => img.albumId === selectedAlbum)
-			setFilteredImages(newImages)
-			setIsAnimating(false)
-		}, 300) // Wait for fade out
-
-		return () => clearTimeout(timeout)
-	}, [selectedAlbum, images])
+	const filteredImages = useMemo(() => selectedAlbum === 'all' ? images : images.filter(image => selectedAlbum === 'new' ? image.sourcePage !== undefined : image.albumId === selectedAlbum), [selectedAlbum, images])
+	const labels = uiText[locale]
 
 	const openLightbox = (index: number) => setLightboxIndex(index)
 	const closeLightbox = () => setLightboxIndex(null)
@@ -58,7 +48,8 @@ export default function GalleryGrid({
 			{/* Filter Buttons */}
 			<div className='flex flex-wrap gap-3 mb-12 justify-center'>
 				<button
-					onClick={() => setSelectedAlbum('all')}
+					onClick={() => { setLightboxIndex(null); setSelectedAlbum('all') }}
+					aria-pressed={selectedAlbum === 'all'}
 					className={clsx(
 						'px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border',
 						selectedAlbum === 'all'
@@ -68,10 +59,16 @@ export default function GalleryGrid({
 				>
 					{allLabel}
 				</button>
+				{images.some(image => image.sourcePage !== undefined) && (
+					<button type='button' aria-pressed={selectedAlbum === 'new'} onClick={() => { setLightboxIndex(null); setSelectedAlbum('new') }} className={clsx('px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border', selectedAlbum === 'new' ? 'bg-slate-900 text-white border-slate-900 shadow-lg scale-105' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:bg-slate-50')}>
+						{labels.newArchive}
+					</button>
+				)}
 				{albums.map(album => (
 					<button
 						key={album.id}
-						onClick={() => setSelectedAlbum(album.id)}
+						aria-pressed={selectedAlbum === album.id}
+						onClick={() => { setLightboxIndex(null); setSelectedAlbum(album.id) }}
 						className={clsx(
 							'px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border',
 							selectedAlbum === album.id
@@ -87,26 +84,18 @@ export default function GalleryGrid({
 			{/* Masonry Grid */}
 			<div
 				className={clsx(
-					'columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 transition-opacity duration-300 ease-in-out',
-					isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+					'columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 transition-opacity duration-300 ease-in-out'
 				)}
 			>
 				{filteredImages.map((image, index) => (
-					<div
+					<button
+						type='button'
+						aria-label={image.alt || `${labels.photo} ${index + 1}`}
 						key={`${image.src}-${index}`}
 						onClick={() => openLightbox(index)}
-						className='break-inside-avoid group relative cursor-zoom-in rounded-xl overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1'
+						className='block w-full text-left break-inside-avoid group relative cursor-zoom-in rounded-xl overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1'
 					>
 						<div className='relative w-full'>
-							{/* We use width/height auto for masonry effect, but Next/Image needs dimensions or fill. 
-                                Since we don't know dimensions, 'fill' with a parent aspect ratio is tricky in masonry.
-                                For masonry with Next.js Image without known dimensions, we usually need "width: 100%, height: auto".
-                                To do this properly with Next/Image "fill", we need the wrapper to have a ratio.
-                                BUT, since we want natural height, we can use a regular img tag OR Next/Image with width/height if known.
-                                Assuming we don't know exact dimensions, we'll use a trick: 
-                                Render as standard img for layout, but that loses optimization.
-                                Better: Use Next/Image with 'width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}'
-                            */}
 							<Image
 								src={image.src}
 								alt={image.alt}
@@ -123,18 +112,19 @@ export default function GalleryGrid({
 								{image.alt}
 							</p>
 						</div>
-					</div>
+					</button>
 				))}
 			</div>
 
 			{/* Empty State */}
-			{!isAnimating && filteredImages.length === 0 && (
+			{filteredImages.length === 0 && (
 				<div className='text-center py-20 text-slate-400'>
-					<p>No images found in this category.</p>
+					<p>{labels.emptyGallery}</p>
 				</div>
 			)}
 
 			<Lightbox
+				locale={locale}
 				isOpen={lightboxIndex !== null}
 				onClose={closeLightbox}
 				imageSrc={

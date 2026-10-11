@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata'
 import { booksContent } from '@/content/books'
 import { siteContent } from '@/content/site'
 import BookCard from '@/components/BookCard'
@@ -14,14 +15,10 @@ export async function generateMetadata({
 		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const books = booksContent[validLocale]
 
-	return {
+	return pageMetadata(validLocale, '/books', {
 		title: books.title,
 		description: books.description,
-		openGraph: {
-			title: books.title,
-			description: books.description,
-		},
-	}
+	})
 }
 
 export default async function BooksPage({

@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata'
 import { galleryContent } from '@/content/gallery'
 import GalleryGrid from '@/components/GalleryGrid'
 import { Metadata } from 'next'
@@ -12,14 +13,10 @@ export async function generateMetadata({
 		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const gallery = galleryContent[validLocale]
 
-	return {
+	return pageMetadata(validLocale, '/gallery', {
 		title: gallery.title,
 		description: gallery.description,
-		openGraph: {
-			title: gallery.title,
-			description: gallery.description,
-		},
-	}
+	})
 }
 
 export default async function GalleryPage({
@@ -56,6 +53,7 @@ export default async function GalleryPage({
 				</div>
 
 				<GalleryGrid
+					locale={validLocale}
 					images={gallery.images}
 					albums={gallery.albums}
 					allLabel={gallery.allText}

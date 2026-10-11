@@ -7,32 +7,13 @@ import { siteContent } from '@/content/site'
 import { memoriesContent } from '@/content/memories'
 import BookCard from '@/components/BookCard'
 import Image from 'next/image'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 
-export async function generateMetadata(
-	{
-		params,
-	}: {
-		params: Promise<{ locale: string }>
-	},
-	parent: ResolvingMetadata
-): Promise<Metadata> {
-	const { locale } = await params
-	const validLocale =
-		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
-	const site = siteContent[validLocale]
-
-	const previousImages = (await parent).openGraph?.images || []
-
-	return {
-		title: site.metadata.title,
-		description: site.metadata.description,
-		openGraph: {
-			title: site.metadata.title,
-			description: site.metadata.description,
-			images: previousImages,
-		},
-	}
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'kz'
+  return pageMetadata(validLocale, '', siteContent[validLocale].metadata)
 }
 
 export default async function Home({

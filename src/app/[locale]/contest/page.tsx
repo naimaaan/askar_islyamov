@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata'
 import { contestContent } from '@/content/contest'
 import ContestTimeline from '@/components/ContestTimeline'
 import ContestGallery from '@/components/ContestGallery' // Импортируем новый компонент
@@ -14,14 +15,10 @@ export async function generateMetadata({
 		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const contest = contestContent[validLocale]
 
-	return {
+	return pageMetadata(validLocale, '/contest', {
 		title: contest.title,
 		description: contest.description,
-		openGraph: {
-			title: contest.title,
-			description: contest.description,
-		},
-	}
+	})
 }
 
 export default async function ContestPage({
@@ -50,13 +47,10 @@ export default async function ContestPage({
 
 	// Helper to determine rank styling
 	const getRankColor = (place: string) => {
-		const p = place.toLowerCase()
-		if (p.includes('i ') || p.includes('1'))
-			return 'text-yellow-600 bg-yellow-400'
-		if (p.includes('ii ') || p.includes('2'))
-			return 'text-slate-500 bg-slate-300'
-		if (p.includes('iii ') || p.includes('3'))
-			return 'text-amber-700 bg-amber-600'
+		const rank = place.trim().toLowerCase().match(/^(iii|ii|i|[123])(?=\s|[.\-]|$)/)?.[1]
+    if (rank === 'i' || rank === '1') return 'text-yellow-600 bg-yellow-400'
+    if (rank === 'ii' || rank === '2') return 'text-slate-500 bg-slate-300'
+    if (rank === 'iii' || rank === '3') return 'text-amber-700 bg-amber-600'
 		return 'text-slate-500 bg-slate-200'
 	}
 
@@ -113,7 +107,6 @@ export default async function ContestPage({
 			</div>
 
 			{/* Media Section: Video & Gallery */}
-			{/* @ts-ignore - игнорируем проверку типов пока не обновите contest.ts полностью */}
 			{(contest.gallery || contest.video) && (
 				<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
 					<div className='mb-8 flex items-center gap-4'>
@@ -129,9 +122,8 @@ export default async function ContestPage({
 					</div>
 
 					<ContestGallery
-						// @ts-ignore
+						locale={validLocale}
 						images={contest.gallery || []}
-						// @ts-ignore
 						videoSrc={contest.video}
 					/>
 				</div>

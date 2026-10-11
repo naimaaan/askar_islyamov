@@ -78,7 +78,7 @@ export default function PersonJsonLd({
 	return (
 		<script
 			type='application/ld+json'
-			dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanedJsonLd) }}
+			dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanedJsonLd).replace(/</g, '\\u003c') }}
 		/>
 	)
 }

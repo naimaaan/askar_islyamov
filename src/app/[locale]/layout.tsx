@@ -1,5 +1,5 @@
 import { Inter, Playfair_Display } from 'next/font/google'
-import { locales, defaultLocale } from '@/lib/i18n'
+import { locales, isLocale, languageTags } from '@/lib/i18n'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import PersonJsonLd from '@/components/PersonJsonLd'
@@ -7,7 +7,7 @@ import { personContent } from '@/content/person'
 import { getDictionary } from '@/lib/i18n'
 import '@/app/globals.css'
 import { Metadata } from 'next'
-import { headers } from 'next/headers'
+import { notFound } from 'next/navigation'
 
 const inter = Inter({
 	subsets: ['latin', 'cyrillic'],
@@ -18,29 +18,18 @@ const playfair = Playfair_Display({
 	variable: '--font-playfair',
 })
 
+export function generateStaticParams() {
+	return locales.map(locale => ({ locale }))
+}
+
 export async function generateMetadata({
 	params,
 }: {
 	params: Promise<{ locale: string }>
 }): Promise<Metadata> {
 	const { locale } = await params
-	const dict = await getDictionary(locale as any)
-
-	const headersList = await headers()
-	const pathname = headersList.get('x-pathname') || ''
-	let slug = pathname
-	const prefix = `/${locale}`
-	if (slug.startsWith(prefix + '/')) {
-		slug = slug.slice(prefix.length)
-	} else if (slug === prefix) {
-		slug = ''
-	}
-
-	const languages: Record<string, string> = {}
-	locales.forEach(l => {
-		languages[l] = `/${l}${slug}`
-	})
-	languages['x-default'] = `/${defaultLocale}${slug}`
+	if (!isLocale(locale)) notFound()
+	const dict = await getDictionary(locale)
 
 	return {
 		metadataBase: new URL('https://askarislyamov.kz'),
@@ -60,10 +49,6 @@ export async function generateMetadata({
 					alt: dict.metadata.title,
 				},
 			],
-		},
-		alternates: {
-			canonical: `/${locale}${slug}`,
-			languages,
 		},
 		icons: {
 			icon: [
@@ -96,13 +81,15 @@ export default async function RootLayout({
 	params: Promise<{ locale: string }>
 }) {
 	const { locale } = await params
-	const dict = await getDictionary(locale as any)
-	const pContent =
-		personContent[locale as keyof typeof personContent] || personContent.ru
+	if (!isLocale(locale)) notFound()
+	const dict = await getDictionary(locale)
+	const pContent = personContent[locale]
 
 	const birthPlace =
 		locale === 'kz'
 			? 'Семей облысы, Ақсуат ауданы, Қызылкесік совхозы'
+			: locale === 'en'
+			? 'Kyzylkesik, Aksuat district, Semey region'
 			: 'Семипалатинская область, Аксуатский район, совхоз Кызылкесик'
 
 	const spouseName = 'Нағима Сүлейменқызы Сатыбалдина'
@@ -114,6 +101,8 @@ export default async function RootLayout({
 					'Өскемен педагогикалық институты',
 					'Абай атындағы Қазақ педагогикалық институты',
 			  ]
+			: locale === 'en'
+			? ['Semey Teacher Training College', 'Ust-Kamenogorsk Pedagogical Institute', 'Abai Kazakh Pedagogical Institute']
 			: [
 					'Семипалатинский учительский техникум',
 					'Усть-Каменогорский педагогический институт',
@@ -124,7 +113,7 @@ export default async function RootLayout({
 	const personUrl = 'https://askarislyamov.kz'
 
 	return (
-		<html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+		<html lang={languageTags[locale]} className={`${inter.variable} ${playfair.variable}`}>
 			<body className='font-sans bg-slate-50 text-slate-900 min-h-screen flex flex-col overflow-x-hidden'>
 				<PersonJsonLd
 					name={pContent.name}
@@ -138,21 +127,17 @@ export default async function RootLayout({
 					birthPlace={birthPlace}
 					spouse={spouseName}
 					alumniOf={alumni}
-					awards={[
-						'Заслуженный учитель Казахской ССР',
-						'Отличник народного просвещения СССР',
-						'Отличник народного просвещения Казахской ССР',
-					]}
+					awards={[...pContent.awards]}
 					// 🔹 Самое важное – связка с wiki + Wikidata
 					sameAs={[
 						'https://kk.wikipedia.org/wiki/Ислямов_Асқар_Жұмағұлұлы',
 						'https://www.wikidata.org/wiki/Q137571264',
 					]}
 				/>
-				<Header locale={locale as any} dict={dict.header} />
+				<Header locale={locale} dict={dict.header} />
 				<main className='flex-grow'>{children}</main>
 				<Footer
-					locale={locale as any}
+					locale={locale}
 					dict={dict.footer}
 					nav={dict.header.nav}
 				/>

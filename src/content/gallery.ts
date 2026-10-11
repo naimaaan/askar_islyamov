@@ -1,3 +1,5 @@
+import { archiveImages } from './archive-materials'
+
 export const galleryContent = {
 	ru: {
 		allText: 'Все',
@@ -447,6 +449,7 @@ export const galleryContent = {
 				albumId: 'personal',
 				alt: '',
 			},
+			...archiveImages('ru'),
 		],
 	},
 	kz: {
@@ -897,6 +900,7 @@ export const galleryContent = {
 				albumId: 'personal',
 				alt: '',
 			},
+			...archiveImages('kz'),
 		],
 	},
 	en: {
@@ -1347,6 +1351,7 @@ export const galleryContent = {
 				albumId: 'personal',
 				alt: '',
 			},
+			...archiveImages('en'),
 		],
 	},
 }

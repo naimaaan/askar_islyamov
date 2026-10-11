@@ -20,6 +20,9 @@
 # production
 /build
 
+# Local document inspection and rendering
+/tmp/
+
 # misc
 .DS_Store
 *.pem

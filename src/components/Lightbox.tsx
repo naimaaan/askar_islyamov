@@ -1,11 +1,15 @@
 'use client'
 
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
 import { clsx } from 'clsx'
+import { useModal } from '@/lib/use-modal'
+import { uiText } from '@/lib/ui-text'
+import type { Locale } from '@/lib/i18n'
 
 interface LightboxProps {
+	locale?: Locale
 	isOpen: boolean
 	onClose: () => void
 	imageSrc: string
@@ -17,6 +21,7 @@ interface LightboxProps {
 }
 
 export default function Lightbox({
+	locale = 'ru',
 	isOpen,
 	onClose,
 	imageSrc,
@@ -26,35 +31,19 @@ export default function Lightbox({
 	hasNext,
 	hasPrev,
 }: LightboxProps) {
-	const [isLoaded, setIsLoaded] = useState(false)
-
-	// Reset loading state when image changes
-	useEffect(() => {
-		setIsLoaded(false)
-	}, [imageSrc])
-
-	useEffect(() => {
-		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') onClose()
-			if (e.key === 'ArrowRight' && onNext) onNext()
-			if (e.key === 'ArrowLeft' && onPrev) onPrev()
-		}
-
-		if (isOpen) {
-			document.body.style.overflow = 'hidden'
-			window.addEventListener('keydown', handleKeyDown)
-		}
-
-		return () => {
-			document.body.style.overflow = 'unset'
-			window.removeEventListener('keydown', handleKeyDown)
-		}
-	}, [isOpen, onClose, onNext, onPrev])
+	const [loadedSrc, setLoadedSrc] = useState('')
+	const isLoaded = loadedSrc === imageSrc
+	const dialogRef = useRef<HTMLDivElement>(null)
+	const labels = uiText[locale]
+	useModal(dialogRef, isOpen, onClose)
 
 	if (!isOpen) return null
 
 	return (
-		<div className='fixed inset-0 z-[100] flex items-center justify-center'>
+		<div ref={dialogRef} role='dialog' aria-modal='true' aria-label={imageAlt || labels.photo} tabIndex={-1} className='fixed inset-0 z-[100] flex items-center justify-center' onKeyDown={event => {
+			if (event.key === 'ArrowRight' && hasNext) { event.preventDefault(); onNext?.() }
+			if (event.key === 'ArrowLeft' && hasPrev) { event.preventDefault(); onPrev?.() }
+		}}>
 			{/* Backdrop with blur */}
 			<div
 				className='absolute inset-0 bg-slate-900/95 backdrop-blur-md transition-opacity duration-300'
@@ -63,6 +52,7 @@ export default function Lightbox({
 
 			{/* Close button */}
 			<button
+				aria-label={labels.close}
 				onClick={onClose}
 				className='absolute top-6 right-6 text-white/60 hover:text-white transition-colors z-20 p-2 hover:bg-white/10 rounded-full'
 			>
@@ -72,6 +62,7 @@ export default function Lightbox({
 			{/* Navigation - Left */}
 			{hasPrev && (
 				<button
+					aria-label={labels.previous}
 					onClick={e => {
 						e.stopPropagation()
 						onPrev?.()
@@ -91,13 +82,14 @@ export default function Lightbox({
 					)}
 				>
 					<Image
+						key={imageSrc}
 						src={imageSrc}
 						alt={imageAlt}
 						fill
 						className='object-contain drop-shadow-2xl'
 						sizes='100vw'
 						priority
-						onLoad={() => setIsLoaded(true)}
+						onLoad={() => setLoadedSrc(imageSrc)}
 					/>
 				</div>
 
@@ -112,6 +104,9 @@ export default function Lightbox({
 						<p className='text-white/90 text-lg font-light tracking-wide'>
 							{imageAlt}
 						</p>
+						<a href={imageSrc} target='_blank' rel='noopener noreferrer' className='pointer-events-auto inline-block mt-2 text-sm text-white/80 underline underline-offset-4 hover:text-white'>
+							{labels.openOriginal}
+						</a>
 					</div>
 				</div>
 			</div>
@@ -119,6 +114,7 @@ export default function Lightbox({
 			{/* Navigation - Right */}
 			{hasNext && (
 				<button
+					aria-label={labels.next}
 					onClick={e => {
 						e.stopPropagation()
 						onNext?.()

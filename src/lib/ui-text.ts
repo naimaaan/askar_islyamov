@@ -1,0 +1,32 @@
+export const uiText = {
+	ru: {
+		openOriginal: 'Открыть оригинал', newArchive: 'Новые материалы',
+		unavailable: 'Электронная версия пока недоступна', otherMaterials: 'Другие материалы', allBooks: 'Все книги', viewAll: 'Смотреть все',
+		menu: 'Меню', openMenu: 'Открыть меню', closeMenu: 'Закрыть меню', close: 'Закрыть', previous: 'Предыдущее фото', next: 'Следующее фото',
+		photo: 'Фотография', emptyGallery: 'В этом альбоме пока нет фотографий.', reader: 'Читалка PDF', loading: 'Загрузка документа…',
+		loadError: 'Не удалось загрузить документ. Попробуйте открыть PDF в отдельной вкладке.',
+		previousPage: 'Предыдущая страница', nextPage: 'Следующая страница', goToPage: 'Номер страницы',
+		rotateLeft: 'Повернуть влево', rotateRight: 'Повернуть вправо', resetRotation: 'Сбросить поворот', zoomIn: 'Увеличить', zoomOut: 'Уменьшить', fitWidth: 'По ширине',
+		fullscreen: 'Полный экран', exitFullscreen: 'Выйти из полного экрана', split: 'Режим разворота', night: 'Ночной режим', day: 'Дневной режим', left: 'Левая', right: 'Правая',
+	},
+	kz: {
+		openOriginal: 'Түпнұсқаны ашу', newArchive: 'Жаңа материалдар',
+		unavailable: 'Электрондық нұсқа әзірге қолжетімсіз', otherMaterials: 'Басқа материалдар', allBooks: 'Барлық кітаптар', viewAll: 'Барлығын көру',
+		menu: 'Мәзір', openMenu: 'Мәзірді ашу', closeMenu: 'Мәзірді жабу', close: 'Жабу', previous: 'Алдыңғы фото', next: 'Келесі фото',
+		photo: 'Фотосурет', emptyGallery: 'Бұл альбомда әзірге фотосурет жоқ.', reader: 'PDF оқу құралы', loading: 'Құжат жүктелуде…',
+		loadError: 'Құжат жүктелмеді. PDF файлын бөлек бетте ашып көріңіз.',
+		previousPage: 'Алдыңғы бет', nextPage: 'Келесі бет', goToPage: 'Бет нөмірі',
+		rotateLeft: 'Солға бұру', rotateRight: 'Оңға бұру', resetRotation: 'Бұруды қалпына келтіру', zoomIn: 'Үлкейту', zoomOut: 'Кішірейту', fitWidth: 'Ені бойынша',
+		fullscreen: 'Толық экран', exitFullscreen: 'Толық экраннан шығу', split: 'Қос бетті оқу', night: 'Түнгі режим', day: 'Күндізгі режим', left: 'Сол жақ', right: 'Оң жақ',
+	},
+	en: {
+		openOriginal: 'Open original', newArchive: 'New materials',
+		unavailable: 'Digital edition is not yet available', otherMaterials: 'Other materials', allBooks: 'All books', viewAll: 'View all',
+		menu: 'Menu', openMenu: 'Open menu', closeMenu: 'Close menu', close: 'Close', previous: 'Previous photo', next: 'Next photo',
+		photo: 'Photograph', emptyGallery: 'There are no photographs in this album yet.', reader: 'PDF reader', loading: 'Loading document…',
+		loadError: 'The document could not be loaded. Try opening the PDF in a separate tab.',
+		previousPage: 'Previous page', nextPage: 'Next page', goToPage: 'Page number',
+		rotateLeft: 'Rotate left', rotateRight: 'Rotate right', resetRotation: 'Reset rotation', zoomIn: 'Zoom in', zoomOut: 'Zoom out', fitWidth: 'Fit width',
+		fullscreen: 'Fullscreen', exitFullscreen: 'Exit fullscreen', split: 'Split page mode', night: 'Night mode', day: 'Day mode', left: 'Left', right: 'Right',
+	},
+} as const

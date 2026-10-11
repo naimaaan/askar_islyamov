@@ -1,0 +1,33 @@
+name: Check website
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm audit --omit=dev
+      - run: npm run build
+      - name: Check production pages
+        run: |
+          npm run start > /tmp/askar-next.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:3000/ru/ > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:smoke

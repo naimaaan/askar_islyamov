@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Locale, locales } from '@/lib/i18n'
 import Link from 'next/link'
 import { clsx } from 'clsx'

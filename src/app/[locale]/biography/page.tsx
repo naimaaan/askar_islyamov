@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
 import { personContent } from '@/content/person'
 import BiographyClient from './BiographyClient'
@@ -12,14 +13,10 @@ export async function generateMetadata({
 		locale === 'ru' || locale === 'kz' || locale === 'en' ? locale : 'ru'
 	const person = personContent[validLocale]
 
-	return {
+	return pageMetadata(validLocale, '/biography', {
 		title: person.biography.title,
 		description: person.intro,
-		openGraph: {
-			title: person.biography.title,
-			description: person.intro,
-		},
-	}
+	})
 }
 
 export default async function BiographyPage({
