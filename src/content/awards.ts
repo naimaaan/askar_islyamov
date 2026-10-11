@@ -1,216 +1,103 @@
-export const awardsContent = {
+import type { Locale } from '@/lib/i18n'
+
+type Award = { title: string; date?: string; dateLabel?: string }
+type AwardDocument = { src: string; title: string; caption: string }
+type AwardsContent = {
+	title: string
+	description: string
+	portraitCaption: string
+	titlesHeading: string
+	titles: Award[]
+	documentsHeading: string
+	documents: AwardDocument[]
+	distinctionsHeading: string
+	distinctions: Award[]
+	statusHeading: string
+	status: string
+	zoomLabel: string
+}
+
+// Dates and document captions come from the original photographs in the archive.
+export const awardsContent: Record<Locale, AwardsContent> = {
 	ru: {
 		title: 'Награды и признание',
-		description:
-			'Звания, награды и общественное признание, полученные Асқаром Жұмағұлұлы Ислямовым за многолетний труд в сфере образования, наставничество и вклад в развитие школы и краеведения.',
-		items: [
-			{
-				title: '«Заслуженный учитель республики Казахстан»',
-				year: '',
-				description:
-					'Почётное признание за выдающийся вклад в развитие образования и воспитание подрастающего поколения.',
-				image: '',
-			},
-			{
-				title: '«Отличник народного просвещения СССР»',
-				year: '',
-				description:
-					'Звание за заслуги в деле народного просвещения и развитие школьного образования.',
-				image: '',
-			},
-			{
-				title: '«Отличник народного просвещения Казахской ССР»',
-				year: '',
-				description:
-					'Признание высокого уровня профессионализма и многолетнего труда в системе образования.',
-				image: '',
-			},
-			{
-				title: 'Диплом «Лучший лектор» (областной партийный комитет)',
-				year: '',
-				description:
-					'Награждён за просветительскую деятельность и выступления как внештатный лектор.',
-				image: '',
-			},
-			{
-				title: 'Медаль «Ветеран труда»',
-				year: '',
-				description:
-					'За многолетний добросовестный труд и вклад в развитие общества.',
-				image: '',
-			},
-			{
-				title: 'Медаль «За доблестный труд в Великой Отечественной войне»',
-				year: '',
-				description:
-					'Награда за труд в тылу в годы Великой Отечественной войны.',
-				image: '',
-			},
-			{
-				title: 'Знак «Отличник гражданской обороны СССР»',
-				year: '',
-				description:
-					'Отличие за вклад и активность в сфере гражданской обороны.',
-				image: '',
-			},
-			{
-				title:
-					'Статус: «Пенсионер за особые заслуги перед Республикой Казахстан»',
-				year: '',
-				description: 'Признание особых заслуг перед Республикой Казахстан.',
-				image: '',
-			},
+		description: 'Многолетний труд Асқара Ислямова в школе и общественной жизни отмечен почётными званиями, медалями и грамотами.',
+		portraitCaption: 'Асқар Ислямов с медалями и нагрудными знаками.',
+		titlesHeading: 'Почётные звания',
+		titles: [
+			{ title: 'Заслуженный учитель Казахской ССР', date: '1983-10-05', dateLabel: '5 октября 1983 года' },
+			{ title: 'Отличник просвещения СССР' },
+			{ title: 'Отличник народного просвещения Казахской ССР' },
 		],
-		influence: {
-			title: 'Влияние и значение',
-			content:
-				'Асқар Жұмағұлұлы Ислямов внёс значительный вклад в развитие образования и педагогической культуры Восточного Казахстана и Республики в целом. Его имя было известно на уровне всего Советского Союза, а педагогический опыт семьи Ислямовых был представлен в Москве в музее А. С. Макаренко как образец передовой практики.\n\nЗа 45 лет труда он опубликовал около 50 методических и научно-практических работ, участвовал в ВДНХ СССР, был дипломантом Фонда мира и делегатом республиканских съездов учителей. После его ухода идеи и труды продолжили жить в научных изданиях, фильмах и образовательных инициативах.\n\nСегодня имя Асқара Ислямова носит Республиканский конкурс «Лучшее педагогическое эссе», а также кабинеты, олимпиады и проекты, сохраняющие и развивающие его педагогическое наследие.',
-		},
+		documentsHeading: 'Грамота и удостоверения',
+		documents: [
+			{ src: '/images/почетная грамота.jpg', title: 'Почётная грамота · 1984', caption: 'За успехи в воспитании подрастающего поколения и активное участие в профсоюзной работе. Президиум Тарбагатайского райкома профсоюза работников просвещения, Ақжар, 17 ноября 1984 года.' },
+			{ src: '/images/archive-2026/p27-i01.webp', title: 'Удостоверения к почётным званиям', caption: 'Документы о присвоении звания заслуженного учителя Казахской ССР, знаках отличника просвещения СССР и Казахской ССР, а также особых заслугах перед Республикой Казахстан.' },
+			{ src: '/images/archive-2026/p28-page.webp', title: 'Трудовые награды', caption: 'Удостоверения к медали «Ветеран труда», знаку «Победитель социалистического соревнования 1974 года» и пенсионная книжка.' },
+		],
+		distinctionsHeading: 'Медали и другие награды',
+		distinctions: [
+			{ title: 'Медаль «Ветеран труда»' },
+			{ title: 'Медаль «За доблестный труд в Великой Отечественной войне»' },
+			{ title: 'Знак «Отличник гражданской обороны СССР»' },
+			{ title: 'Диплом «Лучший лектор» областного партийного комитета' },
+		],
+		statusHeading: 'Особое признание',
+		status: 'Пенсионер за особые заслуги перед Республикой Казахстан.',
+		zoomLabel: 'Увеличить фотографию',
 	},
-
 	kz: {
-		title: 'Марапаттары мен құрметі',
-		description:
-			'Асқар Жұмағұлұлы Ислямовтың білім беру ісіне сіңірген еңбегі, ұстаздық-тәлімгерлік қызметі және қоғамдық белсенділігі үшін алған атақтары мен марапаттары.',
-		items: [
-			{
-				title: '«Қазақстанның еңбек сіңірген мұғалімі»',
-				year: '',
-				description:
-					'Білім беру ісін дамытуға қосқан айрықша үлесі үшін берілген құрметті атақ.',
-				image: '',
-			},
-			{
-				title: '«КСРО Халық ағарту ісінің үздігі»',
-				year: '',
-				description:
-					'Халық ағарту саласындағы еңбегі мен жетістігі үшін берілген атақ.',
-				image: '',
-			},
-			{
-				title: '«Қазақ КСР халық ағарту ісінің үздігі»',
-				year: '',
-				description:
-					'Ұзақ жылғы ұстаздық қызметі мен кәсіби шеберлігі үшін берілген марапат.',
-				image: '',
-			},
-			{
-				title: 'Облыстық партия комитетінің «Үздік лектор» дипломы',
-				year: '',
-				description:
-					'Штаттан тыс лектор ретіндегі ағартушылық қызметі үшін марапатталған.',
-				image: '',
-			},
-			{
-				title: '«Еңбек ардагері» медалі',
-				year: '',
-				description:
-					'Көп жылғы адал еңбегі мен қоғамға қосқан үлесі үшін берілген.',
-				image: '',
-			},
-			{
-				title: '«Отан соғысы кезіндегі тылдағы үздік еңбегі үшін» медалі',
-				year: '',
-				description:
-					'ҰОС жылдарындағы тылдағы қажырлы еңбегі үшін берілген марапат.',
-				image: '',
-			},
-			{
-				title: '«КСРО Азаматтық қорғаныс ісінің үздігі»',
-				year: '',
-				description:
-					'Азаматтық қорғаныс саласындағы үлесі мен белсенділігі үшін берілген белгі.',
-				image: '',
-			},
-			{
-				title:
-					'«Қазақстан Республикасына ерекше сіңірген еңбегі үшін зейнетақы иесі»',
-				year: '',
-				description:
-					'Қазақстан Республикасына сіңірген ерекше еңбегі үшін берілген мәртебе.',
-				image: '',
-			},
+		title: 'Марапаттар мен құрмет',
+		description: 'Асқар Ислямовтың мектептегі көп жылғы еңбегі мен қоғамдық қызметі құрметті атақтармен, медальдармен және грамоталармен бағаланды.',
+		portraitCaption: 'Асқар Ислямов медальдары мен төсбелгілерін тағып түскен портрет.',
+		titlesHeading: 'Құрметті атақтар',
+		titles: [
+			{ title: 'Қазақ КСР-інің еңбек сіңірген мұғалімі', date: '1983-10-05', dateLabel: '1983 жылғы 5 қазан' },
+			{ title: 'КСРО Халық ағарту ісінің үздігі' },
+			{ title: 'Қазақ КСР халық ағарту ісінің үздігі' },
 		],
-		influence: {
-			title: 'Әсері мен маңызы',
-			content:
-				'Ислямов Асқар Жұмағұлұлы Шығыс Қазақстан өңірінде ғана емес, республика көлемінде білім беру ісінің дамуына зор үлес қосты. Оның есімі өз кезеңінде бүкіл Кеңестер Одағына танымал болып, Ислямовтар әулетінің педагогикалық іс-тәжірибесі Мәскеудегі А. С. Макаренко мұражайына экспонат ретінде енгізілді.\n\n45 жылдық еңбек жолында ол елуге жуық әдістемелік және ғылыми-практикалық еңбектер жариялап, КСРО халық шаруашылығы жетістіктерінің көрмесіне қатысты, Бейбітшілік қорының дипломанты атанды. Ұстаз өмірден өткеннен кейін де оның еңбектері мен идеялары ғылыми басылымдар мен білім беру ісінде жалғасын тапты.\n\nБүгінде Асқар Ислямовтың есімімен республикалық «Үздік педагогикалық эссе» байқауы өткізіліп, оның атында кабинеттер мен олимпиадалар ашылып, педагогикалық мұрасы ұрпақтан-ұрпаққа жалғасып келеді.',
-		},
+		documentsHeading: 'Грамота мен куәліктер',
+		documents: [
+			{ src: '/images/почетная грамота.jpg', title: 'Құрмет грамотасы · 1984', caption: 'Жас ұрпақты тәрбиелеудегі жетістіктері және кәсіподақ жұмысына белсенді қатысқаны үшін. Тарбағатай аудандық ағарту қызметкерлері кәсіподағы комитетінің президиумы, Ақжар, 1984 жылғы 17 қараша.' },
+			{ src: '/images/archive-2026/p27-i01.webp', title: 'Құрметті атақтардың куәліктері', caption: 'Қазақ КСР-інің еңбек сіңірген мұғалімі атағын, КСРО және Қазақ КСР халық ағарту ісінің үздігі белгілерін, сондай-ақ Қазақстан Республикасына сіңірген ерекше еңбегін растайтын құжаттар.' },
+			{ src: '/images/archive-2026/p28-page.webp', title: 'Еңбек марапаттары', caption: '«Ветеран труда» медалінің, «Победитель социалистического соревнования 1974 года» белгісінің куәліктері және зейнетақы кітапшасы.' },
+		],
+		distinctionsHeading: 'Медальдар мен өзге марапаттар',
+		distinctions: [
+			{ title: '«Еңбек ардагері» медалі' },
+			{ title: '«Отан соғысы кезіндегі тылдағы үздік еңбегі үшін» медалі' },
+			{ title: '«КСРО Азаматтық қорғаныс ісінің үздігі» белгісі' },
+			{ title: 'Облыстық партия комитетінің «Үздік лектор» дипломы' },
+		],
+		statusHeading: 'Ерекше құрмет',
+		status: 'Қазақстан Республикасына ерекше сіңірген еңбегі үшін зейнетақы иесі.',
+		zoomLabel: 'Фотосуретті үлкейту',
 	},
-
 	en: {
 		title: 'Awards and Recognition',
-		description:
-			'Titles, awards, and public recognition received by Askar Zhumagululy Islyamov for many years of work in education, mentorship, and contribution to the development of schools and local history.',
-		items: [
-			{
-				title:
-					'«Қазақстанның еңбек сіңірген мұғалімі» (Honored Teacher of Kazakhstan)',
-				year: '',
-				description:
-					'Honorary recognition for outstanding contribution to the development of education and upbringing of the younger generation.',
-				image: '',
-			},
-			{
-				title:
-					'«КСРО Халық ағарту ісінің үздігі» (Excellence in Public Education of the USSR)',
-				year: '',
-				description:
-					'Title for merits in the field of public enlightenment and development of school education.',
-				image: '',
-			},
-			{
-				title:
-					'«Қазақ КСР халық ағарту ісінің үздігі» (Excellence in Public Education of the Kazakh SSR)',
-				year: '',
-				description:
-					'Recognition of a high level of professionalism and many years of work in the education system.',
-				image: '',
-			},
-			{
-				title:
-					'Diploma «Үздік лектор» (Best Lecturer) (regional party committee)',
-				year: '',
-				description:
-					'Awarded for educational activities and speeches as a freelance lecturer.',
-				image: '',
-			},
-			{
-				title: 'Medal «Еңбек ардагері» (Veteran of Labour)',
-				year: '',
-				description:
-					'For many years of conscientious work and contribution to the development of society.',
-				image: '',
-			},
-			{
-				title:
-					'Medal «Отан соғысы кезіндегі тылдағы үздік еңбегі үшін» (For Valiant Labour in the Great Patriotic War)',
-				year: '',
-				description:
-					'Award for work on the home front during the Great Patriotic War.',
-				image: '',
-			},
-			{
-				title:
-					'Badge «КСРО Азаматтық қорғаныс ісінің үздігі» (Excellence in Civil Defense of the USSR)',
-				year: '',
-				description:
-					'Distinction for contribution and activity in the field of civil defense.',
-				image: '',
-			},
-			{
-				title:
-					'Status: «Қазақстан Республикасына ерекше сіңірген еңбегі үшін зейнетақы иесі» (Pensioner for Special Merits to the Republic of Kazakhstan)',
-				year: '',
-				description:
-					'Recognition of special merits to the Republic of Kazakhstan.',
-				image: '',
-			},
+		description: 'Askar Islyamov’s years of work in schools and public life were recognised with honorary titles, medals and certificates.',
+		portraitCaption: 'Askar Islyamov wearing his medals and badges.',
+		titlesHeading: 'Honorary titles',
+		titles: [
+			{ title: 'Honoured Teacher of the Kazakh SSR', date: '1983-10-05', dateLabel: '5 October 1983' },
+			{ title: 'Excellence in Education of the USSR' },
+			{ title: 'Excellence in Public Education of the Kazakh SSR' },
 		],
-		influence: {
-			title: 'Influence and Significance',
-			content:
-				'Askar Zhumagululy Islyamov made a significant contribution to the development of education and pedagogical culture of East Kazakhstan and the Republic as a whole. His name was known at the level of the entire Soviet Union, and the pedagogical experience of the Islyamov family was presented in Moscow at the A. S. Makarenko Museum as an example of advanced practice.\n\nOver 45 years of work, he published about 50 methodological and scientific-practical works, participated in the VDNKh of the USSR, was a diploma winner of the Peace Fund and a delegate to republican congresses of teachers. After his passing, his ideas and works continued to live in scientific publications, films, and educational initiatives.\n\nToday, the Republican contest «Лучшее педагогическое эссе» (Best Pedagogical Essay) bears the name of Askar Islyamov, as well as classrooms, olympiads, and projects that preserve and develop his pedagogical heritage.',
-		},
+		documentsHeading: 'Certificates and award documents',
+		documents: [
+			{ src: '/images/почетная грамота.jpg', title: 'Certificate of Honour · 1984', caption: 'For achievements in educating the younger generation and active participation in trade union work. Issued by the Tarbagatai district education workers’ trade union committee, Akzhar, 17 November 1984.' },
+			{ src: '/images/archive-2026/p27-i01.webp', title: 'Certificates of honorary titles', caption: 'Documents for the title of Honoured Teacher of the Kazakh SSR, the USSR and Kazakh SSR education awards, and special merits to the Republic of Kazakhstan.' },
+			{ src: '/images/archive-2026/p28-page.webp', title: 'Awards for service', caption: 'Certificates for the Veteran of Labour medal and the Winner of Socialist Competition 1974 badge, alongside a pension book.' },
+		],
+		distinctionsHeading: 'Medals and other awards',
+		distinctions: [
+			{ title: 'Veteran of Labour medal' },
+			{ title: 'Medal for Valiant Labour in the Great Patriotic War' },
+			{ title: 'Excellence in Civil Defence of the USSR badge' },
+			{ title: 'Best Lecturer diploma from the regional party committee' },
+		],
+		statusHeading: 'Special recognition',
+		status: 'Pensioner for special merits to the Republic of Kazakhstan.',
+		zoomLabel: 'Enlarge photograph',
 	},
 }
