@@ -206,7 +206,7 @@ export default async function Home({
 			{/* Curated photographs from the teaching, family and public archives. */}
 			<section aria-labelledby='home-gallery-title' className='bg-slate-50 py-14 sm:py-16'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-					<HomeSectionHeading id='home-gallery-title' title={gallery.title} description={home.galleryDescription} href={`/${validLocale}/gallery/`} linkLabel={uiText[validLocale].viewAll} />
+					<HomeSectionHeading id='home-gallery-title' title={gallery.title} href={`/${validLocale}/gallery/`} linkLabel={uiText[validLocale].viewAll} />
 					<HomeGalleryPreview locale={validLocale} photos={previewPhotos} />
 				</div>
 			</section>

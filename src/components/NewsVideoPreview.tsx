@@ -1,14 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import Link from 'next/link'
-import { Pause, Play, VolumeX } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { homeContent } from '@/content/home'
 
-type Props = { src: string; href: string; title: string; locale: Locale; children: ReactNode }
+type Props = { src: string; title: string; locale: Locale; children: ReactNode }
 
-export default function NewsVideoPreview({ src, href, title, locale, children }: Props) {
+export default function NewsVideoPreview({ src, title, locale, children }: Props) {
 	const videoRef = useRef<HTMLVideoElement>(null)
 	const manuallyPaused = useRef(false)
 	const [isPlaying, setIsPlaying] = useState(false)
@@ -60,7 +58,7 @@ export default function NewsVideoPreview({ src, href, title, locale, children }:
 
 	return (
 		<div className='relative' data-video-preview data-preview-state={isPlaying ? 'playing' : hasFrame ? 'paused' : 'poster'}>
-			<Link href={href} aria-label={title} className='relative block overflow-hidden rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'>
+			<button type='button' onClick={togglePlayback} aria-label={`${isPlaying ? labels.pausePreview : labels.playPreview}: ${title}`} className='relative block w-full overflow-hidden rounded-lg text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'>
 				{children}
 				<video
 					ref={videoRef}
@@ -75,10 +73,6 @@ export default function NewsVideoPreview({ src, href, title, locale, children }:
 					onError={() => { setIsPlaying(false); setHasFrame(false) }}
 					className={`pointer-events-none absolute inset-0 size-full object-cover transition-opacity duration-500 motion-reduce:transition-none ${hasFrame ? 'opacity-100' : 'opacity-0'}`}
 				/>
-				{isPlaying && <span className='absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-slate-950/75 px-2.5 py-1.5 text-xs font-medium text-white'><VolumeX size={13} aria-hidden='true' />{labels.mutedPreview}</span>}
-			</Link>
-			<button type='button' onClick={togglePlayback} aria-label={isPlaying ? labels.pausePreview : labels.playPreview} className='absolute bottom-3 right-3 z-20 flex size-12 items-center justify-center rounded-full border border-white/30 bg-slate-950/80 text-white transition-colors hover:bg-slate-950 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white'>
-				{isPlaying ? <Pause size={18} fill='currentColor' aria-hidden='true' /> : <Play size={18} fill='currentColor' aria-hidden='true' />}
 			</button>
 		</div>
 	)
