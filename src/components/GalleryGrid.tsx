@@ -11,7 +11,6 @@ interface GalleryImage {
 	src: string
 	albumId: string
 	alt: string
-	sourcePage?: number
 }
 
 interface GalleryGridProps {
@@ -29,7 +28,10 @@ export default function GalleryGrid({
 }: GalleryGridProps) {
 	const [selectedAlbum, setSelectedAlbum] = useState<string>('all')
 	const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-	const filteredImages = useMemo(() => selectedAlbum === 'all' ? images : images.filter(image => selectedAlbum === 'new' ? image.sourcePage !== undefined : image.albumId === selectedAlbum), [selectedAlbum, images])
+	const filteredImages = useMemo(
+		() => selectedAlbum === 'all' ? images : images.filter(image => image.albumId === selectedAlbum),
+		[selectedAlbum, images]
+	)
 	const labels = uiText[locale]
 
 	const openLightbox = (index: number) => setLightboxIndex(index)
@@ -59,11 +61,6 @@ export default function GalleryGrid({
 				>
 					{allLabel}
 				</button>
-				{images.some(image => image.sourcePage !== undefined) && (
-					<button type='button' aria-pressed={selectedAlbum === 'new'} onClick={() => { setLightboxIndex(null); setSelectedAlbum('new') }} className={clsx('px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border', selectedAlbum === 'new' ? 'bg-slate-900 text-white border-slate-900 shadow-lg scale-105' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:bg-slate-50')}>
-						{labels.newArchive}
-					</button>
-				)}
 				{albums.map(album => (
 					<button
 						key={album.id}

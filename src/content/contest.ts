@@ -2,18 +2,25 @@ export const contestContent = {
 	ru: {
 		title: 'Конкурс «Үздік педагогикалық эссе» имени Асқара Ислямова',
 		description:
-			'II Республиканский конкурс среди преподавателей (оқытушылар) организаций технического и профессионального образования (колледжей).',
+			'11–12 декабря 2024 года в Восточно-Казахстанском гуманитарном колледже имени Абая прошёл II Республиканский конкурс педагогических эссе имени Асқара Ислямова.',
 		goals:
 			'Цель конкурса — поддержка творческих педагогов, обмен идеями и распространение передового педагогического опыта, сохранение наследия Асқара Ислямова.',
 
 		// Добавляем галерею и видео
 		gallery: [
-			{ src: '/images/vruchenie.jpg', alt: 'Қатысушылардың жұмыстары' },
-			{ src: '/images/эссе1.jpg', alt: 'Байқауда сөз сөйлеу' },
-			{ src: '/images/stand.jpg', alt: 'Сертификаттарды табыстау' },
-			{ src: '/images/сертифика.jpeg', alt: 'Салтанатты ашылу рәсімі' },
+			{
+				src: '/images/event-2026/event-01.jpg',
+				alt: 'Групповая фотография участников с наградами.',
+				aspectRatio: 16 / 9,
+			},
+			{ src: '/images/event-2026/event-02.jpg', alt: 'Участники встречи в кабинете колледжа.', aspectRatio: 9 / 16 },
+			{
+				src: '/images/event-2026/event-03.jpg',
+				alt: 'Участники мероприятия с сертификатами.',
+				aspectRatio: 16 / 9,
+			},
 		],
-		video: '/images/WhatsApp Video 2025-12-15 at 8.39.07 PM.mp4', // Рекомендую переименовать файл в contest-2024.mp4
+		video: '/images/WhatsApp Video 2025-12-15 at 8.39.07 PM.mp4',
 
 		timeline: [
 			{
@@ -23,7 +30,7 @@ export const contestContent = {
 			},
 			{
 				year: '2024',
-				status: 'II Республикалық — итоги опубликованы',
+				status: 'II Республиканский — итоги опубликованы',
 				completed: true,
 			},
 			{
@@ -88,7 +95,7 @@ export const contestContent = {
 			title: 'Ресурсы',
 			links: [
 				{
-					label: 'Итоги конкурса: список победителей (из документа)',
+					label: 'Официальные итоги конкурса',
 					href: 'https://www.gov.kz/memleket/entities/vko-bilim/press/news/details/901981',
 					badge: 'DOC',
 				},
@@ -100,15 +107,22 @@ export const contestContent = {
 	kz: {
 		title: 'Асқар Ислямов атындағы «Үздік педагогикалық эссе» байқауы',
 		description:
-			'Техникалық және кәсіптік білім беру ұйымдарының (колледж) оқытушылары арасындағы II Республикалық байқау.',
+			'2024 жылғы 11–12 желтоқсанда Абай атындағы Шығыс Қазақстан гуманитарлық колледжінде Асқар Ислямов атындағы II Республикалық педагогикалық эссе байқауы өтті.',
 		goals:
 			'Байқаудың мақсаты — шығармашыл педагогтарды қолдау, педагогикалық идеялармен алмасу және озық тәжірибені тарату, Асқар Ислямов мұрасын сақтау.',
 
 		gallery: [
-			{ src: '/images/vruchenie.jpg', alt: 'Қатысушылардың жұмыстары' },
-			{ src: '/images/эссе1.jpg', alt: 'Байқауда сөз сөйлеу' },
-			{ src: '/images/stand.jpg', alt: 'Сертификаттарды табыстау' },
-			{ src: '/images/сертифика.jpeg', alt: 'Салтанатты ашылу рәсімі' },
+			{
+				src: '/images/event-2026/event-01.jpg',
+				alt: 'Марапат алған қатысушылардың топтық фотосуреті.',
+				aspectRatio: 16 / 9,
+			},
+			{ src: '/images/event-2026/event-02.jpg', alt: 'Колледж кабинетіндегі кездесу қатысушылары.', aspectRatio: 9 / 16 },
+			{
+				src: '/images/event-2026/event-03.jpg',
+				alt: 'Сертификат алған іс-шара қатысушылары.',
+				aspectRatio: 16 / 9,
+			},
 		],
 		video: '/images/WhatsApp Video 2025-12-15 at 8.39.07 PM.mp4',
 
@@ -157,7 +171,7 @@ export const contestContent = {
 			},
 			{
 				year: '2024',
-				name: 'Майлыбаева Данагуль Нурдаулетовna',
+				name: 'Майлыбаева Данагуль Нурдаулетовна',
 				place: 'III дәрежелі диплом',
 				work: 'Қазақ тілі мен әдебиеті пәндері оқытушысы',
 				prize: '50 000 ₸',
@@ -173,7 +187,7 @@ export const contestContent = {
 			},
 			{
 				year: '2024',
-				name: 'Шалибекова Галия Маратовna',
+				name: 'Шалибекова Галия Маратовна',
 				place: 'III дәрежелі диплом',
 				work: 'Қазақ тілі мен әдебиеті пәндері оқытушысы',
 				prize: '50 000 ₸',
@@ -185,7 +199,7 @@ export const contestContent = {
 			title: 'Ресурстар',
 			links: [
 				{
-					label: 'Байқау қорытындысы: жеңімпаздар тізімі (құжаттан)',
+					label: 'Байқаудың ресми қорытындысы',
 					href: 'https://www.gov.kz/memleket/entities/vko-bilim/press/news/details/901981',
 					badge: 'DOC',
 				},
@@ -198,15 +212,18 @@ export const contestContent = {
 		title:
 			'Contest "Үздік педагогикалық эссе" (Best Pedagogical Essay) named after Askar Islyamov',
 		description:
-			'II Republican contest among teachers of technical and vocational education organizations (colleges).',
+			'Abai East Kazakhstan Humanitarian College hosted the second Republican pedagogical essay contest named after Asqar Islyamov on 11–12 December 2024.',
 		goals:
 			'The goal of the contest is to support creative teachers, exchange ideas and disseminate advanced pedagogical experience, and preserve the legacy of Askar Islyamov.',
 
 		gallery: [
-			{ src: '/images/vruchenie.jpg', alt: "Participants' works" },
-			{ src: '/images/эссе1.jpg', alt: 'Speaking at the contest' },
-			{ src: '/images/stand.jpg', alt: 'Awarding certificates' },
-			{ src: '/images/сертифика.jpeg', alt: 'Opening ceremony' },
+			{ src: '/images/event-2026/event-01.jpg', alt: 'Group photograph of participants with awards.', aspectRatio: 16 / 9 },
+			{
+				src: '/images/event-2026/event-02.jpg',
+				alt: 'Meeting participants in the college classroom.',
+				aspectRatio: 9 / 16,
+			},
+			{ src: '/images/event-2026/event-03.jpg', alt: 'Event participants with certificates.', aspectRatio: 16 / 9 },
 		],
 		video: '/images/WhatsApp Video 2025-12-15 at 8.39.07 PM.mp4',
 
@@ -283,7 +300,7 @@ export const contestContent = {
 			title: 'Resources',
 			links: [
 				{
-					label: 'Contest results: list of winners (from document)',
+					label: 'Official contest results',
 					href: 'https://www.gov.kz/memleket/entities/vko-bilim/press/news/details/901981',
 					badge: 'DOC',
 				},

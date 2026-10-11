@@ -7,6 +7,8 @@ import { clsx } from 'clsx'
 import { useModal } from '@/lib/use-modal'
 import { uiText } from '@/lib/ui-text'
 import type { Locale } from '@/lib/i18n'
+import type { PhotoFrame } from '@/lib/photo-frame'
+import FramedPhoto from './FramedPhoto'
 
 interface LightboxProps {
 	locale?: Locale
@@ -14,6 +16,8 @@ interface LightboxProps {
 	onClose: () => void
 	imageSrc: string
 	imageAlt: string
+	showCaption?: boolean
+	imageFrame?: PhotoFrame
 	onNext?: () => void
 	onPrev?: () => void
 	hasNext?: boolean
@@ -26,6 +30,8 @@ export default function Lightbox({
 	onClose,
 	imageSrc,
 	imageAlt,
+	showCaption = true,
+	imageFrame,
 	onNext,
 	onPrev,
 	hasNext,
@@ -67,44 +73,44 @@ export default function Lightbox({
 						e.stopPropagation()
 						onPrev?.()
 					}}
-					className='absolute left-4 md:left-8 text-white/60 hover:text-white transition-all z-20 p-3 hover:bg-white/10 rounded-full hover:scale-110'
+					className='absolute left-1 sm:left-4 md:left-8 text-white/60 hover:text-white transition-all z-20 p-2 hover:bg-white/10 rounded-full'
 				>
-					<ChevronLeft size={40} strokeWidth={1.5} />
+					<ChevronLeft className='size-6 sm:size-10' strokeWidth={1.5} />
 				</button>
 			)}
 
 			{/* Image Container */}
-			<div className='relative w-full h-full max-w-7xl max-h-[85vh] p-4 md:p-8 flex flex-col items-center justify-center z-10 pointer-events-none'>
+			<div className='relative flex h-[calc(100dvh-112px)] w-full max-w-7xl flex-col items-center gap-3 px-12 sm:px-20 md:px-24 z-10 pointer-events-none'>
 				<div
 					className={clsx(
-						'relative w-full h-full transition-opacity duration-500 ease-out pointer-events-auto',
+						'relative min-h-0 w-full flex-1 transition-opacity duration-500 ease-out pointer-events-auto',
 						isLoaded ? 'opacity-100' : 'opacity-0'
 					)}
 				>
-					<Image
+					{imageFrame ? <FramedPhoto key={imageSrc} src={imageSrc} alt={imageAlt} frame={imageFrame} sizes='100vw' preload onLoad={() => setLoadedSrc(imageSrc)} /> : <Image
 						key={imageSrc}
 						src={imageSrc}
 						alt={imageAlt}
 						fill
 						className='object-contain drop-shadow-2xl'
 						sizes='100vw'
-						priority
+						preload
 						onLoad={() => setLoadedSrc(imageSrc)}
-					/>
+					/>}
 				</div>
 
 				{/* Caption */}
 				<div
 					className={clsx(
-						'absolute bottom-8 left-0 right-0 text-center transition-all duration-500 delay-100',
+						'max-h-[25dvh] w-full shrink-0 overflow-y-auto text-center transition-opacity duration-500 pointer-events-auto',
 						isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
 					)}
 				>
-					<div className='inline-block bg-black/50 backdrop-blur-md px-8 py-4 rounded-2xl max-w-[90vw] border border-white/10'>
-						<p className='text-white/90 text-lg font-light tracking-wide'>
+					<div className='inline-block max-w-3xl px-2 py-1'>
+						{showCaption && <p className='text-white/90 text-sm leading-relaxed sm:text-base'>
 							{imageAlt}
-						</p>
-						<a href={imageSrc} target='_blank' rel='noopener noreferrer' className='pointer-events-auto inline-block mt-2 text-sm text-white/80 underline underline-offset-4 hover:text-white'>
+						</p>}
+						<a href={imageSrc} target='_blank' rel='noopener noreferrer' className={clsx('pointer-events-auto inline-block text-sm text-white/80 underline underline-offset-4 hover:text-white', showCaption && 'mt-2')}>
 							{labels.openOriginal}
 						</a>
 					</div>
@@ -119,9 +125,9 @@ export default function Lightbox({
 						e.stopPropagation()
 						onNext?.()
 					}}
-					className='absolute right-4 md:right-8 text-white/60 hover:text-white transition-all z-20 p-3 hover:bg-white/10 rounded-full hover:scale-110'
+					className='absolute right-1 sm:right-4 md:right-8 text-white/60 hover:text-white transition-all z-20 p-2 hover:bg-white/10 rounded-full'
 				>
-					<ChevronRight size={40} strokeWidth={1.5} />
+					<ChevronRight className='size-6 sm:size-10' strokeWidth={1.5} />
 				</button>
 			)}
 		</div>

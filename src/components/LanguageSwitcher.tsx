@@ -1,14 +1,17 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { Suspense } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { Locale, locales } from '@/lib/i18n'
 import Link from 'next/link'
 import { clsx } from 'clsx'
 
-export default function LanguageSwitcher({
+function LanguageLinks({
 	currentLocale,
+	query = '',
 }: {
 	currentLocale: Locale
+	query?: string
 }) {
 	const pathname = usePathname()
 
@@ -16,7 +19,7 @@ export default function LanguageSwitcher({
 		if (!pathname) return '/'
 		const segments = pathname.split('/')
 		segments[1] = locale
-		return segments.join('/')
+		return segments.join('/') + (query ? `?${query}` : '')
 	}
 
 	return (
@@ -37,4 +40,13 @@ export default function LanguageSwitcher({
 			))}
 		</div>
 	)
+}
+
+function QueryLanguageLinks({ currentLocale }: { currentLocale: Locale }) {
+	const params = useSearchParams()
+	return <LanguageLinks currentLocale={currentLocale} query={params.toString()} />
+}
+
+export default function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
+	return <Suspense fallback={<LanguageLinks currentLocale={currentLocale} />}><QueryLanguageLinks currentLocale={currentLocale} /></Suspense>
 }

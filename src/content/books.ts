@@ -10,7 +10,7 @@ export const booksContent = {
 				year: '1998',
 				description:
 					'Автобиографическая книга-воспоминание, написанная к 70-летию Тарбагатайского района. Охватывает жизненный путь автора и его педагогический опыт.',
-				cover: '/images/books/otken-omir-cover.webp',
+				cover: '/images/books/otken-omir-mockup.png',
 				pdf: '/pdf/otken-omir.pdf',
 			},
 			{
@@ -71,7 +71,7 @@ export const booksContent = {
 				year: '1998',
 				description:
 					'Тарбағатай ауданының 70 жылдығына арнап жазылған ғұмырнама-естелік кітап. Автордың өмір жолы мен ұстаздық тәжірибесін қамтиды.',
-				cover: '/images/books/otken-omir-cover.webp',
+				cover: '/images/books/otken-omir-mockup.png',
 				pdf: '/pdf/otken-omir.pdf',
 			},
 			{
@@ -132,7 +132,7 @@ export const booksContent = {
 				year: '1998',
 				description:
 					"Autobiographical memoir book written for the 70th anniversary of the Tarbagatay district. Covers the author's life path and his pedagogical experience.",
-				cover: '/images/books/otken-omir-cover.webp',
+				cover: '/images/books/otken-omir-mockup.png',
 				pdf: '/pdf/otken-omir.pdf',
 			},
 			{

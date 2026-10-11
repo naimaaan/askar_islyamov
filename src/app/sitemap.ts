@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { locales } from '@/lib/i18n'
 import { booksContent } from '@/content/books'
+import { newsArticles } from '@/content/news'
 import { siteUrl, localizedPath, languageAlternates } from '@/lib/metadata'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,13 +13,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		'/books',
 		'/gallery',
 		'/awards',
-		'/contest',
 		'/memories',
 		'/contacts',
+		'/news',
 	]
 
 	return locales.flatMap(locale => {
-		return [...routes, ...booksContent[locale].items.map(book => `/books/${book.id}`)].map(route => ({
+		return [...routes, ...booksContent[locale].items.map(book => `/books/${book.id}`), ...newsArticles.map(article => `/news/${article.slug}`)].map(route => ({
 			url: `${siteUrl}${localizedPath(locale, route)}`,
 			alternates: { languages: languageAlternates(route) },
 			changeFrequency: 'monthly' as const,

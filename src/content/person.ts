@@ -125,7 +125,7 @@ export const personContent = {
 					year: '2021 – 2024',
 					title: 'Память и наследие',
 					description:
-						'2021: в Восточно-Казахстанском гуманитарном колледже имени Абая открыт именной кабинет Асқара Ислямова «Тәрбие жұмысының теориясы мен әдістемесі», учреждена стипендия для студентов. 2022: в селе Акжар в Абай атындағы средней школе открыт кабинет географии. С 2023 года ежегодно проводится районная олимпиада по географии имени Асқара Ислямова. В 2024 году состоялся Республиканский конкурс «Лучшее педагогическое эссе» имени Асқара Ислямова, по итогам которого был издан сборник эссе.',
+						'2021: в Восточно-Казахстанском гуманитарном колледже имени Абая открыт именной кабинет Асқара Ислямова «Тәрбие жұмысының теориясы мен әдістемесі», учреждена стипендия для студентов. 2022: в средней школе имени Абая села Ақжар Тарбагатайского района открыт кабинет географии. С 2023 года ежегодно проводится районная олимпиада по географии имени Асқара Ислямова. В 2024 году состоялся Республиканский конкурс «Лучшее педагогическое эссе» имени Асқара Ислямова, по итогам которого был издан сборник эссе.',
 				},
 			],
 		},
@@ -267,7 +267,7 @@ export const personContent = {
 					year: '2021 – 2024',
 					title: 'Есімін ұлықтау',
 					description:
-						'2021: Абай атындағы Шығыс Қазақстан гуманитарлық колледжінде Асқар Ислямов атындағы «Тәрбие жұмысының теориясы мен әдістемесі» кабинеті ашылып, студенттерге шәкіртақы тағайындалды. 2022: Ақжар ауылындағы Абай атындағы орта мектепте география кабинеті ашылды. 2023 жылдан бастап Асқар Ислямов атындағы география пәні бойынша аудандық олимпиада жыл сайын өткізіліп келеді. 2024 жылы Асқар Ислямов атындағы «Үздік педагогикалық эссе» республикалық байқауы өткізіліп, қатысушылардың ой толғамдары жинақ болып жарық көрді.',
+						'2021: Абай атындағы Шығыс Қазақстан гуманитарлық колледжінде Асқар Ислямов атындағы «Тәрбие жұмысының теориясы мен әдістемесі» кабинеті ашылып, студенттерге шәкіртақы тағайындалды. 2022: Тарбағатай ауданы Ақжар ауылының Абай атындағы орта мектебінде география кабинеті ашылды. 2023 жылдан бастап Асқар Ислямов атындағы география пәні бойынша аудандық олимпиада жыл сайын өткізіліп келеді. 2024 жылы Асқар Ислямов атындағы «Үздік педагогикалық эссе» республикалық байқауы өткізіліп, қатысушылардың ой толғамдары жинақ болып жарық көрді.',
 				},
 			],
 		},
@@ -410,7 +410,7 @@ export const personContent = {
 					year: '2021 – 2024',
 					title: 'Memory and legacy',
 					description:
-						'2021: A named cabinet of Askar Islyamov "Тәрбие жұмысының теориясы мен әдістемесі" (Theory and Methodology of Educational Work) was opened at the East Kazakhstan Humanitarian College named after Abai, and a scholarship for students was established. 2022: A geography cabinet was opened in the secondary school named after Abai in the village of Akzhar. Since 2023, the district geography olympiad named after Askar Islyamov has been held annually. In 2024, the Republican contest "Лучшее педагогическое эссе" (Best Pedagogical Essay) named after Askar Islyamov took place, following which a collection of essays was published.',
+						'2021: A named cabinet of Askar Islyamov "Тәрбие жұмысының теориясы мен әдістемесі" (Theory and Methodology of Educational Work) was opened at Abai East Kazakhstan Humanitarian College, and a scholarship for students was established. 2022: A geography cabinet was opened at Abai Secondary School in Akzhar, Tarbagatai district. Since 2023, the district geography olympiad named after Askar Islyamov has been held annually. In 2024, the Republican contest "Лучшее педагогическое эссе" (Best Pedagogical Essay) named after Askar Islyamov took place, following which a collection of essays was published.',
 				},
 			],
 		},

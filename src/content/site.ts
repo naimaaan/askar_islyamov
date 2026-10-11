@@ -13,9 +13,8 @@ export const siteContent = {
 				{ label: 'Книги', href: '/books' },
 				{ label: 'Галерея', href: '/gallery' },
 				{ label: 'Награды', href: '/awards' },
-				{ label: 'Конкурс', href: '/contest' },
 				{ label: 'Воспоминания', href: '/memories' },
-				{ label: 'Контакты', href: '/contacts' },
+				{ label: 'Новости', href: '/news' },
 			],
 		},
 		footer: {
@@ -48,9 +47,8 @@ export const siteContent = {
 				{ label: 'Кітаптар', href: '/books' },
 				{ label: 'Галерея', href: '/gallery' },
 				{ label: 'Марапаттар', href: '/awards' },
-				{ label: 'Байқау', href: '/contest' },
 				{ label: 'Естеліктер', href: '/memories' },
-				{ label: 'Байланыс', href: '/contacts' },
+				{ label: 'Жаңалықтар', href: '/news' },
 			],
 		},
 		footer: {
@@ -83,9 +81,8 @@ export const siteContent = {
 				{ label: 'Books', href: '/books' },
 				{ label: 'Gallery', href: '/gallery' },
 				{ label: 'Awards', href: '/awards' },
-				{ label: 'Contest', href: '/contest' },
 				{ label: 'Memories', href: '/memories' },
-				{ label: 'Contacts', href: '/contacts' },
+				{ label: 'News', href: '/news' },
 			],
 		},
 		footer: {

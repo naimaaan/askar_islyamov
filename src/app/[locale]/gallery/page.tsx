@@ -1,5 +1,6 @@
 import { pageMetadata } from '@/lib/metadata'
 import { galleryContent } from '@/content/gallery'
+import { sortGalleryImages } from '@/content/gallery-sequence'
 import GalleryGrid from '@/components/GalleryGrid'
 import { Metadata } from 'next'
 
@@ -54,7 +55,7 @@ export default async function GalleryPage({
 
 				<GalleryGrid
 					locale={validLocale}
-					images={gallery.images}
+					images={sortGalleryImages(gallery.images)}
 					albums={gallery.albums}
 					allLabel={gallery.allText}
 				/>

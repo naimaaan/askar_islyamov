@@ -35,7 +35,7 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 					alt={book.title}
 					fill
 					sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-					className={book.id === 'otken-omir' ? 'object-contain' : 'object-cover'}
+					className={book.id === 'otken-omir' ? 'object-contain scale-90' : 'object-cover'}
 				/>
 			</div>
 			<div className='p-6 flex flex-col flex-grow'>

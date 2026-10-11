@@ -8,7 +8,7 @@ import type { Locale } from '@/lib/i18n'
 
 interface ContestGalleryProps {
 	locale: Locale
-	images: readonly { src: string; alt: string }[]
+	images: readonly { src: string; alt: string; aspectRatio?: number }[]
 	videoSrc?: string
 }
 
@@ -34,38 +34,43 @@ export default function ContestGallery({
 		<div className='space-y-8'>
 			{/* Video Section */}
 			{videoSrc && (
-				<div className='relative rounded-2xl overflow-hidden shadow-xl bg-slate-900 aspect-video group'>
+				<div className='relative mx-auto max-w-2xl overflow-hidden rounded-lg bg-slate-950 aspect-[4/3]'>
 					<video
 						src={videoSrc}
 						controls
-						preload='metadata'
-						className='w-full h-full object-cover'
-						poster={images[0]?.src} // Use first image as poster if needed
+						playsInline
+						preload='none'
+						aria-label={locale === 'kz' ? 'Байқау бейнерепортажы' : locale === 'ru' ? 'Видеорепортаж о конкурсе' : 'Contest video report'}
+						className='w-full h-full object-contain'
+						poster='/images/event-2026/event-01.jpg'
 					/>
 				</div>
 			)}
 
 			{/* Photo Grid */}
-			<div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+			<div className='columns-1 gap-6 sm:columns-2'>
 				{images.map((img, idx) => (
+					<figure key={img.src} className='mb-6 break-inside-avoid'>
 					<button
 						type='button'
 						aria-label={img.alt}
-						key={idx}
 						onClick={() => openLightbox(idx)}
-						className='relative aspect-square rounded-xl overflow-hidden cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300'
+						style={{ aspectRatio: img.aspectRatio || 16 / 9 }}
+						className='group relative block w-full overflow-hidden rounded-lg bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700'
 					>
 						<Image
 							src={img.src}
 							alt={img.alt}
 							fill
-							sizes='(max-width: 768px) 50vw, 25vw'
-							className='object-cover group-hover:scale-110 transition-transform duration-500'
+							sizes='(max-width: 640px) 100vw, 400px'
+							className='object-contain'
 						/>
 						<div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center'>
 							<Maximize2 className='text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300 w-8 h-8 drop-shadow-lg' />
 						</div>
 					</button>
+					<figcaption className='mt-3 text-sm leading-relaxed text-slate-500'>{img.alt}</figcaption>
+					</figure>
 				))}
 			</div>
 

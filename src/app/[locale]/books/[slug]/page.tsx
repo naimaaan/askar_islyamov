@@ -225,7 +225,7 @@ export default async function BookPage({
 										alt={otherBook.title}
 										fill
 											sizes='(max-width: 640px) 100vw, 33vw'
-										className={`${otherBook.id === 'otken-omir' ? 'object-contain' : 'object-cover'} group-hover:scale-105 transition-transform duration-700`}
+										className={`${otherBook.id === 'otken-omir' ? 'object-contain scale-90 group-hover:scale-95' : 'object-cover group-hover:scale-105'} transition-transform duration-700`}
 									/>
 									<div className='absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300' />
 								</div>

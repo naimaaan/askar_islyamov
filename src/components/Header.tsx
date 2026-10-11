@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Locale } from '@/lib/i18n'
 import LanguageSwitcher from './LanguageSwitcher'
 import MobileMenu from './MobileMenu'
@@ -12,6 +15,7 @@ interface HeaderProps {
 }
 
 export default function Header({ locale, dict }: HeaderProps) {
+	const pathname = usePathname().replace(/\/$/, '')
 	return (
 		<>
 			{/* Soulful accent line representing the timeline/lifeline */}
@@ -29,21 +33,26 @@ export default function Header({ locale, dict }: HeaderProps) {
 					</div>
 
 					{/* Desktop Navigation */}
-					<nav className='hidden lg:flex items-center space-x-8'>
-						{dict.nav.map(item => (
+					<nav className='hidden xl:flex items-center gap-5 whitespace-nowrap'>
+						{dict.nav.map(item => {
+							const href = `/${locale}${item.href === '/' ? '' : item.href}`
+							const target = href.replace(/\/$/, '')
+							const active = pathname === target || (item.href !== '/' && pathname.startsWith(`${target}/`))
+							return (
 							<Link
 								key={item.href}
-								href={`/${locale}${item.href === '/' ? '' : item.href}`}
-								className='relative text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors py-2 group'
+								href={href}
+								aria-current={active ? 'page' : undefined}
+								className={`relative text-sm font-medium hover:text-slate-900 transition-colors py-2 group ${active ? 'text-amber-800' : 'text-slate-600'}`}
 							>
 								{item.label}
-								<span className='absolute inset-x-0 bottom-0 h-0.5 bg-slate-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out' />
+								<span className={`absolute inset-x-0 bottom-0 h-0.5 transform group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out ${active ? 'bg-amber-800 scale-x-100' : 'bg-slate-900 scale-x-0'}`} />
 							</Link>
-						))}
+						)})}
 					</nav>
 
 					{/* Actions */}
-					<div className='flex items-center space-x-2 sm:space-x-6'>
+					<div className='flex shrink-0 items-center space-x-2 sm:space-x-4'>
 						<div className='hidden sm:block w-px h-6 bg-slate-200' />
 						<LanguageSwitcher currentLocale={locale} />
 						<MobileMenu nav={dict.nav} locale={locale} />

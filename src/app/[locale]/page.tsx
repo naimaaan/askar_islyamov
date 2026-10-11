@@ -6,6 +6,7 @@ import { galleryContent } from '@/content/gallery'
 import { siteContent } from '@/content/site'
 import { memoriesContent } from '@/content/memories'
 import BookCard from '@/components/BookCard'
+import LatestNews from '@/components/LatestNews'
 import Image from 'next/image'
 import { Metadata } from 'next'
 import { pageMetadata } from '@/lib/metadata'
@@ -170,6 +171,8 @@ export default async function Home({
 					))}
 				</div>
 			</section>
+
+			<LatestNews locale={validLocale} />
 
 			{/* Featured Books */}
 			<section className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24'>

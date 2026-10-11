@@ -54,6 +54,9 @@ export default function Footer({ locale, dict, nav }: FooterProps) {
 							{dict.contactsTitle}
 						</h4>
 						<div className='space-y-4 text-sm'>
+							<Link href={`/${locale}/contacts/`} className='inline-flex items-center gap-2 font-medium text-white underline underline-offset-4 decoration-slate-600 hover:decoration-white transition-colors'>
+								{dict.contactsTitle} <span aria-hidden='true'>↗</span>
+							</Link>
 							<p className='text-slate-400 hover:text-white transition-colors'>
 								<a href='mailto:contact@askarislyamov.kz'>
 									contact@askarislyamov.kz

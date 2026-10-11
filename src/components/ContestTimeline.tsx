@@ -12,9 +12,9 @@ export default function ContestTimeline({
 	events: readonly TimelineEvent[]
 }) {
 	return (
-		<div className='flex items-center justify-center space-x-4 md:space-x-12 py-8'>
+		<div className='grid grid-cols-3 gap-3 py-6 sm:gap-8'>
 			{events.map((event, index) => (
-				<div key={index} className='flex flex-col items-center text-center'>
+				<div key={index} className='flex min-w-0 flex-col items-center text-center'>
 					<div className='mb-2'>
 						{event.completed ? (
 							<CheckCircle2 className='text-green-600' size={32} />

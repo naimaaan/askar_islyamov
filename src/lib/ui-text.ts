@@ -1,6 +1,6 @@
 export const uiText = {
 	ru: {
-		openOriginal: 'Открыть оригинал', newArchive: 'Новые материалы',
+		openOriginal: 'Открыть оригинал',
 		unavailable: 'Электронная версия пока недоступна', otherMaterials: 'Другие материалы', allBooks: 'Все книги', viewAll: 'Смотреть все',
 		menu: 'Меню', openMenu: 'Открыть меню', closeMenu: 'Закрыть меню', close: 'Закрыть', previous: 'Предыдущее фото', next: 'Следующее фото',
 		photo: 'Фотография', emptyGallery: 'В этом альбоме пока нет фотографий.', reader: 'Читалка PDF', loading: 'Загрузка документа…',
@@ -10,7 +10,7 @@ export const uiText = {
 		fullscreen: 'Полный экран', exitFullscreen: 'Выйти из полного экрана', split: 'Режим разворота', night: 'Ночной режим', day: 'Дневной режим', left: 'Левая', right: 'Правая',
 	},
 	kz: {
-		openOriginal: 'Түпнұсқаны ашу', newArchive: 'Жаңа материалдар',
+		openOriginal: 'Түпнұсқаны ашу',
 		unavailable: 'Электрондық нұсқа әзірге қолжетімсіз', otherMaterials: 'Басқа материалдар', allBooks: 'Барлық кітаптар', viewAll: 'Барлығын көру',
 		menu: 'Мәзір', openMenu: 'Мәзірді ашу', closeMenu: 'Мәзірді жабу', close: 'Жабу', previous: 'Алдыңғы фото', next: 'Келесі фото',
 		photo: 'Фотосурет', emptyGallery: 'Бұл альбомда әзірге фотосурет жоқ.', reader: 'PDF оқу құралы', loading: 'Құжат жүктелуде…',
@@ -20,7 +20,7 @@ export const uiText = {
 		fullscreen: 'Толық экран', exitFullscreen: 'Толық экраннан шығу', split: 'Қос бетті оқу', night: 'Түнгі режим', day: 'Күндізгі режим', left: 'Сол жақ', right: 'Оң жақ',
 	},
 	en: {
-		openOriginal: 'Open original', newArchive: 'New materials',
+		openOriginal: 'Open original',
 		unavailable: 'Digital edition is not yet available', otherMaterials: 'Other materials', allBooks: 'All books', viewAll: 'View all',
 		menu: 'Menu', openMenu: 'Open menu', closeMenu: 'Close menu', close: 'Close', previous: 'Previous photo', next: 'Next photo',
 		photo: 'Photograph', emptyGallery: 'There are no photographs in this album yet.', reader: 'PDF reader', loading: 'Loading document…',
