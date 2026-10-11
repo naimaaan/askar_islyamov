@@ -19,14 +19,17 @@ export const contestContent = {
 			{
 				year: '2023',
 				status: 'Проведён',
+				completed: true,
 			},
 			{
 				year: '2024',
 				status: 'II Республикалық — итоги опубликованы',
+				completed: true,
 			},
 			{
 				year: '2025',
 				status: 'Проведён',
+				completed: true,
 			},
 		],
 
@@ -113,14 +116,17 @@ export const contestContent = {
 			{
 				year: '2023',
 				status: 'Өтті',
+				completed: true,
 			},
 			{
 				year: '2024',
 				status: 'II Республикалық — қорытынды жарияланды',
+				completed: true,
 			},
 			{
 				year: '2025',
 				status: 'Өтті',
+				completed: true,
 			},
 		],
 
@@ -208,14 +214,17 @@ export const contestContent = {
 			{
 				year: '2023',
 				status: 'Held',
+				completed: true,
 			},
 			{
 				year: '2024',
 				status: 'II Republican — results published',
+				completed: true,
 			},
 			{
 				year: '2025',
 				status: 'Held',
+				completed: true,
 			},
 		],
 
