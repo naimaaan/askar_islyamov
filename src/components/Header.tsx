@@ -26,7 +26,7 @@ export default function Header({ locale, dict }: HeaderProps) {
 					{/* Logo / Title */}
 					<div className='flex-shrink-0'>
 						<Link href={`/${locale}`} className='group flex flex-col'>
-							<span className='text-lg sm:text-2xl font-serif font-bold text-slate-900 tracking-tight group-hover:text-slate-700 transition-colors'>
+							<span className='text-lg sm:text-2xl font-serif font-bold text-slate-900 tracking-tight group-hover:text-blue-700 transition-colors'>
 								{dict.title}
 							</span>
 						</Link>

@@ -50,8 +50,8 @@ export default async function NewsArticlePage({ params }: Props) {
           <Link href={`/${locale}/news/?category=${article.category}`} className='text-slate-600 hover:underline underline-offset-4'>{labels.categories[article.category]}</Link><span className='text-slate-300' aria-hidden='true'>/</span>
           <span className='text-slate-500'>{article.date ? <time dateTime={article.date}>{newsDate(article, locale)}</time> : labels.archive}</span>
         </div>
-        <h1 className='mt-5 text-3xl font-serif font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl'>{article.title[locale]}</h1>
-        <p className='mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl'>{article.summary[locale]}</p>
+        <h1 className='page-title mt-5'>{article.title[locale]}</h1>
+        <p className='text-lead mt-5'>{article.summary[locale]}</p>
       </header>
       <div className='my-8'>
         <NewsPhotoView locale={locale} photo={{ src: article.cover, caption: article.title, position: article.coverPosition }} showCaption={false} preload />
@@ -70,7 +70,7 @@ export default async function NewsArticlePage({ params }: Props) {
     </article>
     <section className='border-t border-slate-200 bg-slate-50 py-14' aria-labelledby='related-news-title'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <h2 id='related-news-title' className='mb-8 text-2xl font-serif font-bold'>{labels.related}</h2>
+        <h2 id='related-news-title' className='section-title mb-8'>{labels.related}</h2>
         <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>{related.map(item => <NewsCard key={item.slug} article={item} locale={locale} />)}</div>
       </div>
     </section>

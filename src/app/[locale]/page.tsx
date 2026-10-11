@@ -75,7 +75,7 @@ export default async function Home({
 								</h1>
 							</div>
 							{/* Reduced text size from xl/2xl to lg/xl */}
-							<p className='text-lg md:text-xl text-slate-300 font-light tracking-wide'>
+							<p className='text-lg leading-relaxed text-slate-300 md:text-xl'>
 								{person.role}
 							</p>
 							<p className='text-base md:text-lg text-slate-400 max-w-2xl mx-auto md:mx-0 leading-relaxed border-l-2 border-slate-700 pl-6'>
@@ -84,14 +84,14 @@ export default async function Home({
 							<div className='flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4'>
 								<Link
 									href={`/${validLocale}/biography`}
-									className='inline-flex items-center justify-center px-6 py-3 bg-white text-slate-900 text-base font-medium rounded-sm hover:bg-slate-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]'
+									className='button-secondary border-white'
 								>
 									{home.biographyLink}
 									<ArrowRight className='ml-2 h-5 w-5' />
 								</Link>
 								<Link
 									href={`/${validLocale}/books`}
-									className='inline-flex items-center justify-center px-6 py-3 border border-slate-700 text-base font-medium rounded-sm text-slate-300 hover:text-white hover:border-slate-500 hover:bg-slate-800/50 transition-all duration-300'
+									className='button-secondary border-slate-600 bg-transparent text-slate-200 hover:bg-slate-800 hover:text-white'
 								>
 									<BookOpen className='mr-2 h-5 w-5' />
 									{site.header.nav.find(n => n.href === '/books')?.label}
@@ -185,7 +185,7 @@ export default async function Home({
 				<div className='absolute inset-0 bg-slate-800/50 mix-blend-overlay' />
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 					<HomeSectionHeading id='home-memories-title' title={memories.title} href={`/${validLocale}/memories/`} linkLabel={home.memoriesLink} dark />
-					<div data-home-reveal className='mx-auto max-w-4xl bg-white/5 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-xl border border-white/10 text-center'>
+					<div data-home-reveal className='mx-auto max-w-4xl bg-white/5 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-lg border border-white/10 text-center'>
 						<p className='text-xl md:text-2xl font-serif italic leading-relaxed mb-8 text-slate-200'>
 							&ldquo;{featuredMemory.text}&rdquo;
 						</p>
@@ -204,7 +204,7 @@ export default async function Home({
 			</section>
 
 			{/* Curated photographs from the teaching, family and public archives. */}
-			<section aria-labelledby='home-gallery-title' className='bg-slate-50 py-14 sm:py-16'>
+			<section aria-labelledby='home-gallery-title' className='border-t border-slate-200 bg-white py-14 sm:py-16'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 					<HomeSectionHeading id='home-gallery-title' title={gallery.title} href={`/${validLocale}/gallery/`} linkLabel={uiText[validLocale].viewAll} />
 					<HomeGalleryPreview locale={validLocale} photos={previewPhotos} />

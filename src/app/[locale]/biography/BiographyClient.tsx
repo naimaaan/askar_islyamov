@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { personContent } from '@/content/person'
 import Timeline from '@/components/Timeline'
+import PageHeader from '@/components/PageHeader'
 import Image from 'next/image'
 import Lightbox from '@/components/Lightbox'
 import { Quote } from 'lucide-react'
@@ -84,34 +85,11 @@ export default function BiographyClient({ locale }: { locale: string }) {
 	}
 
 	return (
-		<div className='min-h-screen bg-white'>
-			{/* Hero Section */}
-			<div className='relative bg-slate-900 text-white py-24 overflow-hidden'>
-				<div className='absolute inset-0 opacity-20'>
-					<Image
-						src='/images/image2.png'
-						alt='Background'
-						fill
-						className='object-cover blur-sm'
-					/>
-				</div>
-				<div className='relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
-					<FadeIn>
-						<h1 className='text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight'>
-							{biography.title}
-						</h1>
-					</FadeIn>
-					<FadeIn delay={200}>
-						<p className='text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light italic'>
-							&ldquo;{intro}&rdquo;
-						</p>
-					</FadeIn>
-				</div>
-			</div>
-
-			<div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24'>
+		<div className='site-page'>
+			<div className='site-container'>
+				<PageHeader title={biography.title} description={intro} />
 				{/* Biography Sections */}
-				<div className='space-y-24'>
+				<div className='space-y-14 sm:space-y-16'>
 					{biography.sections.map((section, index) => {
 						const imageSrc = sectionImages[index % sectionImages.length]
 						const isReversed = index % 2 !== 0
@@ -125,20 +103,20 @@ export default function BiographyClient({ locale }: { locale: string }) {
 								>
 									<div className='flex-1'>
 										<div className='flex items-center gap-4 mb-4'>
-											<span className='text-6xl font-serif text-slate-200 font-bold select-none'>
+											<span className='eyebrow select-none'>
 												{index + 1}
 											</span>
-											<h2 className='text-3xl font-serif font-semibold text-slate-900 pt-4'>
+											<h2 className='section-title'>
 												{section.title}
 											</h2>
 										</div>
-										<p className='text-lg text-slate-600 leading-relaxed text-justify'>
+										<p className='text-lead'>
 											{section.content}
 										</p>
 									</div>
 									<div className='flex-1 w-full'>
 										<div
-											className='relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-xl border border-slate-100 cursor-zoom-in group'
+											className='media-frame aspect-[4/3] w-full cursor-zoom-in group'
 											onClick={() => openLightbox(imageSrc)}
 										>
 											<Image
@@ -181,10 +159,10 @@ export default function BiographyClient({ locale }: { locale: string }) {
 
 				{/* Family Section */}
 				<FadeIn>
-					<section className='bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm'>
+					<section className='mt-14 rounded-lg border border-slate-200 bg-slate-50 p-6 sm:mt-16 md:p-10'>
 						<div className='flex flex-col xl:flex-row gap-12 items-start'>
 							<div className='flex-1'>
-								<h2 className='text-3xl font-serif font-semibold text-slate-900 mb-6 flex items-center gap-3'>
+								<h2 className='section-title mb-6'>
 									{family.title}
 								</h2>
 								<p className='text-xl text-slate-800 font-medium mb-6 italic border-l-4 border-slate-300 pl-4'>
@@ -197,7 +175,7 @@ export default function BiographyClient({ locale }: { locale: string }) {
 							<div className='w-full xl:w-1/2 flex-shrink-0'>
 								<div className='grid grid-cols-2 gap-4'>
 									<div
-										className='relative aspect-[4/3] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 col-span-2 cursor-zoom-in group'
+										className='relative aspect-[4/3] rounded-lg overflow-hidden transition-colors duration-300 col-span-2 cursor-zoom-in group'
 										onClick={() => openLightbox(familyImages[0])}
 									>
 										<Image
@@ -208,7 +186,7 @@ export default function BiographyClient({ locale }: { locale: string }) {
 										/>
 									</div>
 									<div
-										className='relative aspect-square rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-zoom-in group'
+										className='relative aspect-square rounded-lg overflow-hidden transition-colors duration-300 cursor-zoom-in group'
 										onClick={() => openLightbox(familyImages[1])}
 									>
 										<Image
@@ -219,7 +197,7 @@ export default function BiographyClient({ locale }: { locale: string }) {
 										/>
 									</div>
 									<div
-										className='relative aspect-square rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-zoom-in group'
+										className='relative aspect-square rounded-lg overflow-hidden transition-colors duration-300 cursor-zoom-in group'
 										onClick={() => openLightbox(familyImages[2])}
 									>
 										<Image
@@ -244,8 +222,8 @@ export default function BiographyClient({ locale }: { locale: string }) {
 
 				{/* Timeline Section */}
 				<FadeIn>
-					<section className='max-w-4xl mx-auto pt-8 border-t border-slate-100'>
-						<h2 className='text-3xl font-serif font-semibold text-slate-900 mb-12 text-center'>
+					<section className='mt-14 border-t border-slate-200 pt-8 sm:mt-16'>
+						<h2 className='section-title mb-8'>
 							{validLocale === 'ru'
 								? 'Хронология жизни'
 								: validLocale === 'kz'

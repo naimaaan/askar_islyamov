@@ -13,7 +13,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
 					<span className='text-sm font-bold text-slate-500 block mb-1'>
 						{item.year}
 					</span>
-					<h3 className='text-lg font-serif font-semibold text-slate-900 mb-2'>
+					<h3 className='card-title mb-2'>
 						{item.title}
 					</h3>
 					<p className='text-slate-600 leading-relaxed'>{item.description}</p>

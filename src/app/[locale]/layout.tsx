@@ -114,7 +114,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang={languageTags[locale]} className={`${inter.variable} ${playfair.variable}`}>
-			<body className='font-sans bg-slate-50 text-slate-900 min-h-screen flex flex-col overflow-x-hidden'>
+			<body className='font-sans bg-white text-slate-900 min-h-screen flex flex-col overflow-x-hidden'>
 				<PersonJsonLd
 					name={pContent.name}
 					description={dict.metadata.description}

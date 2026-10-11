@@ -52,7 +52,7 @@ export default async function BookPage({
 	const otherBooks = books.items.filter(b => b.id !== slug).slice(0, 3)
 
 	return (
-		<div className='min-h-screen bg-slate-50'>
+		<div className='min-h-screen bg-white'>
 			{/* Navigation Bar */}
 			<div className='bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-16 z-40 transition-all duration-300'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between'>
@@ -71,19 +71,8 @@ export default async function BookPage({
 
 			{/* Hero Section */}
 			<BookReaderProvider>
-				<div className='relative overflow-hidden bg-slate-900'>
-					{/* Ambient Background */}
-					<div className='absolute inset-0 overflow-hidden'>
-						<Image
-							src={book.cover}
-							alt=''
-							fill
-							className='object-cover opacity-30 blur-3xl scale-110 mix-blend-overlay'
-						/>
-						<div className='absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/95 to-slate-900/50' />
-					</div>
-
-					<div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24'>
+				<div>
+					<div className='site-container py-12 sm:py-16'>
 						<div className='flex flex-col md:flex-row gap-12 lg:gap-20 items-start'>
 							{/* Book Cover */}
 							<div className='w-full md:w-1/3 lg:w-[320px] flex-shrink-0 relative z-10 mx-auto md:mx-0 max-w-sm'>
@@ -123,11 +112,11 @@ export default async function BookPage({
 									)}
 								</div>
 
-								<h1 className='text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight tracking-tight'>
+								<h1 className='page-title mb-5'>
 									{book.title}
 								</h1>
 
-								<div className='prose prose-lg text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0'>
+								<div className='text-lead mb-8 max-w-2xl mx-auto md:mx-0'>
 									{book.description}
 								</div>
 
@@ -157,7 +146,7 @@ export default async function BookPage({
 										href={book.pdf}
 										target='_blank'
 										rel='noopener noreferrer'
-										className='inline-flex items-center justify-center px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-lg font-medium hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md group'
+										className='button-secondary'
 									>
 										{isFilm ? (
 											<>
@@ -177,7 +166,7 @@ export default async function BookPage({
 										<a
 											href={book.pdf}
 											download
-											className='inline-flex items-center justify-center px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-lg font-medium hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md group'
+											className='button-secondary'
 										>
 											<Download className='mr-3 h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors' />
 											{site.common.download}
@@ -198,14 +187,14 @@ export default async function BookPage({
 
 			{/* Related Books Section */}
 			{otherBooks.length > 0 && (
-				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 border-t border-slate-200'>
+				<div className='site-container py-14 sm:py-16 border-t border-slate-200'>
 					<div className='flex items-center justify-between mb-12'>
-						<h2 className='text-2xl md:text-3xl font-serif font-bold text-slate-900'>
+						<h2 className='section-title'>
 							{labels.otherMaterials}
 						</h2>
 						<Link
 							href={`/${locale}/books`}
-							className='hidden sm:flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors'
+							className='text-link hidden sm:inline-flex'
 						>
 							{labels.allBooks}
 							<ArrowLeft className='ml-2 h-4 w-4 rotate-180' />
@@ -217,7 +206,7 @@ export default async function BookPage({
 							<Link
 								key={otherBook.id}
 								href={`/${locale}/books/${otherBook.id}`}
-								className='group block bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-300 flex flex-col h-full'
+								className='group flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-colors hover:border-slate-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
 							>
 								<div className='aspect-[3/4] relative bg-slate-100 overflow-hidden'>
 									<Image
@@ -233,10 +222,10 @@ export default async function BookPage({
 									<div className='text-xs font-bold text-slate-400 uppercase tracking-wider mb-2'>
 										{otherBook.year}
 									</div>
-									<h3 className='font-serif font-bold text-lg text-slate-900 group-hover:text-blue-700 transition-colors line-clamp-2 mb-3'>
+									<h3 className='card-title group-hover:text-blue-700 transition-colors line-clamp-2 mb-3'>
 										{otherBook.title}
 									</h3>
-									<p className='text-slate-500 text-sm line-clamp-2 leading-relaxed'>
+									<p className='text-caption line-clamp-2'>
 										{otherBook.description}
 									</p>
 								</div>
@@ -247,7 +236,7 @@ export default async function BookPage({
 					<div className='mt-8 text-center sm:hidden'>
 						<Link
 							href={`/${locale}/books`}
-							className='inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors'
+							className='text-link'
 						>
 							{labels.viewAll}
 							<ArrowLeft className='ml-2 h-4 w-4 rotate-180' />

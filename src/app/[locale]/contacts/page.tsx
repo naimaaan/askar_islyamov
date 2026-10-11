@@ -1,7 +1,6 @@
 import { pageMetadata } from '@/lib/metadata'
 import { siteContent } from '@/content/site'
 import {
-	Mail,
 	Image as ImageIcon,
 	PenTool,
 	FileText,
@@ -11,6 +10,7 @@ import {
 	BookOpen,
 } from 'lucide-react'
 import { Metadata } from 'next'
+import PageHeader from '@/components/PageHeader'
 
 export async function generateMetadata({
 	params,
@@ -160,48 +160,24 @@ export default async function ContactsPage({
 	}[validLocale]
 
 	return (
-		<div className='min-h-screen bg-slate-50'>
-			{/* Hero Section */}
-			<div className='relative bg-slate-900 pt-24 pb-48 overflow-hidden'>
-				{/* Background Effects */}
-				<div className='absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900' />
-				<div className='absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl' />
-				<div className='absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl' />
-
-				<div className='relative max-w-4xl mx-auto px-4 text-center z-10'>
-					<div className='inline-flex items-center justify-center p-3 bg-white/5 rounded-full mb-8 backdrop-blur-sm border border-white/10 shadow-2xl'>
-						<Mail className='w-6 h-6 text-blue-200' />
-					</div>
-					<h1 className='text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 tracking-tight leading-tight'>
-						{site.header.nav.find(n => n.href === '/contacts')?.label}
-					</h1>
-					<p className='text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed'>
-						{content.subtitle}
-					</p>
-				</div>
-			</div>
-
-			{/* Main Content Card */}
-			<div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-20 pb-16'>
-				<div className='bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden'>
+		<div className='site-page'>
+			<div className='site-container'>
+				<PageHeader title={site.footer.contactsTitle} description={content.subtitle} />
+				<div className='overflow-hidden rounded-lg border border-slate-200 bg-white'>
 					<div className='grid md:grid-cols-5'>
 						{/* Left Side: Contact Info (Dark) */}
-						<div className='md:col-span-2 bg-slate-900 text-white p-10 flex flex-col justify-between relative overflow-hidden'>
-							{/* Decorative circles */}
-							<div className='absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 bg-blue-500/20 rounded-full blur-2xl' />
-							<div className='absolute bottom-0 left-0 -ml-10 -mb-10 w-40 h-40 bg-blue-500/10 rounded-full blur-2xl' />
-
+						<div className='md:col-span-2 bg-slate-900 text-white p-6 sm:p-10 flex flex-col justify-between'>
 							<div className='relative z-10'>
-								<h3 className='text-xl font-serif font-bold mb-2 text-blue-200'>
+								<h2 className='card-title mb-2 text-white'>
 									{content.emailLabel}
-								</h3>
+								</h2>
 								<p className='text-slate-400 text-sm mb-8'>
 									contact@askarislyamov.kz
 								</p>
 
 								<a
 									href='mailto:contact@askarislyamov.kz'
-									className='inline-flex items-center justify-center w-full px-6 py-3 bg-white text-slate-900 rounded-xl font-bold hover:bg-blue-50 transition-colors group'
+									className='button-secondary w-full border-white'
 								>
 									<Send className='w-4 h-4 mr-2 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform text-blue-600' />
 									{validLocale === 'ru'
@@ -221,10 +197,10 @@ export default async function ContactsPage({
 						</div>
 
 						{/* Right Side: How to help (Light) */}
-						<div className='md:col-span-3 p-10 bg-white'>
-							<h3 className='text-2xl font-serif font-bold text-slate-900 mb-8'>
+						<div className='md:col-span-3 p-6 sm:p-10 bg-white'>
+							<h2 className='section-title mb-8'>
 								{content.helpTitle}
-							</h3>
+							</h2>
 
 							<div className='space-y-8'>
 								{content.helpItems.map((item, index) => (
@@ -233,9 +209,9 @@ export default async function ContactsPage({
 											<item.icon className='w-6 h-6' />
 										</div>
 										<div>
-											<h4 className='font-bold text-slate-900 mb-1 group-hover:text-blue-700 transition-colors'>
+											<h3 className='mb-1 font-semibold text-slate-900 group-hover:text-blue-700 transition-colors'>
 												{item.title}
-											</h4>
+											</h3>
 											<p className='text-slate-500 text-sm leading-relaxed'>
 												{item.desc}
 											</p>
@@ -249,20 +225,20 @@ export default async function ContactsPage({
 			</div>
 
 			{/* About / Credits Section */}
-			<div className='bg-white border-t border-slate-100'>
-				<div className='max-w-4xl mx-auto px-4 py-16 text-center'>
-					<h2 className='text-2xl font-serif font-bold text-slate-900 mb-6'>
+			<div className='mt-14 border-t border-slate-200 sm:mt-16'>
+				<div className='site-container pt-14 sm:pt-16'>
+					<h2 className='section-title mb-5'>
 						{content.aboutTitle}
 					</h2>
-					<p className='text-slate-600 text-lg mb-12 leading-relaxed max-w-2xl mx-auto'>
+					<p className='text-copy mb-8 max-w-3xl'>
 						{content.aboutText}
 					</p>
 
-					<div className='grid md:grid-cols-2 gap-8 max-w-2xl mx-auto'>
+					<div className='grid gap-6 md:grid-cols-2'>
 						{content.credits.map((credit, index) => (
 							<div
 								key={index}
-								className='flex items-center gap-4 p-4 rounded-xl bg-slate-50 text-left'
+								className='flex items-center gap-4 p-4 rounded-lg bg-slate-50 text-left'
 							>
 								<div className='w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400'>
 									<credit.icon className='w-5 h-5' />

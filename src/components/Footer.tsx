@@ -20,7 +20,7 @@ export default function Footer({ locale, dict, nav }: FooterProps) {
 				<div className='grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20'>
 					{/* Column 1: Brand & Legacy */}
 					<div className='space-y-6'>
-						<h3 className='text-2xl font-serif font-bold text-white tracking-wide'>
+						<h3 className='text-2xl font-serif font-bold text-white tracking-tight'>
 							Asqar Islyamov
 						</h3>
 						<p className='text-slate-400 leading-relaxed max-w-xs text-sm'>
@@ -30,7 +30,7 @@ export default function Footer({ locale, dict, nav }: FooterProps) {
 
 					{/* Column 2: Navigation */}
 					<div>
-						<h4 className='text-xs font-bold uppercase tracking-widest text-slate-500 mb-6'>
+						<h4 className='eyebrow mb-6 text-slate-400'>
 							{dict.menuTitle}
 						</h4>
 						<ul className='space-y-3 text-sm'>
@@ -50,7 +50,7 @@ export default function Footer({ locale, dict, nav }: FooterProps) {
 
 					{/* Column 3: Contact / Info */}
 					<div>
-						<h4 className='text-xs font-bold uppercase tracking-widest text-slate-500 mb-6'>
+						<h4 className='eyebrow mb-6 text-slate-400'>
 							{dict.contactsTitle}
 						</h4>
 						<div className='space-y-4 text-sm'>

@@ -40,15 +40,15 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 			</div>
 			<div className='p-6 flex flex-col flex-grow'>
 				<div className='text-sm text-slate-500 mb-2'>{book.year}</div>
-				<h3 className='text-xl font-serif font-semibold text-slate-900 mb-3 line-clamp-2'>
+				<h3 className='card-title mb-3 line-clamp-2'>
 					<Link
 						href={`/${locale}/books/${book.id}`}
-						className='hover:underline before:absolute before:inset-0'
+						className='transition-colors hover:text-blue-700 before:absolute before:inset-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700'
 					>
 						{book.title}
 					</Link>
 				</h3>
-				<p className='text-slate-600 text-sm mb-6 line-clamp-3 flex-grow'>
+				<p className='text-caption mb-6 line-clamp-3 flex-grow'>
 					{book.description}
 				</p>
 
@@ -58,7 +58,7 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 						href={book.pdf}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='flex-1 inline-flex justify-center items-center px-4 py-2 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50'
+						className='button-secondary flex-1 px-3 py-2'
 					>
 						{isFilm ? (
 							<>
@@ -77,7 +77,7 @@ export default function BookCard({ book, locale, dict }: BookCardProps) {
 							href={book.pdf}
 							download
 							aria-label={`${dict.download}: ${book.title}`}
-							className='inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-slate-800 hover:bg-slate-900'
+							className='button-primary px-3 py-2'
 						>
 							<Download size={16} />
 						</a>

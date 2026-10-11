@@ -17,20 +17,16 @@ export default function ReadOnlineButton({
 	return (
 		<button
 			onClick={toggleReader}
-			className={`inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group ${
-				isReaderOpen
-					? 'bg-slate-100 text-slate-900 ring-2 ring-slate-200'
-					: 'bg-slate-900 text-white hover:bg-slate-800'
-			}`}
+			className={isReaderOpen ? 'button-secondary' : 'button-primary'}
 		>
 			{isReaderOpen ? (
 				<>
-					<X className='mr-3 h-5 w-5 group-hover:scale-110 transition-transform' />
+					<X className='size-4' />
 					{activeLabel || 'Закрыть'}
 				</>
 			) : (
 				<>
-					<BookOpen className='mr-3 h-5 w-5 group-hover:scale-110 transition-transform' />
+					<BookOpen className='size-4' />
 					{label}
 				</>
 			)}
