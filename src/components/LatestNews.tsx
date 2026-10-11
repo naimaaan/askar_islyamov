@@ -14,7 +14,7 @@ export default function LatestNews({ locale }: { locale: Locale }) {
       <div className='grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-10'>
         <NewsCard article={lead} locale={locale} headingLevel='h3' />
         <div className='grid content-start gap-6 border-t border-slate-200 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0'>
-          {otherArticles.map(article => <NewsCard key={article.slug} article={article} locale={locale} compact headingLevel='h3' />)}
+          {otherArticles.map((article, index) => <NewsCard key={article.slug} article={article} locale={locale} compact headingLevel='h3' revealDelay={index + 1} />)}
         </div>
       </div>
     </div>

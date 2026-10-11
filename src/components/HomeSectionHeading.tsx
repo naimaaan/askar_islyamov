@@ -13,7 +13,7 @@ type Props = {
 
 export default function HomeSectionHeading({ id, title, href, linkLabel, description, eyebrow, dark = false }: Props) {
 	return (
-		<div className={`mb-8 flex flex-wrap items-end justify-between gap-5 border-b pb-6 ${dark ? 'border-white/15' : 'border-slate-200'}`}>
+		<div data-home-reveal className={`mb-8 flex flex-wrap items-end justify-between gap-5 border-b pb-6 ${dark ? 'border-white/15' : 'border-slate-200'}`}>
 			<div className='min-w-0'>
 				{eyebrow && <p className={`mb-2 text-xs font-semibold uppercase tracking-[0.15em] ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{eyebrow}</p>}
 				<h2 id={id} className={`font-serif text-3xl font-bold leading-tight tracking-tight sm:text-4xl ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>

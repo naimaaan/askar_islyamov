@@ -14,8 +14,8 @@ export default function FeaturedBooks({ locale }: { locale: Locale }) {
 		<section aria-labelledby='home-books-title' className='mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8'>
 			<HomeSectionHeading id='home-books-title' title={books.title} description={books.description} href={`/${locale}/books/`} linkLabel={uiText[locale].allBooks} />
 			<div className='grid gap-4 lg:grid-cols-3'>
-				{books.items.slice(0, 3).map(book => (
-					<Link key={book.id} href={`/${locale}/books/${book.id}/`} className='group flex min-w-0 items-center gap-4 rounded-xl border border-slate-200 bg-slate-50/60 p-4 transition-colors hover:border-slate-300 hover:bg-slate-100/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700 sm:gap-5 sm:p-5'>
+				{books.items.slice(0, 3).map((book, index) => (
+					<Link key={book.id} data-home-reveal data-home-delay={index} href={`/${locale}/books/${book.id}/`} className='home-card group flex min-w-0 items-center gap-4 rounded-xl border border-slate-200 bg-slate-50/60 p-4 transition-colors hover:border-slate-300 hover:bg-slate-100/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700 sm:gap-5 sm:p-5'>
 						<div className='relative h-40 w-24 shrink-0 sm:h-44 sm:w-28'>
 							<Image src={book.cover} alt='' fill sizes='(max-width: 640px) 96px, 112px' className='object-contain transition-transform duration-300 motion-safe:group-hover:-translate-y-1' />
 						</div>

@@ -6,7 +6,7 @@ import { contestContent } from '@/content/contest'
 type Translation<T> = Record<Locale, T>
 export type NewsCategory = 'school' | 'college' | 'meetings' | 'contest'
 export type NewsPhoto = { src: string; caption: Translation<string>; note?: Translation<string>; document?: boolean; frame?: PhotoFrame; aspectRatio?: number; position?: string }
-export type NewsVideo = { src: string; poster: string; caption: Translation<string>; duration: string; portrait?: boolean }
+export type NewsVideo = { src: string; poster: string; caption: Translation<string>; duration: string; portrait?: boolean; preview?: string }
 export type NewsInset = { photo: NewsPhoto; title: Translation<string>; text: Translation<string> }
 export type NewsArticle = {
   slug: string
@@ -69,7 +69,7 @@ export const newsArticles: NewsArticle[] = [
       ['Тарбағатай ауданы Ақжар ауылының Абай атындағы орта мектебінде Асқар Жұмағұлұлы Ислямов атындағы аудандық география олимпиадасы өтті. 9–11 сынып оқушылары пән бойынша жазбаша тапсырмаларды орындап, білімдерін сынады.', 'Олимпиада мектеп кабинетіне есімі берілген география мұғалімінің ісін жалғастырады. Қатысушылар кездесуі мен педагогтердің сөз сөйлеуі білім сайысын Асқар Ислямовтың өнегесімен және білім беру ісіне қосқан үлесімен ұштастырды.'],
       ['Abai Secondary School in Akzhar, Tarbagatai district, hosted the district geography olympiad named after Asqar Islyamov. Pupils in grades 9–11 tested their knowledge through written geography tasks.', 'The olympiad carries on the work of the geography teacher whose name the school classroom bears. Participants’ gathering and educators’ presentations connected the competition with his contribution to education.']),
     photos: [photo('geography-olympiad-announcement-2025', 'Слайд районной олимпиады: 9–11 классы, 29 апреля 2025 года.', 'Аудандық олимпиада слайды: 9–11 сыныптар, 2025 жылғы 29 сәуір.', 'Olympiad slide: grades 9–11, 29 April 2025.', true)],
-    video: { src: '/videos/news/geography-olympiad-2025.mp4', poster: asset('geography-olympiad-2025'), duration: '1:33', caption: tr('Олимпиада: выступления и выполнение заданий школьниками.', 'Олимпиада: сөз сөйлеулер және оқушылардың тапсырма орындауы.', 'Olympiad presentations and pupils working on their tasks.') },
+    video: { src: '/videos/news/geography-olympiad-2025.mp4', preview: '/videos/previews/geography-olympiad-2025.mp4', poster: asset('geography-olympiad-2025'), duration: '1:33', caption: tr('Олимпиада: выступления и выполнение заданий школьниками.', 'Олимпиада: сөз сөйлеулер және оқушылардың тапсырма орындауы.', 'Olympiad presentations and pupils working on their tasks.') },
   },
   {
     slug: 'college-classroom-opening', category: 'college', date: '2021', cover: '/images/колледж7.jpeg',

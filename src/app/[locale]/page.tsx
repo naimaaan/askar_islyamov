@@ -9,6 +9,7 @@ import FeaturedBooks from '@/components/FeaturedBooks'
 import HomeGalleryPreview from '@/components/HomeGalleryPreview'
 import LatestNews from '@/components/LatestNews'
 import HomeSectionHeading from '@/components/HomeSectionHeading'
+import HomeMotion from '@/components/HomeMotion'
 import Image from 'next/image'
 import { Metadata } from 'next'
 import { pageMetadata } from '@/lib/metadata'
@@ -48,7 +49,7 @@ export default async function Home({
 	})
 
 	return (
-		<div className='flex flex-col min-h-screen'>
+		<HomeMotion locale={validLocale}>
 			{/* Hero Section with Gradient and Texture */}
 			<section className='relative bg-slate-900 text-white overflow-hidden'>
 				{/* Background Gradient Effect */}
@@ -62,7 +63,7 @@ export default async function Home({
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 pb-12 md:pt-12 md:pb-20'>
 					{/* Reduced gap from gap-12 md:gap-20 to gap-8 md:gap-12 */}
 					<div className='flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12'>
-						<div className='flex-1 space-y-6 text-center md:text-left'>
+						<div className='home-hero-copy flex-1 space-y-6 text-center md:text-left'>
 							{/* Desktop Date & Name */}
 							<div className='hidden md:block'>
 								<div className='inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm font-medium text-slate-300 mb-2'>
@@ -99,7 +100,7 @@ export default async function Home({
 						</div>
 
 						{/* Enhanced Image Container with Awards */}
-						<div className='flex flex-col items-center gap-8 relative z-10'>
+						<div className='home-hero-portrait flex flex-col items-center gap-8 relative z-10'>
 							<div className='relative group'>
 								<div className='absolute inset-0 bg-gradient-to-tr from-slate-200/20 to-blue-200/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700' />
 								{/* Profile Image - Optimized Size */}
@@ -108,7 +109,7 @@ export default async function Home({
 										src='/images/image2.png'
 										alt={person.name}
 										fill
-										className='object-cover transition-transform duration-700 group-hover:scale-105'
+										className='object-cover transition-transform duration-700 motion-safe:group-hover:scale-105'
 										style={{
 											objectPosition: '50% 10%',
 										}}
@@ -150,7 +151,7 @@ export default async function Home({
 			{/* Quote and key facts share one compact editorial section. */}
 			<section className='border-b border-slate-200 bg-white'>
 				<div className='mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8'>
-					<div className='mx-auto max-w-3xl text-center'>
+					<div data-home-reveal className='mx-auto max-w-3xl text-center'>
 						<Quote className='mx-auto mb-4 size-7 text-slate-400' aria-hidden='true' />
 						<blockquote className='mb-4 font-serif text-2xl italic leading-relaxed text-slate-800 sm:text-3xl'>
 							{validLocale === 'ru'
@@ -164,8 +165,8 @@ export default async function Home({
 						</cite>
 					</div>
 					<dl className='mt-9 grid divide-y divide-slate-200 border-t border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:pt-8'>
-						{person.keyFacts.map(fact => (
-							<div key={fact.label} className='grid grid-cols-[5.5rem_1fr] items-center gap-x-5 gap-y-1 py-5 sm:flex sm:flex-col sm:gap-0 sm:px-5 sm:py-0 sm:text-center'>
+						{person.keyFacts.map((fact, index) => (
+							<div key={fact.label} data-home-reveal data-home-delay={index} className='grid grid-cols-[5.5rem_1fr] items-center gap-x-5 gap-y-1 py-5 sm:flex sm:flex-col sm:gap-0 sm:px-5 sm:py-0 sm:text-center'>
 								<dt className='order-2 text-sm font-semibold text-slate-800 sm:mt-3'>{fact.label}</dt>
 								<dd className='order-1 row-span-2 font-serif text-5xl font-medium tabular-nums tracking-tight text-slate-900'>{fact.value}</dd>
 								<dd className='order-3 col-start-2 text-sm leading-relaxed text-slate-500 sm:mt-1'>{fact.description}</dd>
@@ -184,7 +185,7 @@ export default async function Home({
 				<div className='absolute inset-0 bg-slate-800/50 mix-blend-overlay' />
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 					<HomeSectionHeading id='home-memories-title' title={memories.title} href={`/${validLocale}/memories/`} linkLabel={home.memoriesLink} dark />
-					<div className='mx-auto max-w-4xl bg-white/5 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-xl border border-white/10 text-center'>
+					<div data-home-reveal className='mx-auto max-w-4xl bg-white/5 backdrop-blur-sm p-6 sm:p-8 md:p-10 rounded-xl border border-white/10 text-center'>
 						<p className='text-xl md:text-2xl font-serif italic leading-relaxed mb-8 text-slate-200'>
 							&ldquo;{featuredMemory.text}&rdquo;
 						</p>
@@ -209,6 +210,6 @@ export default async function Home({
 					<HomeGalleryPreview locale={validLocale} photos={previewPhotos} />
 				</div>
 			</section>
-		</div>
+		</HomeMotion>
 	)
 }
